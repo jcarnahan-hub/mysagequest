@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>✨ AureliaQuest</title>
+<title>🧩 SageQuest</title>
 <meta name="theme-color" content="#0d0b1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" type="image/png" href="aureliaquest-icon.png">
-<link rel="apple-touch-icon" href="aureliaquest-icon.png">
+<link rel="icon" type="image/png" href="Sagequest-icon.png">
+<link rel="apple-touch-icon" href="Sagequest-icon.png">
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -350,8 +350,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <!-- ══ SIGN IN ══ -->
 <div id="screen-signin" class="screen active" style="display:flex;">
   <div class="signin-orb">🧩</div>
-  <div class="signin-title">AureliaQuest</div>
-  <div class="signin-sub">✦ AureliaSphere Games ✦</div>
+  <div class="signin-title">SageQuest</div>
+  <div class="signin-sub">✦ SageSphere Games ✦</div>
   <div class="signin-tagline">Your magical games hub — earn badges, track scores, and grow your quest across every device.</div>
   <button class="google-btn" onclick="signInWithGoogle()">
     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
@@ -364,7 +364,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <!-- ══ HUB ══ -->
 <div id="screen-hub" class="screen">
   <div class="topnav">
-    <div class="nav-brand">✦ AureliaQuest</div>
+    <div class="nav-brand">✦ SageQuest</div>
     <div class="nav-right">
       <div class="nav-score">⭐ <span id="nav-score">0</span></div>
       <img class="nav-avatar" id="nav-avatar" src="" alt="You" onclick="doSignOut()">
@@ -401,7 +401,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(245,200,66,0.08),transparent)" onclick="openGame('mahjong')">
       <div class="gc-top">
         <div class="gc-icon" style="background:linear-gradient(135deg,#3d2a00,#1a1200);border:1px solid rgba(245,200,66,.3)">🦋</div>
-        <div style="flex:1"><div class="gc-name">AureliaMahjong</div><div class="gc-desc">Match whimsical fantasy tiles — butterflies, dragons, crystals and more!</div></div>
+        <div style="flex:1"><div class="gc-name">SageMahjong</div><div class="gc-desc">Match whimsical fantasy tiles — butterflies, dragons, crystals and more!</div></div>
       </div>
       <div class="gc-stats"><div class="gc-stat">3 layouts</div><div class="gc-stat">3 difficulties</div><div class="gc-stat hi" id="best-mahjong">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
@@ -467,7 +467,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <div id="game-mahjong" class="game-overlay">
   <div class="go-topbar">
     <button class="go-back" onclick="closeGame('mahjong')">← Hub</button>
-    <div class="go-title">🦋 AureliaMahjong</div>
+    <div class="go-title">🦋 SageMahjong</div>
     <div class="go-score">⭐ <span id="mj-score-disp">0</span></div>
   </div>
   <div class="go-body" id="mj-wrap" style="display:flex;flex-direction:column;height:calc(100vh - 55px);">
@@ -481,7 +481,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div id="mj-welcome" style="flex:1;overflow:auto;">
       <div class="gm-welcome">
         <div class="gm-icon">🦋</div>
-        <div class="gm-title">AureliaMahjong</div>
+        <div class="gm-title">SageMahjong</div>
         <div class="gm-sub">✦ Match the magic, clear the board ✦</div>
         <div style="font-size:.72rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Difficulty</div>
         <div class="diff-row" style="width:100%;max-width:340px;margin-bottom:16px;">
@@ -578,9 +578,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <script>
 const firebaseConfig = {
   apiKey:"AIzaSyChW4xXFj1RCoc6VhLpMICF-cH1_8SQGKg",
-  authDomain:"aureliaquest.firebaseapp.com",
-  projectId:"aureliaquest",
-  storageBucket:"aureliaquest.firebasestorage.app",
+  authDomain:"Sagequest.firebaseapp.com",
+  projectId:"Sagequest",
+  storageBucket:"Sagequest.firebasestorage.app",
   messagingSenderId:"587430893612",
   appId:"1:587430893612:web:560a4d89c0c6f3632e9989",
   measurementId:"G-FDBCPJNQQC"
@@ -613,7 +613,7 @@ window.signInWithGoogle = async () => {
 };
 
 window.doSignOut = async () => {
-  if(confirm('Sign out of AureliaQuest?')) {
+  if(confirm('Sign out of SageQuest?')) {
     await auth.signOut();
   }
 };
@@ -645,7 +645,7 @@ const BADGES = [
   {id:'high_scorer',icon:'🔥',name:'High Scorer',desc:'Score 500+ in one game'},
   {id:'market_visitor',icon:'🛒',name:'Market Regular',desc:'Play Clover Market'},
   {id:'word_wizard',icon:'💎',name:'Word Wizard',desc:'Play WordWeave'},
-  {id:'mahjong_master',icon:'🦋',name:'Mahjong Master',desc:'Play AureliaMahjong'},
+  {id:'mahjong_master',icon:'🦋',name:'Mahjong Master',desc:'Play SageMahjong'},
   {id:'hearth_keeper',icon:'🏰',name:'Hearth Keeper',desc:'Play The Arcane Hearth'},
   {id:'starfall',icon:'☄️',name:'Starfall!',desc:'Score a STARFALL in Dice'},
   {id:'dice_master',icon:'🎲',name:'Dice Master',desc:'Score 200+ in Starfall Dice'},
@@ -741,7 +741,7 @@ function renderActivity() {
   }
   el.innerHTML = '';
   const icons={market:'🛒',words:'💎',mahjong:'🦋',hearth:'🏰',dice:'🎲'};
-  const names={market:'Clover Market',words:'WordWeave',mahjong:'AureliaMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice'};
+  const names={market:'Clover Market',words:'WordWeave',mahjong:'SageMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice'};
   userData.activity.slice(0,5).forEach(a => {
     const row = document.createElement('div');
     row.className = 'activity-row';
@@ -1228,7 +1228,7 @@ window.wwPickPair=function(tile,w,side,pairs){
 };
 
 // ═══════════════════════════════════════════
-// AURELIAMAHONG
+// SageMAHONG
 // ═══════════════════════════════════════════
 const MJ_SYMS=['🦋','🌙','💎','🦄','🐉','🔮','📚','🧪','✨','⭐','🌺','🌸','💫','🪄','📖','⚗️','🗝️','🌟','🦊','🦅','🌈','🕯️','🧿','🌻','🫧','🏺','🌌','💜','🌿','🦚','🐺','⚡','🌠','🧭','🌙','🔯'];
 
