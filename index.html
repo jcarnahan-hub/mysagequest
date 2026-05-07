@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>✨ AureliaQuest</title>
+<title>🧩 SageQuest</title>
 <meta name="theme-color" content="#0d0b1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" type="image/png" href="aureliaquest-icon.png">
-<link rel="apple-touch-icon" href="aureliaquest-icon.png">
+<link rel="icon" type="image/png" href="SageQuest-icon.png">
+<link rel="apple-touch-icon" href="SageQuest-icon.png">
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -350,7 +350,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <!-- ══ SIGN IN ══ -->
 <div id="screen-signin" class="screen active" style="display:flex;">
   <div class="signin-orb">🧩</div>
-  <div class="signin-title">AureliaQuest</div>
+  <div class="signin-title">SageQuest</div>
   <div class="signin-sub">✦ AureliaSphere Games ✦</div>
   <div class="signin-tagline">Your magical games hub — earn badges, track scores, and grow your quest across every device.</div>
   <button class="google-btn" onclick="signInWithGoogle()">
@@ -364,7 +364,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <!-- ══ HUB ══ -->
 <div id="screen-hub" class="screen">
   <div class="topnav">
-    <div class="nav-brand">✦ AureliaQuest</div>
+    <div class="nav-brand">✦ SageQuest</div>
     <div class="nav-right">
       <div class="nav-score">⭐ <span id="nav-score">0</span></div>
       <img class="nav-avatar" id="nav-avatar" src="" alt="You" onclick="doSignOut()">
@@ -578,9 +578,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <script>
 const firebaseConfig = {
   apiKey:"AIzaSyChW4xXFj1RCoc6VhLpMICF-cH1_8SQGKg",
-  authDomain:"aureliaquest.firebaseapp.com",
-  projectId:"aureliaquest",
-  storageBucket:"aureliaquest.firebasestorage.app",
+  authDomain:"SageQuest.firebaseapp.com",
+  projectId:"SageQuest",
+  storageBucket:"SageQuest.firebasestorage.app",
   messagingSenderId:"587430893612",
   appId:"1:587430893612:web:560a4d89c0c6f3632e9989",
   measurementId:"G-FDBCPJNQQC"
@@ -613,7 +613,7 @@ window.signInWithGoogle = async () => {
 };
 
 window.doSignOut = async () => {
-  if(confirm('Sign out of AureliaQuest?')) {
+  if(confirm('Sign out of SageQuest?')) {
     await auth.signOut();
   }
 };
