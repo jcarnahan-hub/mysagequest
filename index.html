@@ -605,15 +605,12 @@ let userData = {totalScore:0,gamesPlayed:0,badges:[],activity:[],bestScores:{},s
 
 window.signInWithGoogle = async () => {
   const errEl = document.getElementById('signin-error');
-  if(errEl) errEl.textContent = 'Opening Google sign-in...';
+  if(errEl) errEl.textContent = 'Redirecting to Google...';
   try {
-    await auth.signInWithPopup(provider);
+    await auth.signInWithRedirect(provider);
   } catch(e) {
+    console.error('Sign-in error:', e);
     if(errEl) errEl.textContent = 'Error: ' + e.code;
-    if(e.code === 'auth/popup-blocked' || e.code === 'auth/popup-closed-by-user') {
-      if(errEl) errEl.textContent = 'Popup blocked — trying redirect...';
-      await auth.signInWithRedirect(provider);
-    }
   }
 };
 
