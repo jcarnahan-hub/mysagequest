@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>🧩 SageQuest</title>
+<title>✨ SageQuest</title>
 <meta name="theme-color" content="#0d0b1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" type="image/png" href="Sagequest-icon.png">
-<link rel="apple-touch-icon" href="Sagequest-icon.png">
+<link rel="icon" type="image/png" href="sagequest-icon.png">
+<link rel="apple-touch-icon" href="sagequest-icon.png">
 <link rel="manifest" href="manifest.json">
---font: 'Inter', sans-serif;
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -27,18 +26,15 @@
 html,body{height:100%;overflow-x:hidden;}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-/* starfield */
 .starfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);}
 @keyframes twinkle{0%,100%{opacity:var(--lo,.2);transform:scale(1)}50%{opacity:var(--hi,.9);transform:scale(1.4)}}
 .nebula{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
 #app{position:relative;z-index:1;}
 
-/* ── SCREENS ── */
 .screen{display:none;min-height:100vh;}
 .screen.active{display:block;}
 
-/* ── SIGN IN ── */
 #screen-signin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;min-height:100vh;}
 .signin-orb{width:110px;height:110px;background:radial-gradient(circle at 35% 35%,var(--violet),#3a1a6e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3.2rem;margin-bottom:24px;box-shadow:0 0 60px var(--glow-violet);animation:orbPulse 4s ease-in-out infinite;}
 @keyframes orbPulse{0%,100%{box-shadow:0 0 60px var(--glow-violet);transform:scale(1)}50%{box-shadow:0 0 80px rgba(176,110,243,.5);transform:scale(1.04)}}
@@ -51,14 +47,12 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .signin-note{font-size:.72rem;color:var(--text3);}
 #signin-error{margin-top:12px;color:var(--rose);font-size:.75rem;max-width:280px;text-align:center;}
 
-/* ── TOP NAV ── */
 .topnav{position:sticky;top:0;z-index:100;background:rgba(13,11,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
 .nav-brand{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px;}
 .nav-right{display:flex;align-items:center;gap:10px;}
 .nav-avatar{width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 10px var(--glow-gold);cursor:pointer;object-fit:cover;}
 .nav-score{background:var(--panel);border:1px solid var(--border);border-radius:30px;padding:5px 12px;font-size:.75rem;font-weight:800;color:var(--gold);}
 
-/* ── HUB ── */
 #screen-hub{padding-bottom:40px;}
 .hub-hero{text-align:center;padding:28px 20px 20px;}
 .hub-greeting{font-size:.75rem;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;}
@@ -98,7 +92,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .activity-row .ar-pts{font-weight:800;color:var(--gold);font-size:.78rem;}
 .empty-activity{text-align:center;color:var(--text3);font-size:.82rem;padding:20px;}
 
-/* ── FULL SCREEN GAME OVERLAY ── */
 .game-overlay{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);flex-direction:column;}
 .game-overlay.active{display:flex;}
 .go-topbar{background:rgba(13,11,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
@@ -108,7 +101,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .go-score{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:.75rem;font-weight:800;color:var(--gold);white-space:nowrap;}
 .go-body{flex:1;overflow:auto;}
 
-/* ── SHARED GAME STYLES ── */
 .gm-welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 55px);padding:24px;text-align:center;}
 .gm-icon{font-size:3.5rem;animation:gemFloat 4s ease-in-out infinite;margin-bottom:14px;}
 @keyframes gemFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
@@ -126,17 +118,13 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .diff-btn{flex:1;background:var(--panel);border:1.5px solid var(--border);border-radius:30px;padding:8px;text-align:center;font-size:.75rem;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s;}
 .diff-btn.active{background:var(--violet);border-color:var(--violet);color:white;box-shadow:0 0 12px var(--glow-violet);}
 
-/* ── TOAST ── */
 #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--panel2);border:1px solid var(--border2);color:var(--text);padding:10px 22px;border-radius:30px;font-weight:700;font-size:.82rem;opacity:0;transition:all .3s;z-index:500;pointer-events:none;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.6);}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* confetti */
 .cp{position:fixed;border-radius:2px;animation:cpFall 3s ease-in forwards;pointer-events:none;z-index:999;}
 @keyframes cpFall{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 
-/* ════════════════════════════════
-   MAHJONG STYLES
-════════════════════════════════ */
+/* MAHJONG */
 #mj-board-wrap{padding:10px;overflow:auto;}
 #mj-board{position:relative;}
 .mj-tile{position:absolute;width:58px;height:72px;background:linear-gradient(145deg,#2a2050,#1a1535);border:2px solid var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;cursor:pointer;transition:all .15s ease;user-select:none;box-shadow:3px 3px 0 rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1);}
@@ -169,9 +157,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .ov-btn{background:linear-gradient(135deg,var(--violet2),var(--violet));border:none;border-radius:14px;padding:13px 28px;font-family:'Cinzel',serif;font-size:.95rem;color:white;cursor:pointer;transition:all .2s;}
 .ov-btn.sec{background:var(--panel);border:1.5px solid var(--border);color:var(--text2);box-shadow:none;}
 
-/* ════════════════════════════════
-   CLOVER MARKET STYLES
-════════════════════════════════ */
+/* CLOVER MARKET */
 #cm-wrap{--cream:#fdf6ec;--warm:#f5e6c8;--sage:#8daa91;--sage-dark:#5f7d63;--mrose:#e8a5a5;--butter:#f5d06e;--butter-dark:#d4a830;--mtext:#3d2c1e;--mtext-light:#7a5c44;--mshadow:rgba(100,70,40,0.15);background:var(--cream);color:var(--mtext);font-family:'Nunito',sans-serif;}
 .cm-content{padding:14px 12px 80px;}
 .cm-sort-header{text-align:center;margin-bottom:12px;}
@@ -201,11 +187,10 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .cm-shelf{background:white;border-radius:16px;padding:10px;box-shadow:0 2px 10px var(--mshadow);}
 .cm-shelf h5{font-family:'Cinzel',serif;font-size:.8rem;margin-bottom:6px;color:var(--sage-dark);}
 .cm-shelf-items{display:flex;flex-direction:column;gap:4px;}
+/* FIX: removed cm-on-list glow — items no longer visually highlighted on shelf */
 .cm-product{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:var(--warm);border:2px solid transparent;cursor:pointer;transition:all .15s;}
 .cm-product:hover{border-color:var(--sage);transform:translateX(2px);}
 .cm-product.cm-in-cart{background:#e8f5e8;border-color:var(--sage);opacity:.5;cursor:default;}
-.cm-product.cm-on-list{background:#fff8e0;border-color:var(--butter-dark);animation:cmGlow 2s ease-in-out infinite;}
-@keyframes cmGlow{0%,100%{box-shadow:0 0 0 0 rgba(213,168,48,.3)}50%{box-shadow:0 0 0 5px rgba(213,168,48,0)}}
 .cm-cart-bar{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;z-index:200;box-shadow:0 -4px 18px rgba(100,70,40,.15);cursor:pointer;}
 .cm-cart-label{font-family:'Cinzel',serif;font-size:1rem;}
 .cm-cart-count{background:var(--butter);color:var(--mtext);border-radius:20px;padding:3px 12px;font-weight:800;font-size:.8rem;}
@@ -235,9 +220,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .cm-store-sign{font-family:'Cinzel',serif;font-size:2rem;color:var(--sage-dark);text-align:center;margin:20px 0 6px;text-shadow:2px 2px 0 var(--warm);animation:gemFloat 3s ease-in-out infinite;}
 .cm-subtitle{text-align:center;color:var(--mtext-light);font-size:.85rem;margin-bottom:24px;}
 
-/* ════════════════════════════════
-   WORDWEAVE STYLES
-════════════════════════════════ */
+/* WORDWEAVE */
 #ww-wrap{padding:14px 14px 40px;}
 .ww-conn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
 .ww-tile{background:var(--panel);border:2px solid var(--border);border-radius:12px;padding:13px 8px;text-align:center;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .18s;user-select:none;min-height:50px;display:flex;align-items:center;justify-content:center;}
@@ -284,9 +267,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .ww-result-row .rl{color:var(--text2);}
 .ww-result-row .rv{font-weight:800;color:var(--gold);}
 
-/* ════════════════════════════════
-   ARCANE HEARTH STYLES  
-════════════════════════════════ */
+/* ARCANE HEARTH */
 #ah-wrap{background:var(--bg);}
 .ah-res-bar{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:rgba(10,6,18,.8);border-bottom:1px solid var(--border);flex-shrink:0;}
 .ah-res-group{display:flex;gap:8px;}
@@ -297,7 +278,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .ah-main{flex:1;display:flex;overflow:hidden;}
 .ah-grid-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;overflow:auto;}
 #ah-grid{display:grid;gap:6px;}
-.ah-cell{width:68px;height:68px;background:rgba(20,16,40,.5);border:1.5px solid var(--border);border-radius:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.9rem;position:relative;transition:all .18s ease;user-select:none;}
+.ah-cell{width:68px;height:68px;background:rgba(20,16,40,.5);border:1.5px solid var(--border);border-radius:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.9rem;position:relative;transition:all .18px ease;user-select:none;}
 .ah-cell.has-item{background:linear-gradient(145deg,var(--panel2),var(--panel));border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.4);}
 .ah-cell.has-item:hover{transform:translateY(-3px) scale(1.06);border-color:var(--violet);box-shadow:0 6px 18px var(--glow-violet);}
 .ah-cell.ah-selected{border-color:var(--gold);background:linear-gradient(145deg,#2a2000,#1e1800);box-shadow:0 0 18px var(--glow-gold);transform:translateY(-3px) scale(1.08);}
@@ -337,18 +318,42 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .ah-how-icon{font-size:1.1rem;flex-shrink:0;}
 .float-score{position:fixed;font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold);pointer-events:none;z-index:500;animation:floatUp 1s ease forwards;}
 @keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-60px)}}
+
+/* STARFALL DICE */
+#sd-wrap{padding:14px 14px 40px;}
+.sd-dice-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.sd-die{width:64px;height:64px;background:linear-gradient(145deg,var(--panel2),var(--panel));border:2px solid var(--border2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transition:all .18s;user-select:none;position:relative;}
+.sd-die:hover{border-color:var(--violet);transform:translateY(-3px);}
+.sd-die.sd-held{border-color:var(--gold);background:linear-gradient(145deg,#2a2000,#1e1800);box-shadow:0 0 16px var(--glow-gold);}
+.sd-die.sd-held::after{content:'HELD';position:absolute;bottom:-18px;font-size:.5rem;font-weight:800;color:var(--gold);letter-spacing:1px;}
+.sd-die.sd-rolling{animation:sdRoll .4s ease;}
+@keyframes sdRoll{0%,100%{transform:rotate(0)}25%{transform:rotate(-15deg) scale(1.1)}75%{transform:rotate(15deg) scale(1.1)}}
+.sd-cats{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.sd-cat{background:var(--panel);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s;font-size:.78rem;}
+.sd-cat:hover:not(.sd-cat-used){border-color:var(--violet);background:var(--panel2);}
+.sd-cat.sd-cat-used{opacity:.5;cursor:default;}
+.sd-cat.sd-cat-best{border-color:var(--gold);box-shadow:0 0 10px var(--glow-gold);}
+.sd-cat-name{color:var(--text);font-weight:700;}
+.sd-cat-pts{font-weight:800;color:var(--gold);}
+.sd-cat-poss{font-size:.68rem;color:var(--teal);}
+.sd-info-row{display:flex;gap:8px;margin-bottom:12px;justify-content:center;}
+.sd-info-chip{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.75rem;font-weight:800;}
+.sd-rolls-left{color:var(--violet);}
+.sd-total{color:var(--gold);}
+.sd-roll-btn{width:100%;background:linear-gradient(135deg,var(--violet2),var(--violet));border:none;border-radius:14px;padding:14px;font-family:'Cinzel',serif;font-size:1rem;color:white;cursor:pointer;box-shadow:0 6px 20px var(--glow-violet);transition:all .2s;margin-bottom:10px;}
+.sd-roll-btn:hover{transform:translateY(-2px);}
+.sd-roll-btn:disabled{opacity:.45;cursor:default;transform:none;}
 </style>
 </head>
 <body>
 
-<!-- Starfield -->
 <div class="starfield" id="starfield"></div>
 <div class="nebula" style="width:300px;height:300px;top:-80px;left:-80px;background:radial-gradient(circle,rgba(192,132,252,0.12),transparent)"></div>
 <div class="nebula" style="width:250px;height:250px;bottom:10%;right:-60px;background:radial-gradient(circle,rgba(245,200,66,0.08),transparent)"></div>
 
 <div id="app">
 
-<!-- ══ SIGN IN ══ -->
+<!-- SIGN IN -->
 <div id="screen-signin" class="screen active" style="display:flex;">
   <div class="signin-orb">🧩</div>
   <div class="signin-title">SageQuest</div>
@@ -362,7 +367,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   <div id="signin-error"></div>
 </div>
 
-<!-- ══ HUB ══ -->
+<!-- HUB -->
 <div id="screen-hub" class="screen">
   <div class="topnav">
     <div class="nav-brand">✦ SageQuest</div>
@@ -414,14 +419,15 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       </div>
       <div class="gc-stats"><div class="gc-stat">6 merge chains</div><div class="gc-stat">5 recipes</div><div class="gc-stat hi" id="best-hearth">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
-      <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(168,85,247,0.08),transparent)" onclick="window.location.href='game-dice.html'">
+    </div>
+    <!-- FIX: Starfall Dice is now its own properly closed card, not nested inside Arcane Hearth -->
+    <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(168,85,247,0.08),transparent)" onclick="openGame('dice')">
       <div class="gc-top">
         <div class="gc-icon" style="background:linear-gradient(135deg,#2a1060,#12082a);border:1px solid rgba(168,85,247,.3)">🎲</div>
         <div style="flex:1"><div class="gc-name">Starfall Dice</div><div class="gc-desc">Roll fantasy dice, hold your favorites, and chase legendary combinations in 13 rounds!</div></div>
       </div>
       <div class="gc-stats"><div class="gc-stat">3 modes</div><div class="gc-stat">13 categories</div><div class="gc-stat hi" id="best-dice">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
-    </div>
     </div>
   </div>
   <div class="section-head"><h2>🏅 Badges</h2><div class="section-line"></div></div>
@@ -431,10 +437,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 </div>
 
 </div><!-- /app -->
-
-<!-- ══════════════════════════════════════════
-     GAME OVERLAYS — full screen, fixed position
-══════════════════════════════════════════ -->
 
 <!-- CLOVER MARKET -->
 <div id="game-market" class="game-overlay">
@@ -459,9 +461,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="go-title">💎 WordWeave</div>
     <div class="go-score">⭐ <span id="ww-score-disp">0</span></div>
   </div>
-  <div class="go-body" id="ww-wrap">
-    <!-- populated by JS -->
-  </div>
+  <div class="go-body" id="ww-wrap"></div>
 </div>
 
 <!-- MAHJONG -->
@@ -478,7 +478,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="mj-stat"><span class="mj-val" id="mj-score">0</span><span class="mj-lbl">Score</span></div>
       <button class="mj-hint-btn" id="mj-hint-btn" onclick="mjUseHint()">💡 Hint <span id="mj-hints">(3)</span></button>
     </div>
-    <!-- Welcome shown first, board hidden -->
     <div id="mj-welcome" style="flex:1;overflow:auto;">
       <div class="gm-welcome">
         <div class="gm-icon">🦋</div>
@@ -500,6 +499,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       <div id="mj-board" style="position:relative;"></div>
     </div>
   </div>
+  <!-- FIX: overlay buttons call mjRestartGame() which hides overlays before restarting -->
   <div class="mj-overlay" id="mj-win">
     <div class="ov-gem">🦋</div>
     <div class="ov-title" id="mj-win-title">Magnificent!</div>
@@ -507,7 +507,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="ov-stats" id="mj-win-stats"></div>
     <div class="ov-btns">
       <button class="ov-btn sec" onclick="mjShowWelcome()">Menu</button>
-      <button class="ov-btn" onclick="mjStart(mjLayout)">Play Again ✦</button>
+      <button class="ov-btn" onclick="mjRestartGame()">Play Again ✦</button>
     </div>
   </div>
   <div class="mj-overlay" id="mj-lose">
@@ -517,7 +517,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="ov-stats" id="mj-lose-stats"></div>
     <div class="ov-btns">
       <button class="ov-btn sec" onclick="mjShowWelcome()">Menu</button>
-      <button class="ov-btn" onclick="mjStart(mjLayout)">Try Again ✦</button>
+      <button class="ov-btn" onclick="mjRestartGame()">Try Again ✦</button>
     </div>
   </div>
 </div>
@@ -567,11 +567,20 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   </div>
 </div>
 
+<!-- STARFALL DICE — FIX: now a proper overlay instead of separate page -->
+<div id="game-dice" class="game-overlay">
+  <div class="go-topbar">
+    <button class="go-back" onclick="closeGame('dice')">← Hub</button>
+    <div class="go-title">🎲 Starfall Dice</div>
+    <div class="go-score">⭐ <span id="sd-score-disp">0</span></div>
+  </div>
+  <div class="go-body" id="sd-wrap">
+    <!-- populated by JS -->
+  </div>
+</div>
+
 <div id="toast"></div>
 
-<!-- ══════════════════════════════════════
-     FIREBASE AUTH
-══════════════════════════════════════ -->
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
@@ -579,12 +588,11 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <script>
 const firebaseConfig = {
   apiKey:"AIzaSyChW4xXFj1RCoc6VhLpMICF-cH1_8SQGKg",
-  authDomain:"Sagequest.firebaseapp.com",
-  projectId:"Sagequest",
-  storageBucket:"Sagequest.firebasestorage.app",
+  authDomain:"mysagequest.firebaseapp.com",
+  projectId:"mysagequest",
+  storageBucket:"mysagequest.firebasestorage.app",
   messagingSenderId:"587430893612",
-  appId:"1:587430893612:web:560a4d89c0c6f3632e9989",
-  measurementId:"G-FDBCPJNQQC"
+  appId:"1:587430893612:web:560a4d89c0c6f3632e9989"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -595,17 +603,13 @@ const provider = new firebase.auth.GoogleAuthProvider();
 let currentUser = null;
 let userData = {totalScore:0,gamesPlayed:0,badges:[],activity:[],bestScores:{},streak:0};
 
-// Sign in with popup — works reliably on all browsers
 window.signInWithGoogle = async () => {
   const errEl = document.getElementById('signin-error');
   if(errEl) errEl.textContent = 'Opening Google sign-in...';
   try {
-    const result = await auth.signInWithPopup(provider);
-    console.log('Signed in:', result.user.email);
+    await auth.signInWithPopup(provider);
   } catch(e) {
-    console.error('Sign-in error:', e.code, e.message);
     if(errEl) errEl.textContent = 'Error: ' + e.code;
-    // If popup blocked, try redirect
     if(e.code === 'auth/popup-blocked' || e.code === 'auth/popup-closed-by-user') {
       if(errEl) errEl.textContent = 'Popup blocked — trying redirect...';
       await auth.signInWithRedirect(provider);
@@ -614,9 +618,7 @@ window.signInWithGoogle = async () => {
 };
 
 window.doSignOut = async () => {
-  if(confirm('Sign out of SageQuest?')) {
-    await auth.signOut();
-  }
+  if(confirm('Sign out of SageQuest?')) await auth.signOut();
 };
 
 window.saveScore = async (game, score, mode) => {
@@ -667,16 +669,13 @@ function checkBadges(game, score) {
   if(game==='mahjong') earn('mahjong_master');
   if(game==='hearth') earn('hearth_keeper');
   if(game==='dice' && score>=200) earn('dice_master');
-  if(userData.bestScores.market&&userData.bestScores.words&&userData.bestScores.mahjong&&userData.bestScores.hearth) earn('dual_quest');
+  if(userData.bestScores.market&&userData.bestScores.words&&userData.bestScores.mahjong&&userData.bestScores.hearth&&userData.bestScores.dice) earn('dual_quest');
   if(userData.totalScore>=1000) earn('thousand_pts');
 }
 
-// Handle redirect result first
 auth.getRedirectResult().then(result => {
   if(result && result.user) console.log('Redirect sign-in OK:', result.user.email);
-}).catch(e => {
-  console.warn('Redirect result:', e.code);
-});
+}).catch(e => { console.warn('Redirect result:', e.code); });
 
 auth.onAuthStateChanged(async (user) => {
   if(user) {
@@ -754,11 +753,8 @@ function renderActivity() {
 }
 </script>
 
-<!-- ══════════════════════════════════════
-     GAME ENGINE
-══════════════════════════════════════ -->
 <script>
-// ── STARFIELD ──
+// STARFIELD
 (()=>{
   const sf=document.getElementById('starfield');
   for(let i=0;i<70;i++){
@@ -769,7 +765,6 @@ function renderActivity() {
   }
 })();
 
-// ── UTILS ──
 function showToast(msg,dur=2000){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
@@ -789,30 +784,27 @@ function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.fl
 function pick(a,n){return shuffle(a).slice(0,n);}
 function rand(a){return a[Math.floor(Math.random()*a.length)];}
 
-// ── GAME OVERLAY MANAGER ──
+// GAME OVERLAY MANAGER
 window.openGame = function(id) {
-  // Hide hub
   document.getElementById('screen-hub').classList.remove('active');
   document.getElementById('screen-hub').style.display = 'none';
-  // Show overlay
   const el = document.getElementById('game-'+id);
   if(el) el.classList.add('active');
-  // Init game
   if(id==='market') cmInit();
   else if(id==='words') wwInit();
   else if(id==='mahjong') mjShowWelcome();
   else if(id==='hearth') ahShowWelcome();
+  else if(id==='dice') sdInit();
 };
 
 window.closeGame = function(id) {
   const el = document.getElementById('game-'+id);
   if(el) el.classList.remove('active');
-  // Show hub
   document.getElementById('screen-hub').style.display = 'block';
   document.getElementById('screen-hub').classList.add('active');
-  // Cleanup
   if(id==='market') document.getElementById('cm-cart-bar').style.display='none';
-  if(id==='mahjong') { clearInterval(mjTimer); }
+  if(id==='mahjong') clearInterval(mjTimer);
+  if(id==='dice') clearInterval(sdTimer);
 };
 
 // ═══════════════════════════════════════════
@@ -878,7 +870,6 @@ function cmStartSort(){
   aisles.forEach(a=>{html+=`<div class="cm-aisle" id="cma-${a.id}" onclick="cmDropAisle('${a.id}')"><div class="cm-aisle-head">${a.label}</div><div class="cm-aisle-items" id="cmai-${a.id}"></div></div>`;});
   html+=`</div></div>`;
   document.getElementById('cm-content').innerHTML=html;
-  // Store items in window for access
   window._cmItems=items;
 }
 
@@ -929,9 +920,10 @@ function cmStartShop(listItems){
     const aisle=CM_AISLES.find(a=>a.id===aid);
     const aisleItems=cmList.filter(i=>i.a===aid);
     const decoys=CM_ITEMS.filter(i=>i.a===aid&&!listIds.has(i.id));
+    // FIX: removed cm-on-list class — items are no longer visually highlighted on shelf
     const shelf=shuffle([...aisleItems,...pick(decoys,2)]);
     html+=`<div class="cm-shelf"><h5>${aisle.label}</h5><div class="cm-shelf-items">`;
-    shelf.forEach(item=>{html+=`<div class="cm-product${listIds.has(item.id)?' cm-on-list':''}" id="cmp-${item.id}" onclick="cmAddCart('${item.id}')">${item.e} ${item.n}</div>`;});
+    shelf.forEach(item=>{html+=`<div class="cm-product" id="cmp-${item.id}" onclick="cmAddCart('${item.id}')">${item.e} ${item.n}</div>`;});
     html+=`</div></div>`;
   });
   html+=`</div></div>`;
@@ -946,7 +938,8 @@ window.cmAddCart=function(itemId){
   cmCart.push(item);btn?.classList.add('cm-in-cart');
   const n=cmCart.length;document.getElementById('cm-cart-count').textContent=n===1?'1 item':`${n} items`;
   const lr=document.getElementById('clr-'+itemId);
-  if(lr){lr.classList.add('cm-checked');const ck=document.getElementById('cc-'+itemId);if(ck)ck.textContent='✓';
+  if(lr){
+    lr.classList.add('cm-checked');const ck=document.getElementById('cc-'+itemId);if(ck)ck.textContent='✓';
     cmScore+=5;document.getElementById('cm-score-disp').textContent=cmScore;showToast(`${item.e} Added! +5 pts`);
     if(document.querySelectorAll('.cm-list-item.cm-checked').length===cmList.length)setTimeout(()=>showToast('🎉 List complete! Tap cart!',2500),500);
   } else {showToast(`${item.e} In cart!`);}
@@ -987,11 +980,18 @@ window.cmConfirm=function(){
   document.getElementById('cm-content').innerHTML=`<div class="cm-success"><div class="cm-success-emoji">🎉</div><h3>All Done!</h3><p>Thanks for shopping at Clover Market 🌿</p><div class="cm-success-details">🛒 ${cmCart.length} items purchased<br>✅ ${found}/${cmList.length} list items found<br>💳 Paid with ${lbl[cmPayMethod]}<br>🏆 Score: <strong>${cmScore} pts</strong><div class="cm-big-total">Total: $${total.toFixed(2)}</div></div><button class="cm-again-btn" onclick="cmInit()">Shop Again 🛒</button></div>`;
 };
 
+// FIX: "Go back to market" button added to cart bar area
+window.cmBackToMarket=function(){
+  document.getElementById('cm-cart-bar').style.display='none';
+  cmInit();
+};
+
 function cmStartFull(){cmMode='full';cmStartShop();}
 
 // ═══════════════════════════════════════════
 // WORDWEAVE
 // ═══════════════════════════════════════════
+// FIX: All connection puzzles now have exactly 4 words per category
 const WW_CONN=[
   {title:"What are they all?",cats:[
     {name:"🌿 Garden Things",c:0,words:["Rose","Shovel","Snail","Hose"]},
@@ -1002,6 +1002,7 @@ const WW_CONN=[
   {title:"Hidden connections…",cats:[
     {name:"🍕 Pizza Toppings",c:0,words:["Pepperoni","Anchovy","Arugula","Ricotta"]},
     {name:"☁️ Cloud Types",c:1,words:["Cumulus","Stratus","Nimbus","Cirrus"]},
+    // FIX: added Werewolf back so Movie Monsters has 4 words
     {name:"🎬 Movie Monsters",c:2,words:["Godzilla","Frankenstein","Dracula","Werewolf"]},
     {name:"🌺 Tropical Flowers",c:3,words:["Hibiscus","Plumeria","Orchid","Heliconia"]},
   ]},
@@ -1024,6 +1025,8 @@ const WW_CONN=[
     {name:"🍎 Apple ___",c:3,words:["Sauce","Cider","Jack","Pie"]},
   ]},
 ];
+
+// FIX: Word Pairs now has enough pairs for all difficulties; uses index tracking to avoid repeats
 const WW_PAIRS=[
   {title:"Perfect pairs!",sub:"Tap left, then its match on the right",pairs:[["Salt","Pepper"],["Sun","Moon"],["Cat","Dog"],["Bread","Butter"],["Romeo","Juliet"],["Thunder","Lightning"]]},
   {title:"Word partners",sub:"Find each word's companion",pairs:[["Peanut Butter","Jelly"],["Bow","Arrow"],["Cup","Saucer"],["Hammer","Nail"],["Stars","Stripes"],["Needle","Thread"]]},
@@ -1033,6 +1036,8 @@ const WW_PAIRS=[
 ];
 
 let wwScore=0,wwLives=0,wwDiff='easy',wwPuzzle=null,wwSel=[],wwSolved=[],wwPairA=null,wwPairB=null,wwMatched=new Set(),wwStart=0;
+// FIX: track used puzzle indices to avoid repeating
+let wwUsedConn=[],wwUsedPairs=[];
 
 function wwInit(){
   wwScore=0;wwDiff='easy';
@@ -1054,6 +1059,15 @@ function wwInit(){
   document.getElementById('ww-score-disp').textContent='0';
 }
 
+// FIX: pick non-repeating puzzle
+function wwPickPuzzle(arr, usedArr) {
+  if(usedArr.length >= arr.length) usedArr.length = 0; // reset when all used
+  const available = arr.map((_,i)=>i).filter(i=>!usedArr.includes(i));
+  const idx = available[Math.floor(Math.random()*available.length)];
+  usedArr.push(idx);
+  return arr[idx];
+}
+
 window.wwSetDiff=function(d){
   wwDiff=d;
   document.querySelectorAll('.ww-diff-btn').forEach(b=>b.classList.remove('active'));
@@ -1063,7 +1077,7 @@ window.wwSetDiff=function(d){
 window.wwStartConn=function(){
   wwSel=[];wwSolved=[];wwStart=Date.now();
   wwLives=wwDiff==='easy'?5:wwDiff==='medium'?4:3;
-  wwPuzzle=rand(WW_CONN);
+  wwPuzzle=wwPickPuzzle(WW_CONN, wwUsedConn);
   const allWords=shuffle(wwPuzzle.cats.flatMap(cat=>cat.words.map(w=>({w,cat}))));
   const wrap=document.getElementById('ww-wrap');
   wrap.innerHTML=`<div style="padding:12px;">
@@ -1141,22 +1155,27 @@ function wwWin(mode){
   document.getElementById('ww-score-disp').textContent=wwScore;
   if(window.saveScore) saveScore('words',wwScore,mode);
   const m=Math.floor(e/60),s=e%60;
+  // FIX: Play Again buttons call the correct mode function, not wwInit()
+  const againFn = mode==='connections' ? 'wwStartConn()' : 'wwStartPairs()';
   document.getElementById('ww-wrap').innerHTML=`<div class="gm-welcome"><div class="gm-icon">💎</div>
     <div class="gm-title" style="font-size:1.5rem;">${rand(['Brilliant! ✦','Magnificent! ✦','Dazzling! ✦'])}</div>
     <div class="gm-sub">Puzzle complete!</div>
     <div class="ww-result-card"><div class="ww-result-row"><span class="rl">⏱ Time</span><span class="rv">${m}:${s.toString().padStart(2,'0')}</span></div><div class="ww-result-row"><span class="rl">⭐ Score</span><span class="rv">${wwScore}</span></div>${bonus?`<div class="ww-result-row"><span class="rl">⚡ Speed Bonus</span><span class="rv">+${bonus}</span></div>`:''}<div class="ww-result-row"><span class="rl">💎 Difficulty</span><span class="rv">${wwDiff}</span></div></div>
-    <button class="gm-btn" onclick="wwInit()">Play Again ✦</button></div>`;
+    <button class="gm-btn" onclick="${againFn}">Play Again ✦</button>
+    <button class="gm-btn sec" style="margin-top:8px;background:var(--panel);border:1.5px solid var(--border);color:var(--text2);box-shadow:none;" onclick="wwInit()">Main Menu</button></div>`;
 }
 
 function wwLose(){
   if(window.saveScore) saveScore('words',wwScore,'connections');
-  document.getElementById('ww-wrap').innerHTML=`<div class="gm-welcome"><div class="gm-icon" style="font-size:3rem;">💜</div><div class="gm-title" style="font-size:1.5rem;">So close!</div><div class="gm-sub">The puzzle stumped you!</div><div class="ww-result-card"><div class="ww-result-row"><span class="rl">⭐ Score</span><span class="rv">${wwScore}</span></div></div><button class="gm-btn" onclick="wwInit()">Try Again ✦</button></div>`;
+  document.getElementById('ww-wrap').innerHTML=`<div class="gm-welcome"><div class="gm-icon" style="font-size:3rem;">💜</div><div class="gm-title" style="font-size:1.5rem;">So close!</div><div class="gm-sub">The puzzle stumped you!</div><div class="ww-result-card"><div class="ww-result-row"><span class="rl">⭐ Score</span><span class="rv">${wwScore}</span></div></div>
+    <button class="gm-btn" onclick="wwStartConn()">Try Again ✦</button>
+    <button class="gm-btn sec" style="margin-top:8px;background:var(--panel);border:1.5px solid var(--border);color:var(--text2);box-shadow:none;" onclick="wwInit()">Main Menu</button></div>`;
 }
 
 window.wwStartPairs=function(){
   wwPairA=null;wwPairB=null;wwMatched=new Set();wwStart=Date.now();wwScore=0;
   wwLives=wwDiff==='easy'?999:wwDiff==='medium'?5:3;
-  wwPuzzle=rand(WW_PAIRS);
+  wwPuzzle=wwPickPuzzle(WW_PAIRS, wwUsedPairs);
   const count=wwDiff==='easy'?4:wwDiff==='medium'?5:6;
   const chosen=shuffle(wwPuzzle.pairs).slice(0,count);
   const lefts=shuffle(chosen.map(p=>p[0]));
@@ -1229,9 +1248,9 @@ window.wwPickPair=function(tile,w,side,pairs){
 };
 
 // ═══════════════════════════════════════════
-// SageMAHONG
+// SAGEMAHJONG
 // ═══════════════════════════════════════════
-const MJ_SYMS=['🦋','🌙','💎','🦄','🐉','🔮','📚','🧪','✨','⭐','🌺','🌸','💫','🪄','📖','⚗️','🗝️','🌟','🦊','🦅','🌈','🕯️','🧿','🌻','🫧','🏺','🌌','💜','🌿','🦚','🐺','⚡','🌠','🧭','🌙','🔯'];
+const MJ_SYMS=['🦋','🌙','💎','🦄','🐉','🔮','📚','🧪','✨','⭐','🌺','🌸','💫','🪄','📖','⚗️','🗝️','🌟','🦊','🦅','🌈','🕯️','🧿','🌻','🫧','🏺','🌌','💜','🌿','🦚','🐺','⚡','🌠','🧭','🔯'];
 
 let mjBoard=[],mjSel=null,mjScore=0,mjPairs=0,mjHints=3,mjTimer=null,mjElapsed=0,mjLayout='turtle',mjDiff='easy';
 
@@ -1241,9 +1260,15 @@ function mjShowWelcome(){
   document.getElementById('mj-board-wrap').style.display='none';
   document.getElementById('mj-win').classList.remove('show');
   document.getElementById('mj-lose').classList.remove('show');
-  mjSel=null;
-  mjBoard=[];
+  mjSel=null;mjBoard=[];
 }
+
+// FIX: mjRestartGame hides overlays before starting to avoid stacking
+window.mjRestartGame=function(){
+  document.getElementById('mj-win').classList.remove('show');
+  document.getElementById('mj-lose').classList.remove('show');
+  setTimeout(()=>mjStart(mjLayout),50);
+};
 
 window.mjSetDiff=function(d){
   mjDiff=d;
@@ -1262,13 +1287,14 @@ window.mjStart=function(layout){
   document.getElementById('mj-hints').textContent='(3)';
 
   const positions=layout==='turtle'?mjTurtle():layout==='dragon'?mjDragon():mjPyramid();
+  // FIX: ensure even number of tiles and enough unique symbols
   const count=Math.floor(positions.length/2)*2;
   const pos=positions.slice(0,count);
   const pairCount=count/2;
-  const symsNeeded=Math.min(pairCount,MJ_SYMS.length);
-  const syms=shuffle([...MJ_SYMS]).slice(0,symsNeeded);
+  // Use enough unique symbols to guarantee solvable board
+  const symsPool=shuffle([...MJ_SYMS]);
   let pool=[];
-  for(let i=0;i<pairCount;i++) pool.push(syms[i%symsNeeded],syms[i%symsNeeded]);
+  for(let i=0;i<pairCount;i++) pool.push(symsPool[i%symsPool.length],symsPool[i%symsPool.length]);
   pool=shuffle(pool);
   mjBoard=[];
   shuffle(pos).forEach(([col,row,layer],i)=>{
@@ -1427,6 +1453,8 @@ function mjLose(){
 
 // ═══════════════════════════════════════════
 // THE ARCANE HEARTH
+// FIX: Starting gold increased to 60 so players can make initial purchases
+// FIX: Added more starting items for better recipe progression
 // ═══════════════════════════════════════════
 const AH_CHAINS={
   herb:{items:[{e:'🌱',n:'Seedling'},{e:'🌿',n:'Herb'},{e:'🍃',n:'Moon Leaf'},{e:'🌺',n:'Bloom'},{e:'🌸',n:'Starbloom'}]},
@@ -1446,10 +1474,10 @@ const AH_RECIPES=[
 ];
 
 const AH_SHOP=[
-  {e:'🌱',n:'Seedling',cost:10,gives:'herb_1',lv:1},{e:'🪨',n:'Pebble',cost:10,gives:'crystal_1',lv:1},
-  {e:'🕯️',n:'Candle',cost:10,gives:'flame_1',lv:1},{e:'💧',n:'Dew Drop',cost:15,gives:'potion_1',lv:1},
-  {e:'📄',n:'Scroll',cost:20,gives:'tome_1',lv:2},{e:'🥚',n:'Mystery Egg',cost:30,gives:'creature_1',lv:2},
-  {e:'🌿',n:'Herb',cost:40,gives:'herb_2',lv:3},{e:'💠',n:'Crystal Shard',cost:40,gives:'crystal_2',lv:3},
+  {e:'🌱',n:'Seedling',cost:8,gives:'herb_1',lv:1},{e:'🪨',n:'Pebble',cost:8,gives:'crystal_1',lv:1},
+  {e:'🕯️',n:'Candle',cost:8,gives:'flame_1',lv:1},{e:'💧',n:'Dew Drop',cost:10,gives:'potion_1',lv:1},
+  {e:'📄',n:'Scroll',cost:15,gives:'tome_1',lv:2},{e:'🥚',n:'Mystery Egg',cost:25,gives:'creature_1',lv:2},
+  {e:'🌿',n:'Herb',cost:30,gives:'herb_2',lv:3},{e:'💠',n:'Crystal Shard',cost:30,gives:'crystal_2',lv:3},
 ];
 
 const AH_WORLDS=[
@@ -1478,8 +1506,9 @@ function ahShowWelcome(){
 
 window.ahStart=function(){
   ahGrid=Array(AH_COLS*AH_ROWS).fill(null);
-  ahGold=30;ahXp=0;ahLv=1;ahMerges=0;ahSel=null;ahDone=new Set();
-  const starters=['herb_1','herb_1','crystal_1','crystal_1','flame_1','potion_1'];
+  // FIX: more starting items and gold so first recipe is achievable
+  ahGold=60;ahXp=0;ahLv=1;ahMerges=0;ahSel=null;ahDone=new Set();
+  const starters=['herb_1','herb_1','herb_1','crystal_1','crystal_1','flame_1','flame_1','potion_1'];
   const slots=shuffle([...Array(ahGrid.length).keys()]);
   starters.forEach((item,i)=>{ahGrid[slots[i]]=item;});
   document.getElementById('ah-welcome').style.display='none';
@@ -1515,10 +1544,8 @@ function ahRenderGrid(){
 
 function ahRenderSide(){
   const side=document.getElementById('ah-side');side.innerHTML='';
-  // World
   const stage=AH_WORLDS.find(w=>w.lv===Math.min(ahLv,AH_WORLDS.length))||AH_WORLDS[0];
   side.innerHTML+=`<div class="ah-section"><h4>🌍 World</h4><div class="ah-world"><div class="ah-world-scene">${stage.scene}</div><div class="ah-world-name">${stage.n}</div><div class="ah-world-desc">${stage.desc}</div></div></div>`;
-  // Recipes
   let rHtml='<div class="ah-section"><h4>📜 Recipes</h4>';
   const vis=AH_RECIPES.filter(r=>r.lv<=ahLv);
   if(!vis.length) rHtml+='<div style="font-size:.62rem;color:var(--text3);text-align:center;padding:6px;">Level up to unlock!</div>';
@@ -1527,7 +1554,6 @@ function ahRenderSide(){
     rHtml+=`<div class="ah-recipe${ahDone.has(r.id)?' done':''}"><div class="ah-recipe-title">${r.icon} ${r.n}</div><div class="ah-recipe-chain">${req}</div><div class="ah-recipe-reward">🪙${r.gold} ·✨${r.xp}${ahDone.has(r.id)?' ·✅':''}</div></div>`;
   });
   rHtml+='</div>';side.innerHTML+=rHtml;
-  // Shop
   let sHtml='<div class="ah-section"><h4>🛒 Shop</h4>';
   AH_SHOP.filter(s=>s.lv<=ahLv).forEach(item=>{
     const canAfford=ahGold>=item.cost;
@@ -1558,7 +1584,7 @@ function ahMerge(from,to){
   const next=ahGetItem(nextKey);
   ahGrid[from]=null;ahGrid[to]=nextKey;ahMerges++;
   ahXp+=10*item.lv;ahSel=null;
-  const gr=item.lv>=3?(item.lv-2)*5:0;if(gr>0)ahGold+=gr;
+  const gr=item.lv>=2?(item.lv-1)*5:0;if(gr>0)ahGold+=gr;
   ahCheckRecipes();
   if(ahXp>=ahLv*100)ahLevelUp();
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
@@ -1603,6 +1629,155 @@ window.ahBuy=function(gives,cost){
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
 };
 
+// ═══════════════════════════════════════════
+// STARFALL DICE
+// FIX: Full inline implementation — no longer routes to game-dice.html
+// ═══════════════════════════════════════════
+const SD_FACES=['⭐','🌙','💎','🔮','✨','🌟'];
+const SD_CATS=[
+  {id:'ones',n:'Ones ⭐',desc:'Count all ⭐',score:(d)=>d.filter(f=>f===0).length*1},
+  {id:'twos',n:'Twos 🌙',desc:'Count all 🌙',score:(d)=>d.filter(f=>f===1).length*2},
+  {id:'threes',n:'Threes 💎',desc:'Count all 💎',score:(d)=>d.filter(f=>f===2).length*3},
+  {id:'fours',n:'Fours 🔮',desc:'Count all 🔮',score:(d)=>d.filter(f=>f===3).length*4},
+  {id:'fives',n:'Fives ✨',desc:'Count all ✨',score:(d)=>d.filter(f=>f===4).length*5},
+  {id:'sixes',n:'Sixes 🌟',desc:'Count all 🌟',score:(d)=>d.filter(f=>f===5).length*6},
+  {id:'three_kind',n:'Three of a Kind',desc:'3+ same: sum all',score:(d)=>{const c=SD_FACES.map((_,i)=>d.filter(f=>f===i).length);return c.some(x=>x>=3)?d.reduce((s,f)=>s+(f+1),0):0;}},
+  {id:'four_kind',n:'Four of a Kind',desc:'4+ same: sum all',score:(d)=>{const c=SD_FACES.map((_,i)=>d.filter(f=>f===i).length);return c.some(x=>x>=4)?d.reduce((s,f)=>s+(f+1),0):0;}},
+  {id:'full_house',n:'Full House 🏠',desc:'3+2 combo: 25pts',score:(d)=>{const c=SD_FACES.map((_,i)=>d.filter(f=>f===i).length).filter(x=>x>0);return(c.includes(3)&&c.includes(2))?25:0;}},
+  {id:'sm_straight',n:'Small Straight',desc:'4 in a row: 30pts',score:(d)=>{const u=[...new Set(d)].sort();for(let i=0;i<=2;i++){if([0,1,2,3].every(x=>u.includes(i+x)))return 30;}return 0;}},
+  {id:'lg_straight',n:'Large Straight',desc:'5 in a row: 40pts',score:(d)=>{const u=[...new Set(d)].sort((a,b)=>a-b);return(u.length===5&&u[4]-u[0]===4)?40:0;}},
+  {id:'starfall',n:'✦ STARFALL ✦',desc:'All same: 50pts',score:(d)=>new Set(d).size===1?50:0},
+  {id:'chance',n:'Chance',desc:'Sum of all dice',score:(d)=>d.reduce((s,f)=>s+(f+1),0)},
+];
+
+let sdDice=[],sdHeld=[],sdRollsLeft=3,sdScores={},sdRound=0,sdTotalRounds=13,sdTimer=null,sdMode='classic';
+
+function sdInit(){
+  sdScores={};sdRound=0;sdRollsLeft=3;sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);
+  document.getElementById('sd-score-disp').textContent='0';
+  sdShowWelcome();
+}
+
+function sdShowWelcome(){
+  document.getElementById('sd-wrap').innerHTML=`<div class="gm-welcome">
+    <div class="gm-icon">🎲</div>
+    <div class="gm-title">Starfall Dice</div>
+    <div class="gm-sub">✦ Roll · Hold · Score ✦</div>
+    <div class="gm-card" onclick="sdStartGame('classic')"><div class="gm-card-icon">🎲</div><div><div class="gm-card-label">Classic</div><div class="gm-card-desc">13 rounds, score every category</div></div></div>
+    <div class="gm-card" onclick="sdStartGame('speed')"><div class="gm-card-icon">⚡</div><div><div class="gm-card-label">Speed Round</div><div class="gm-card-desc">5 rounds, go for the top score!</div></div></div>
+    <div class="gm-card" onclick="sdStartGame('challenge')"><div class="gm-card-icon">🔮</div><div><div class="gm-card-label">Challenge</div><div class="gm-card-desc">Only 1 roll per round — think fast!</div></div></div>
+  </div>`;
+}
+
+window.sdStartGame=function(mode){
+  sdMode=mode;sdScores={};sdRound=0;
+  sdTotalRounds=mode==='speed'?5:13;
+  sdRollsLeft=mode==='challenge'?1:3;
+  sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);
+  sdRenderGame();
+  sdRoll();
+};
+
+function sdRenderGame(){
+  const total=Object.values(sdScores).reduce((s,v)=>s+v,0);
+  document.getElementById('sd-score-disp').textContent=total;
+  const usedCats=new Set(Object.keys(sdScores));
+  const availCats=SD_CATS.filter(c=>!usedCats.has(c.id));
+
+  let html=`<div style="padding:12px;">
+    <div class="sd-info-row">
+      <div class="sd-info-chip sd-rolls-left">🎲 ${sdRollsLeft} roll${sdRollsLeft!==1?'s':''} left</div>
+      <div class="sd-info-chip" style="color:var(--text2)">Round ${sdRound+1}/${sdTotalRounds}</div>
+      <div class="sd-info-chip sd-total">⭐ ${total} pts</div>
+    </div>
+    <div class="sd-dice-row" id="sd-dice-row">`;
+  sdDice.forEach((f,i)=>{
+    html+=`<div class="sd-die${sdHeld[i]?' sd-held':''}" onclick="sdToggleHold(${i})">${SD_FACES[f]}</div>`;
+  });
+  html+=`</div>
+    <button class="sd-roll-btn" id="sd-roll-btn" onclick="sdRoll()" ${sdRollsLeft<=0?'disabled':''}>
+      ${sdRollsLeft>0?'🎲 Roll Dice!':'Choose a category below ↓'}
+    </button>
+    <div class="sd-cats" id="sd-cats">`;
+  availCats.forEach(cat=>{
+    const poss=cat.score(sdDice);
+    html+=`<div class="sd-cat${poss>0?' sd-cat-best':''}" onclick="sdSelectCat('${cat.id}')">
+      <div>
+        <div class="sd-cat-name">${cat.n}</div>
+        <div style="font-size:.65rem;color:var(--text3)">${cat.desc}</div>
+      </div>
+      <div style="text-align:right">
+        ${poss>0?`<div class="sd-cat-poss">+${poss}</div>`:''}
+        <div class="sd-cat-pts" style="font-size:.7rem;color:var(--text3)">score</div>
+      </div>
+    </div>`;
+  });
+  // Already scored
+  Object.entries(sdScores).forEach(([id,pts])=>{
+    const cat=SD_CATS.find(c=>c.id===id);
+    html+=`<div class="sd-cat sd-cat-used"><div class="sd-cat-name">${cat?.n||id}</div><div class="sd-cat-pts">${pts} pts ✓</div></div>`;
+  });
+  html+=`</div></div>`;
+  document.getElementById('sd-wrap').innerHTML=html;
+}
+
+window.sdToggleHold=function(i){
+  if(sdRollsLeft>=(sdMode==='challenge'?1:3))return; // can only hold after first roll
+  sdHeld[i]=!sdHeld[i];sdRenderGame();
+};
+
+window.sdRoll=function(){
+  if(sdRollsLeft<=0)return;
+  sdDice=sdDice.map((f,i)=>sdHeld[i]?f:Math.floor(Math.random()*6));
+  sdRollsLeft--;
+  sdHeld=new Array(5).fill(false);
+  sdRenderGame();
+  // Animate dice
+  document.querySelectorAll('.sd-die').forEach(d=>{
+    d.classList.add('sd-rolling');
+    setTimeout(()=>d.classList.remove('sd-rolling'),400);
+  });
+};
+
+window.sdSelectCat=function(catId){
+  if(sdScores[catId]!==undefined)return;
+  const cat=SD_CATS.find(c=>c.id===catId);
+  if(!cat)return;
+  const pts=cat.score(sdDice);
+  sdScores[catId]=pts;
+  if(catId==='starfall'&&pts>0){
+    confetti();showToast('✦ STARFALL! ✦ +50',3000);
+    if(window.saveScore) checkBadges('dice',999); // trigger starfall badge
+  }
+  sdRound++;
+  if(sdRound>=sdTotalRounds){
+    setTimeout(sdEndGame,300);
+  } else {
+    sdRollsLeft=sdMode==='challenge'?1:3;
+    sdDice=sdDice.map(()=>Math.floor(Math.random()*6));
+    sdHeld=new Array(5).fill(false);
+    showToast(`${pts>0?'+'+pts+' pts!':'Scored 0'}`,1500);
+    sdRenderGame();
+  }
+};
+
+function sdEndGame(){
+  const total=Object.values(sdScores).reduce((s,v)=>s+v,0);
+  if(window.saveScore) saveScore('dice',total,sdMode);
+  confetti();
+  let breakdown=Object.entries(sdScores).map(([id,pts])=>{
+    const cat=SD_CATS.find(c=>c.id===id);
+    return `<div class="ww-result-row"><span class="rl">${cat?.n||id}</span><span class="rv">${pts}</span></div>`;
+  }).join('');
+  document.getElementById('sd-wrap').innerHTML=`<div class="gm-welcome">
+    <div class="gm-icon">🎲</div>
+    <div class="gm-title" style="font-size:1.5rem;">${total>=200?'Legendary! ✦':total>=100?'Brilliant! ✦':'Quest Complete!'}</div>
+    <div class="gm-sub">Final Score: ${total} pts</div>
+    <div class="ww-result-card" style="max-height:40vh;overflow-y:auto;">${breakdown}</div>
+    <button class="gm-btn" onclick="sdStartGame('${sdMode}')">Play Again ✦</button>
+    <button class="gm-btn sec" style="margin-top:8px;background:var(--panel);border:1.5px solid var(--border);color:var(--text2);box-shadow:none;" onclick="sdShowWelcome()">Main Menu</button>
+  </div>`;
+}
 </script>
 </body>
 </html>
