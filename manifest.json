@@ -1,0 +1,22 @@
+{
+  "name": "SageQuest",
+  "short_name": "SageQuest",
+  "description": "Your magical games hub — earn badges, track scores, and grow your quest across every device.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0b1a",
+  "theme_color": "#0d0b1a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "sagequest-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "sagequest-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
