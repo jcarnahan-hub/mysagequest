@@ -402,7 +402,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(245,200,66,0.08),transparent)" onclick="openGame('mahjong')">
       <div class="gc-top">
         <div class="gc-icon" style="background:linear-gradient(135deg,#3d2a00,#1a1200);border:1px solid rgba(245,200,66,.3)">🦋</div>
-        <div style="flex:1"><div class="gc-name">AureliaMahjong</div><div class="gc-desc">Match whimsical fantasy tiles — butterflies, dragons, crystals and more!</div></div>
+        <div style="flex:1"><div class="gc-name">SageMahjong</div><div class="gc-desc">Match whimsical fantasy tiles — butterflies, dragons, crystals and more!</div></div>
       </div>
       <div class="gc-stats"><div class="gc-stat">3 layouts</div><div class="gc-stat">3 difficulties</div><div class="gc-stat hi" id="best-mahjong">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
@@ -468,7 +468,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 <div id="game-mahjong" class="game-overlay">
   <div class="go-topbar">
     <button class="go-back" onclick="closeGame('mahjong')">← Hub</button>
-    <div class="go-title">🦋 AureliaMahjong</div>
+    <div class="go-title">🦋 SageMahjong</div>
     <div class="go-score">⭐ <span id="mj-score-disp">0</span></div>
   </div>
   <div class="go-body" id="mj-wrap" style="display:flex;flex-direction:column;height:calc(100vh - 55px);">
@@ -482,7 +482,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div id="mj-welcome" style="flex:1;overflow:auto;">
       <div class="gm-welcome">
         <div class="gm-icon">🦋</div>
-        <div class="gm-title">AureliaMahjong</div>
+        <div class="gm-title">SageMahjong</div>
         <div class="gm-sub">✦ Match the magic, clear the board ✦</div>
         <div style="font-size:.72rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Difficulty</div>
         <div class="diff-row" style="width:100%;max-width:340px;margin-bottom:16px;">
@@ -646,7 +646,7 @@ const BADGES = [
   {id:'high_scorer',icon:'🔥',name:'High Scorer',desc:'Score 500+ in one game'},
   {id:'market_visitor',icon:'🛒',name:'Market Regular',desc:'Play Clover Market'},
   {id:'word_wizard',icon:'💎',name:'Word Wizard',desc:'Play WordWeave'},
-  {id:'mahjong_master',icon:'🦋',name:'Mahjong Master',desc:'Play AureliaMahjong'},
+  {id:'mahjong_master',icon:'🦋',name:'Mahjong Master',desc:'Play SageMahjong'},
   {id:'hearth_keeper',icon:'🏰',name:'Hearth Keeper',desc:'Play The Arcane Hearth'},
   {id:'starfall',icon:'☄️',name:'Starfall!',desc:'Score a STARFALL in Dice'},
   {id:'dice_master',icon:'🎲',name:'Dice Master',desc:'Score 200+ in Starfall Dice'},
@@ -742,7 +742,7 @@ function renderActivity() {
   }
   el.innerHTML = '';
   const icons={market:'🛒',words:'💎',mahjong:'🦋',hearth:'🏰',dice:'🎲'};
-  const names={market:'Clover Market',words:'WordWeave',mahjong:'AureliaMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice'};
+  const names={market:'Clover Market',words:'WordWeave',mahjong:'SageMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice'};
   userData.activity.slice(0,5).forEach(a => {
     const row = document.createElement('div');
     row.className = 'activity-row';
