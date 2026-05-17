@@ -363,11 +363,11 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .sd-cat.sd-cat-best{border-color:var(--gold);box-shadow:0 0 10px var(--glow-gold);}
 .sd-cat-name{color:var(--text);font-weight:700;}
 .sd-cat-pts{font-weight:800;color:var(--gold);}
-.sd-cat-poss{font-size:.68rem;color:var(--teal);}
-.sd-info-row{display:flex;gap:8px;margin-bottom:12px;justify-content:center;}
-.sd-info-chip{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.75rem;font-weight:800;}
-.sd-rolls-left{color:var(--violet);}
-.sd-total{color:var(--gold);}
+.sd-cat-poss{font-size:.72rem;font-weight:800;color:var(--teal);}
+.sd-info-row{display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;}
+.sd-info-chip{background:var(--panel);border:1px solid var(--border2);border-radius:20px;padding:6px 14px;font-size:.75rem;font-weight:800;color:var(--text);}
+.sd-rolls-left{color:var(--violet);border-color:rgba(176,110,243,.4);}
+.sd-total{color:var(--gold);border-color:rgba(245,200,66,.4);}
 .sd-roll-btn{width:100%;background:linear-gradient(135deg,var(--violet2),var(--violet));border:none;border-radius:14px;padding:14px;font-family:'Cinzel',serif;font-size:1rem;color:white;cursor:pointer;box-shadow:0 6px 20px var(--glow-violet);transition:all .2s;margin-bottom:10px;}
 .sd-roll-btn:hover{transform:translateY(-2px);}
 .sd-roll-btn:disabled{opacity:.45;cursor:default;transform:none;}
@@ -414,7 +414,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="stat-gem"><span class="sg-val" id="stat-total">0</span><span class="sg-lbl">Total Pts</span></div>
       <div class="stat-gem"><span class="sg-val" id="stat-games">0</span><span class="sg-lbl">Games</span></div>
       <div class="stat-gem"><span class="sg-val" id="stat-badges">0</span><span class="sg-lbl">Badges</span></div>
-      <div class="stat-gem"><span class="sg-val" id="stat-streak">0</span><span class="sg-lbl">🔥 Streak</span></div>
+      <div class="stat-gem"><span class="sg-val" id="stat-streak">0</span><span class="sg-lbl">🔥 Daily Streak</span></div>
     </div>
   </div>
   <div class="section-head"><h2>🎮 Games</h2><div class="section-line"></div></div>
@@ -544,8 +544,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   </div>
   <div class="mj-overlay" id="mj-lose">
     <div class="ov-gem">💜</div>
-    <div class="ov-title">No More Moves</div>
-    <div class="ov-sub">The magic faded — try again!</div>
+    <div class="ov-title">No More Moves!</div>
+    <div class="ov-sub" id="mj-lose-reason">All remaining tiles are blocked — no free matches left.</div>
     <div class="ov-stats" id="mj-lose-stats"></div>
     <div class="ov-btns">
       <button class="ov-btn sec" onclick="mjShowWelcome()">Menu</button>
@@ -559,6 +559,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   <div class="go-topbar">
     <button class="go-back" onclick="closeGame('hearth')">← Hub</button>
     <div class="go-title">🏰 The Arcane Hearth</div>
+    <button class="go-back" onclick="ahShowLegend()" style="color:var(--amber);border-color:rgba(251,146,60,.4);">📖 Guide</button>
     <div class="go-score">🪙 <span id="ah-gold-disp">0</span></div>
   </div>
   <div class="go-body" id="ah-wrap" style="display:flex;flex-direction:column;height:calc(100vh - 55px);">
@@ -570,11 +571,12 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
         <button class="gm-btn amber" onclick="ahStart()" style="margin-bottom:16px;">Begin Your Quest ✦</button>
         <div class="ah-how-card">
           <h4>📜 How to Play</h4>
-          <div class="ah-how-row"><span class="ah-how-icon">👆</span><span>Tap an item to select, then tap a matching item or empty space</span></div>
-          <div class="ah-how-row"><span class="ah-how-icon">✨</span><span>Two matching items merge into a higher-level item</span></div>
-          <div class="ah-how-row"><span class="ah-how-icon">🧪</span><span>Recipes complete when required items are on the grid</span></div>
-          <div class="ah-how-row"><span class="ah-how-icon">🛒</span><span>Spend gold in the shop to add new items</span></div>
-          <div class="ah-how-row"><span class="ah-how-icon">📚</span><span>Level up to unlock new items and watch your world grow!</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">👆</span><span>Tap an item to select it (glows gold), then tap a <strong>matching item</strong> to merge them</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">✨</span><span>Two <strong>identical</strong> items merge into the next tier — e.g. 🌱+🌱 = 🌿</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">📖</span><span>Tap <strong>Guide</strong> in the top bar to see all merge chains</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">🧪</span><span>Recipes complete automatically when required items are on the grid</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">🛒</span><span>Spend gold in the Shop (side panel) to add new items</span></div>
+          <div class="ah-how-row"><span class="ah-how-icon">📚</span><span>Level up to unlock new item chains and worlds!</span></div>
         </div>
       </div>
     </div>
@@ -604,7 +606,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   <div class="go-topbar">
     <button class="go-back" onclick="closeGame('dice')">← Hub</button>
     <div class="go-title">🎲 Starfall Dice</div>
-    <div class="go-score">⭐ <span id="sd-score-disp">0</span></div>
+    <div class="go-score" title="Your score for this game">🏆 <span id="sd-score-disp">0</span> pts</div>
   </div>
   <div class="go-body" id="sd-wrap">
     <!-- populated by JS -->
@@ -1319,11 +1321,15 @@ window.wwPickPair=function(tile,w,side,pairs){
       wwPairA=null;wwPairB=null;
       if(wwMatched.size===total)setTimeout(()=>wwWin('pairs'),400);
     } else {
-      const a=wwPairA,b=wwPairB;
-      a.tile.classList.add('ww-wrong');b.tile.classList.add('ww-wrong');
+      // Capture references and mark tiles wrong
+      const aTile=wwPairA.tile, bTile=wwPairB.tile;
+      // Clear selection state immediately so new clicks aren't blocked
+      wwPairA=null;wwPairB=null;
+      aTile.classList.remove('ww-sela');bTile.classList.remove('ww-selb');
+      aTile.classList.add('ww-wrong');bTile.classList.add('ww-wrong');
       if(wwDiff!=='easy'){wwLives--;wwRenderLives2();showToast('❌ Not a pair! '+wwLives+' left');if(wwLives<=0){setTimeout(wwLose,400);return;}}
       else showToast('❌ Try again!');
-      setTimeout(()=>{a.tile.classList.remove('ww-sela','ww-wrong');b.tile.classList.remove('ww-selb','ww-wrong');wwPairA=null;wwPairB=null;},500);
+      setTimeout(()=>{aTile.classList.remove('ww-wrong');bTile.classList.remove('ww-wrong');},500);
     }
   }
 };
@@ -1379,19 +1385,38 @@ window.mjStart=function(layout){
   }
 
   const positions=layout==='turtle'?mjTurtle():layout==='dragon'?mjDragon():mjPyramid();
-  // FIX: ensure even number of tiles and enough unique symbols
-  const count=Math.floor(positions.length/2)*2;
+  // Ensure even count, cap at available unique symbol pairs (35 syms = 35 pairs max)
+  const maxPairs=MJ_SYMS.length; // 35
+  const count=Math.min(Math.floor(positions.length/2)*2, maxPairs*2);
   const pos=positions.slice(0,count);
   const pairCount=count/2;
-  // Use enough unique symbols to guarantee solvable board
-  const symsPool=shuffle([...MJ_SYMS]);
+  // Build symbol pool: each symbol used exactly once as a pair
+  const symsPool=shuffle([...MJ_SYMS]).slice(0,pairCount);
   let pool=[];
-  for(let i=0;i<pairCount;i++) pool.push(symsPool[i%symsPool.length],symsPool[i%symsPool.length]);
+  symsPool.forEach(s=>pool.push(s,s));
   pool=shuffle(pool);
   mjBoard=[];
   shuffle(pos).forEach(([col,row,layer],i)=>{
     mjBoard.push({id:i,col,row,layer,sym:pool[i],removed:false,el:null});
   });
+  mjPairs=count/2;
+  // Guarantee at least one free matching pair at start — reshuffle syms if needed
+  let attempts=0;
+  while(attempts<20){
+    const freeTiles=mjBoard.filter(t=>!t.removed&&mjIsFree(t));
+    const symCounts={};
+    freeTiles.forEach(t=>{symCounts[t.sym]=(symCounts[t.sym]||0)+1;});
+    const hasFreeMatch=Object.values(symCounts).some(c=>c>=2);
+    if(hasFreeMatch) break;
+    // Reshuffle just the pool and reassign
+    pool=shuffle(pool);
+    const flatPos=shuffle(pos);
+    mjBoard=[];
+    flatPos.forEach(([col,row,layer],i)=>{
+      mjBoard.push({id:i,col,row,layer,sym:pool[i],removed:false,el:null});
+    });
+    attempts++;
+  }
   mjPairs=count/2;
   document.getElementById('mj-pairs').textContent=mjPairs;
   mjRender();mjUpdateFree();
@@ -1539,7 +1564,10 @@ function mjWin(){
 function mjLose(){
   clearInterval(mjTimer);
   if(window.saveScore) saveScore('mahjong',mjScore,mjLayout);
-  document.getElementById('mj-lose-stats').innerHTML=`<div class="ov-row"><span class="ol">⭐ Score</span><span class="ov">${mjScore}</span></div><div class="ov-row"><span class="ol">🀄 Pairs Cleared</span><span class="ov">${Math.floor(mjBoard.length/2)-mjPairs}</span></div>`;
+  const cleared=Math.floor(mjBoard.length/2)-mjPairs;
+  const reasonEl=document.getElementById('mj-lose-reason');
+  if(reasonEl) reasonEl.textContent=`${cleared} pair${cleared!==1?'s':''} cleared — all remaining tiles are blocked!`;
+  document.getElementById('mj-lose-stats').innerHTML=`<div class="ov-row"><span class="ol">⭐ Score</span><span class="ov">${mjScore}</span></div><div class="ov-row"><span class="ol">🀄 Pairs Cleared</span><span class="ov">${cleared}</span></div>`;
   document.getElementById('mj-lose').classList.add('show');
 }
 
@@ -1598,14 +1626,16 @@ function ahShowWelcome(){
 
 window.ahStart=function(){
   ahGrid=Array(AH_COLS*AH_ROWS).fill(null);
-  // FIX: more starting items and gold so first recipe is achievable
   ahGold=60;ahXp=0;ahLv=1;ahMerges=0;ahSel=null;ahDone=new Set();
-  const starters=['herb_1','herb_1','herb_1','crystal_1','crystal_1','flame_1','flame_1','potion_1'];
+  // Start with at least 2 of every type needed for first merge + recipe ingredients
+  const starters=['herb_1','herb_1','herb_1','herb_1','crystal_1','crystal_1','flame_1','flame_1','potion_1','potion_1'];
   const slots=shuffle([...Array(ahGrid.length).keys()]);
   starters.forEach((item,i)=>{ahGrid[slots[i]]=item;});
   document.getElementById('ah-welcome').style.display='none';
   document.getElementById('ah-game').style.display='flex';
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
+  // Check immediately for any impossible start state
+  setTimeout(ahCheckStuck,300);
 };
 
 function ahUpdateHUD(){
@@ -1626,7 +1656,7 @@ function ahRenderGrid(){
     if(item){
       cell.classList.add('has-item');cell.textContent=item.e;
       const lv=document.createElement('span');lv.className='ah-lv';lv.textContent='★'+item.lv;cell.appendChild(lv);
-      cell.title=item.n;
+      cell.title=`${item.n} (Lv.${item.lv}) — tap another ${item.e} to merge`;
     }
     if(ahSel===i) cell.classList.add('ah-selected');
     cell.onclick=()=>ahCellClick(i);
@@ -1682,6 +1712,7 @@ function ahMerge(from,to){
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
   showToast(`✨ ${next?.e||'?'} ${next?.n||''}!`);
   if(next?.lv===next?.maxLv){confetti();setTimeout(()=>showToast(`🌟 LEGENDARY: ${next.e} ${next.n}!`,3000),300);}
+  setTimeout(ahCheckStuck,400);
 }
 
 function ahCheckRecipes(){
@@ -1719,6 +1750,69 @@ window.ahBuy=function(gives,cost){
   const item=ahGetItem(gives);
   showToast(`${item?.e||'?'} ${item?.n||''} added!`);
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
+  setTimeout(ahCheckStuck,300);
+};
+
+function ahCheckStuck(){
+  // Can we make any merge?
+  const keys=ahGrid.filter(Boolean);
+  const counts={};keys.forEach(k=>{counts[k]=(counts[k]||0)+1;});
+  const canMerge=Object.entries(counts).some(([k,c])=>{
+    if(c<2)return false;
+    const item=ahGetItem(k);
+    return item&&item.lv<item.maxLv;
+  });
+  const canBuy=ahGold>=8&&ahGrid.some(c=>c===null);
+  if(!canMerge&&!canBuy&&keys.length>0){
+    // Stuck — show toast and offer restart with bonus gold
+    showToast('⚠️ No merges possible! Try buying items or reshuffling.',4000);
+    setTimeout(()=>{
+      if(confirm('No more merges available! Restart with bonus gold?')){
+        // Reset but give extra gold
+        ahGold=Math.max(ahGold+40,80);
+        // Clear non-maxlevel duplicates and re-deal
+        const starters=['herb_1','herb_1','herb_1','herb_1','crystal_1','crystal_1','flame_1','flame_1','potion_1','potion_1'];
+        const slots=shuffle([...Array(ahGrid.length).keys()]);
+        ahGrid=Array(AH_COLS*AH_ROWS).fill(null);
+        starters.forEach((item,i)=>{ahGrid[slots[i]]=item;});
+        ahUpdateHUD();ahRenderGrid();ahRenderSide();
+      }
+    },1500);
+  }
+}
+
+function ahGetLegendHtml(){
+  let html='<div style="padding:12px 14px 20px;">';
+  html+=`<h3 style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);text-align:center;margin-bottom:14px;">📖 Merge Guide</h3>`;
+  Object.entries(AH_CHAINS).forEach(([chain,data])=>{
+    html+=`<div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 12px;margin-bottom:10px;">`;
+    html+=`<div style="font-family:'Cinzel',serif;font-size:.75rem;color:var(--amber);margin-bottom:6px;text-transform:capitalize;">✦ ${chain} chain</div>`;
+    html+=`<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:1.1rem;">`;
+    data.items.forEach((item,i)=>{
+      html+=`<span title="${item.n}">${item.e}</span>`;
+      if(i<data.items.length-1) html+=`<span style="font-size:.65rem;color:var(--text3);">→</span>`;
+    });
+    html+=`</div>`;
+    html+=`<div style="font-size:.6rem;color:var(--text2);margin-top:4px;">${data.items.map(i=>i.n).join(' → ')}</div>`;
+    html+=`</div>`;
+  });
+  html+=`<div style="font-size:.72rem;color:var(--text3);text-align:center;margin-top:8px;">Tap two matching items to merge them ✨</div>`;
+  html+=`</div>`;
+  return html;
+}
+
+window.ahShowLegend=function(){
+  const wrap=document.getElementById('ah-wrap');
+  const prev=document.getElementById('ah-legend-modal');
+  if(prev){prev.remove();return;}
+  const modal=document.createElement('div');
+  modal.id='ah-legend-modal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(10,6,24,.88);backdrop-filter:blur(8px);z-index:300;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;';
+  modal.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--border2);border-radius:20px;max-width:360px;width:90%;position:relative;">
+    <button onclick="document.getElementById('ah-legend-modal').remove()" style="position:absolute;top:10px;right:12px;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text2);">✕</button>
+    ${ahGetLegendHtml()}
+  </div>`;
+  document.body.appendChild(modal);
 };
 
 // ═══════════════════════════════════════════
@@ -1779,8 +1873,8 @@ function sdRenderGame(){
   let html=`<div style="padding:12px;">
     <div class="sd-info-row">
       <div class="sd-info-chip sd-rolls-left">🎲 ${sdRollsLeft} roll${sdRollsLeft!==1?'s':''} left</div>
-      <div class="sd-info-chip" style="color:var(--text2)">Round ${sdRound+1}/${sdTotalRounds}</div>
-      <div class="sd-info-chip sd-total">⭐ ${total} pts</div>
+      <div class="sd-info-chip" style="color:var(--text2);border-color:var(--border2);">Round ${sdRound+1} of ${sdTotalRounds}</div>
+      <div class="sd-info-chip sd-total" title="Running total score">🏆 ${total} pts</div>
     </div>
     <div class="sd-dice-row" id="sd-dice-row">`;
   sdDice.forEach((f,i)=>{
