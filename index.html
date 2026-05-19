@@ -1319,44 +1319,68 @@ window.mjStart=function(layout){
 // MOBILE-FIRST LAYOUTS — compact, few layers, all tiles visible on screen
 // Each entry: [col, row, layer]  (0-based, small grids)
 
+// LAYOUTS — each row is a strip of tiles side by side.
+// Only tiles at the END of a strip (or on top of a stack) are free.
+// Strips are kept short (2–4 tiles wide) so many ends are exposed at once.
+// Format: [col, row, layer]
+
 function mjTurtle(){
-  // 8 cols × 5 rows base + 2 stacked layers in centre = 40+16+4 = 60 tiles → 30 pairs
+  // Turtle shape: horizontal strips of varying length, 2 layers in centre
+  // Layer 0: 9 strips of width 4 (cols 0-3 or 4-7), rows 0-8
   const pos=[];
-  // Layer 0 — full 8×5 grid
-  for(let r=0;r<5;r++) for(let c=0;c<8;c++) pos.push([c,r,0]);
-  // Layer 1 — 4×4 centre
-  for(let r=1;r<4;r++) for(let c=2;c<6;c++) pos.push([c,r,1]);
-  // Layer 2 — 2×2 centre (top of "shell")
-  [[3,1,2],[4,1,2],[3,2,2],[4,2,2]].forEach(p=>pos.push(p));
+  // Left half — 5 strips
+  [[0,4],[0,3],[0,3],[0,3],[0,4]].forEach(([c,w],r)=>{
+    for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);
+  });
+  // Right half — mirror (cols 4-7)
+  [[4,4],[4,3],[4,3],[4,3],[4,4]].forEach(([c,w],r)=>{
+    for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);
+  });
+  // Layer 1: centre strips (shorter)
+  [[1,2],[1,2],[1,2]].forEach(([c,w],r)=>{
+    for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);
+  });
+  [[5,2],[5,2],[5,2]].forEach(([c,w],r)=>{
+    for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);
+  });
+  // Layer 2: single tile "head"
+  pos.push([3,2,2],[4,2,2]);
   return pos;
 }
 
 function mjDragon(){
-  // S-curve snake: two horizontal bands offset, connected — 48 tiles → 24 pairs
+  // Dragon: a winding S-path of short strips
   const pos=[];
-  // Top row band
-  for(let c=0;c<8;c++) pos.push([c,0,0],[c,1,0]);
-  // Middle connector
-  for(let c=2;c<6;c++) pos.push([c,2,0]);
-  // Bottom row band (shifted right by 2)
-  for(let c=2;c<10;c++) pos.push([c,3,0],[c,4,0]);
-  // Layer 1 over each band
-  for(let c=1;c<7;c++) pos.push([c,0,1]);
-  for(let c=3;c<9;c++) pos.push([c,3,1]);
+  // Head (top)
+  for(let c=0;c<4;c++) pos.push([c,0,0]);
+  // Body curves down
+  for(let c=2;c<6;c++) pos.push([c,1,0]);
+  for(let c=4;c<8;c++) pos.push([c,2,0]);
+  for(let c=3;c<7;c++) pos.push([c,3,0]);
+  for(let c=1;c<5;c++) pos.push([c,4,0]);
+  // Tail
+  for(let c=0;c<3;c++) pos.push([c,5,0]);
+  // Layer 1 on top of middle section
+  for(let c=3;c<6;c++) pos.push([c,2,1]);
+  for(let c=2;c<5;c++) pos.push([c,3,1]);
+  // Tip
+  pos.push([4,2,2]);
   return pos;
 }
 
 function mjPyramid(){
-  // True stepped pyramid: rows shrink toward top — 40 tiles → 20 pairs
-  const steps=[
-    {c:0,w:8},{c:1,w:6},{c:2,w:4},{c:3,w:2}
-  ];
+  // Classic pyramid: each row is one strip, getting shorter toward top
+  // All layer 0, arranged so bottom is widest
   const pos=[];
-  steps.forEach(({c:sc,w},layer)=>{
-    for(let col=sc;col<sc+w;col++) pos.push([col,layer,layer]);
+  // Rows from bottom to top, shrinking
+  const rows=[8,6,4,2];
+  rows.forEach((w,layer)=>{
+    const startCol=Math.floor((8-w)/2);
+    for(let c=startCol;c<startCol+w;c++) pos.push([c,layer,layer]);
   });
-  // Also fill base rows for visual bulk (layer 0 only, rows 0–3)
-  for(let r=1;r<4;r++) for(let c=0;c<8;c++) pos.push([c,r,0]);
+  // Fill row 0 with extra tiles so we have enough pairs
+  for(let c=0;c<8;c++) pos.push([c,4,0]);
+  for(let c=1;c<7;c++) pos.push([c,5,0]);
   return pos;
 }
 
@@ -1409,11 +1433,8 @@ function mjRender(){
 
 function mjIsFree(tile){
   if(tile.removed)return false;
-  const covered=mjBoard.some(t=>!t.removed&&t.layer===tile.layer+1&&Math.abs(t.col-tile.col)<=1&&Math.abs(t.row-tile.row)<=1);
-  if(covered)return false;
-  const bl=mjBoard.some(t=>!t.removed&&t.layer===tile.layer&&t.col===tile.col-1&&t.row===tile.row);
-  const br=mjBoard.some(t=>!t.removed&&t.layer===tile.layer&&t.col===tile.col+1&&t.row===tile.row);
-  return!(bl&&br);
+  // A tile is free if nothing sits directly on top of it (same col, same row, one layer up)
+  return !mjBoard.some(t=>!t.removed&&t.layer===tile.layer+1&&t.col===tile.col&&t.row===tile.row);
 }
 
 function mjUpdateFree(){
