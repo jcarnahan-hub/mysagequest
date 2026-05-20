@@ -158,67 +158,76 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .ov-btn.sec{background:var(--panel);border:1.5px solid var(--border);color:var(--text2);box-shadow:none;}
 
 /* CLOVER MARKET */
-#cm-wrap{--cream:#fdf6ec;--warm:#f5e6c8;--sage:#8daa91;--sage-dark:#5f7d63;--mrose:#e8a5a5;--butter:#f5d06e;--butter-dark:#d4a830;--mtext:#3d2c1e;--mtext-light:#7a5c44;--mshadow:rgba(100,70,40,0.15);background:var(--cream);color:var(--mtext);font-family:'Nunito',sans-serif;}
-.cm-content{padding:14px 12px 80px;}
-.cm-sort-header{text-align:center;margin-bottom:12px;}
-.cm-sort-header h3{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--sage-dark);}
-.cm-sort-header p{font-size:.75rem;color:var(--mtext-light);}
-.cm-tray{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;background:white;border-radius:16px;padding:12px;box-shadow:0 2px 10px var(--mshadow);margin-bottom:16px;min-height:70px;}
-.cm-item{background:var(--warm);border-radius:12px;padding:7px 11px;font-size:.82rem;font-weight:700;cursor:pointer;border:2px solid var(--butter-dark);transition:all .15s;user-select:none;}
-.cm-item:hover{transform:scale(1.05) rotate(-2deg);}
-.cm-item.cm-selected{background:var(--butter);transform:scale(1.08) rotate(2deg);box-shadow:0 4px 12px var(--mshadow);}
-.cm-item.cm-sorted{display:none;}
-.cm-aisles{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.cm-aisle{background:white;border-radius:16px;padding:10px;box-shadow:0 2px 10px var(--mshadow);border:3px solid transparent;transition:border-color .2s;min-height:80px;}
-.cm-aisle.cm-correct{border-color:var(--sage-dark);background:#f0f8f0;}
-.cm-aisle.cm-wrong{border-color:#c97b7b;background:#fff0f0;}
-.cm-aisle-head{font-family:'Cinzel',serif;font-size:.85rem;margin-bottom:6px;color:var(--mtext);}
-.cm-aisle-items{display:flex;flex-wrap:wrap;gap:4px;}
-.cm-aisle-chip{background:var(--warm);border-radius:8px;padding:3px 7px;font-size:.66rem;font-weight:700;border:1.5px solid var(--butter-dark);animation:chipIn .3s ease;}
-@keyframes chipIn{0%{transform:scale(0) rotate(-10deg);opacity:0}70%{transform:scale(1.1) rotate(3deg)}100%{transform:scale(1);opacity:1}}
-.cm-list-card{background:linear-gradient(135deg,#fff9ef,#fff3e0);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 3px 14px var(--mshadow);border:2px solid var(--butter);}
-.cm-list-card h4{font-family:'Cinzel',serif;color:var(--mtext);margin-bottom:8px;font-size:.95rem;}
-.cm-list-items{display:flex;flex-direction:column;gap:5px;}
-.cm-list-item{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;}
-.cm-list-item.cm-checked{text-decoration:line-through;color:var(--mtext-light);opacity:.6;}
-.cm-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--sage);background:white;display:flex;align-items:center;justify-content:center;font-size:.68rem;flex-shrink:0;transition:all .15s;}
-.cm-list-item.cm-checked .cm-check{background:var(--sage);color:white;}
-.cm-shelves{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.cm-shelf{background:white;border-radius:16px;padding:10px;box-shadow:0 2px 10px var(--mshadow);}
-.cm-shelf h5{font-family:'Cinzel',serif;font-size:.8rem;margin-bottom:6px;color:var(--sage-dark);}
-.cm-shelf-items{display:flex;flex-direction:column;gap:4px;}
-/* FIX: removed cm-on-list glow — items no longer visually highlighted on shelf */
-.cm-product{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:var(--warm);border:2px solid transparent;cursor:pointer;transition:all .15s;}
-.cm-product:hover{border-color:var(--sage);transform:translateX(2px);}
-.cm-product.cm-in-cart{background:#e8f5e8;border-color:var(--sage);opacity:.5;cursor:default;}
-.cm-cart-bar{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;z-index:200;box-shadow:0 -4px 18px rgba(100,70,40,.15);cursor:pointer;}
-.cm-cart-label{font-family:'Cinzel',serif;font-size:1rem;}
-.cm-cart-count{background:var(--butter);color:var(--mtext);border-radius:20px;padding:3px 12px;font-weight:800;font-size:.8rem;}
-.cm-receipt{background:white;border-radius:18px;padding:16px;box-shadow:0 4px 18px var(--mshadow);margin-bottom:12px;}
-.cm-receipt-title{font-family:'Cinzel',serif;text-align:center;color:var(--sage-dark);font-size:1rem;border-bottom:2px dashed var(--warm);padding-bottom:8px;margin-bottom:10px;}
-.cm-receipt-row{display:flex;justify-content:space-between;font-size:.8rem;padding:4px 0;border-bottom:1px dotted #eee;font-weight:600;}
-.cm-receipt-total{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:1.1rem;padding-top:8px;margin-top:6px;border-top:3px solid var(--sage);color:var(--sage-dark);}
-.cm-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.cm-pay-btn{background:white;border:3px solid var(--sage);border-radius:14px;padding:12px;text-align:center;cursor:pointer;font-family:'Cinzel',serif;font-size:.88rem;color:var(--mtext);transition:all .15s;box-shadow:0 2px 8px var(--mshadow);}
-.cm-pay-btn:hover,.cm-pay-btn.cm-pay-selected{background:var(--sage);color:white;}
-.cm-pay-icon{font-size:1.6rem;display:block;margin-bottom:3px;}
-.cm-confirm-btn{width:100%;background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;border:none;border-radius:18px;padding:14px;font-family:'Cinzel',serif;font-size:1.1rem;cursor:pointer;transition:all .2s;}
-.cm-confirm-btn:disabled{opacity:.45;cursor:default;}
-.cm-success{display:flex;flex-direction:column;align-items:center;padding:40px 20px;text-align:center;}
-.cm-success-emoji{font-size:4rem;animation:gemFloat 2s ease-in-out infinite;margin-bottom:12px;}
-.cm-success h3{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--sage-dark);margin-bottom:8px;}
-.cm-success p{color:var(--mtext-light);margin-bottom:20px;font-size:.85rem;}
-.cm-success-details{background:white;border-radius:16px;padding:16px 20px;box-shadow:0 4px 18px var(--mshadow);margin-bottom:20px;width:100%;max-width:300px;text-align:left;font-size:.8rem;font-weight:600;color:var(--mtext-light);line-height:1.8;}
-.cm-success-details .cm-big-total{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--sage-dark);text-align:center;margin-top:6px;}
-.cm-again-btn{background:linear-gradient(135deg,var(--butter-dark),var(--butter));color:var(--mtext);border:none;border-radius:18px;padding:13px 32px;font-family:'Cinzel',serif;font-size:1rem;cursor:pointer;transition:all .2s;}
-.cm-mode-cards{display:flex;flex-direction:column;gap:12px;max-width:340px;}
-.cm-mode-card{background:white;border-radius:18px;padding:16px 20px;cursor:pointer;border:3px solid transparent;box-shadow:0 4px 18px var(--mshadow);transition:all .2s;display:flex;align-items:center;gap:14px;}
-.cm-mode-card:hover{transform:translateY(-2px);}
-.cm-mode-card.sort{border-color:var(--sage);}
-.cm-mode-card.shop{border-color:var(--mrose);}
-.cm-mode-card.full{border-color:var(--butter-dark);}
+#cm-wrap{--cream:#fdf6ec;--warm:#f5e6c8;--sage:#8daa91;--sage-dark:#5f7d63;--butter:#f5d06e;--butter-dark:#d4a830;--mtext:#3d2c1e;--mtext-light:#7a5c44;--mshadow:rgba(100,70,40,0.15);background:var(--cream);color:var(--mtext);font-family:'Nunito',sans-serif;height:100%;display:flex;flex-direction:column;}
 .cm-store-sign{font-family:'Cinzel',serif;font-size:2rem;color:var(--sage-dark);text-align:center;margin:20px 0 6px;text-shadow:2px 2px 0 var(--warm);animation:gemFloat 3s ease-in-out infinite;}
 .cm-subtitle{text-align:center;color:var(--mtext-light);font-size:.85rem;margin-bottom:24px;}
+.cm-mode-cards{display:flex;flex-direction:column;gap:12px;max-width:340px;width:100%;}
+.cm-mode-card{background:white;border-radius:18px;padding:16px 20px;cursor:pointer;border:3px solid transparent;box-shadow:0 4px 18px var(--mshadow);transition:all .2s;display:flex;align-items:center;gap:14px;}
+.cm-mode-card:active{transform:scale(.97);}
+.cm-mode-card.shelf{border-color:var(--sage);}
+.cm-mode-card.sweep{border-color:#e8855a;}
+.cm-again-btn{background:linear-gradient(135deg,var(--butter-dark),var(--butter));color:var(--mtext);border:none;border-radius:18px;padding:13px 32px;font-family:'Cinzel',serif;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px;}
+.cm-success{display:flex;flex-direction:column;align-items:center;padding:30px 20px;text-align:center;}
+.cm-success-emoji{font-size:4rem;animation:gemFloat 2s ease-in-out infinite;margin-bottom:12px;}
+.cm-success h3{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--sage-dark);margin-bottom:8px;}
+.cm-success p{color:var(--mtext-light);margin-bottom:16px;font-size:.85rem;}
+.cm-success-details{background:white;border-radius:16px;padding:16px 20px;box-shadow:0 4px 18px var(--mshadow);margin-bottom:20px;width:100%;max-width:300px;text-align:left;font-size:.82rem;font-weight:600;color:var(--mtext-light);line-height:2;}
+.cm-big-total{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--sage-dark);text-align:center;margin-top:6px;}
+.cm-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;flex-shrink:0;}
+.cm-topbar-stat{text-align:center;}
+.cm-topbar-val{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;display:block;}
+.cm-topbar-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;}
+.cm-timer{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;background:rgba(0,0,0,.2);border-radius:12px;padding:4px 16px;}
+.cm-timer.urgent{color:#ffd700;animation:timerPulse .5s ease-in-out infinite alternate;}
+@keyframes timerPulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+.cm-combo-bar{text-align:center;padding:3px;background:rgba(0,0,0,.15);flex-shrink:0;}
+.cm-combo{display:inline-block;font-family:'Cinzel',serif;font-size:.8rem;font-weight:800;color:white;background:rgba(0,0,0,.2);border-radius:20px;padding:2px 12px;}
+.cm-combo.active{background:linear-gradient(135deg,#e8855a,#f5a84e);box-shadow:0 0 10px rgba(232,133,90,.5);}
+.cm-shelf-game{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.cm-shelves-grid{flex:1;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:6px;overflow:hidden;}
+.cm-shelf-slot{background:white;border-radius:14px;box-shadow:0 2px 8px var(--mshadow);border:2px solid #e8d8b8;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transition:all .18s;position:relative;user-select:none;}
+.cm-shelf-slot:active{transform:scale(.93);}
+.cm-shelf-slot.cm-slot-selected{border-color:var(--butter-dark);background:#fffbe8;box-shadow:0 0 0 3px var(--butter),0 2px 12px var(--mshadow);transform:scale(1.06);}
+.cm-shelf-slot.cm-slot-empty{background:#f0e8d8;box-shadow:none;cursor:default;}
+.cm-shelf-slot.cm-slot-match{animation:slotMatch .35s ease forwards;}
+@keyframes slotMatch{0%{transform:scale(1.1);filter:brightness(1.5)}50%{transform:scale(1.3);filter:brightness(2.2)}100%{transform:scale(0);opacity:0}}
+.cm-shelf-slot.cm-slot-wrong{animation:slotWrong .35s ease;}
+@keyframes slotWrong{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.cm-holding-tray{flex-shrink:0;background:linear-gradient(135deg,#e8d5b0,#f5e6c8);border-top:2px solid #d4b880;padding:8px 10px;display:flex;gap:6px;justify-content:center;align-items:center;min-height:72px;position:relative;}
+.cm-tray-slot{width:54px;height:54px;border-radius:12px;background:white;border:2px dashed #c8a870;display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:all .2s;}
+.cm-tray-slot.filled{border-style:solid;border-color:#d4b880;background:#fffbe8;}
+.cm-tray-slot.cm-tray-match{border-color:var(--sage-dark);background:#e8f5e0;}
+.cm-tray-slot.cm-tray-danger{border-color:#c97b7b;background:#fff0f0;}
+.cm-tray-warning{position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:#c97b7b;color:white;font-size:.65rem;font-weight:800;padding:2px 10px;border-radius:10px;white-space:nowrap;pointer-events:none;}
+.cm-sweep-game{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.cm-list-panel{flex-shrink:0;background:linear-gradient(135deg,#fff9ef,#fff3e0);border-bottom:2px solid #e8d5b0;padding:8px 12px;}
+.cm-list-title{font-family:'Cinzel',serif;font-size:.78rem;color:var(--sage-dark);margin-bottom:5px;}
+.cm-list-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.cm-list-chip{background:white;border:2px solid var(--butter-dark);border-radius:20px;padding:2px 9px;font-size:.7rem;font-weight:700;color:var(--mtext);transition:all .2s;}
+.cm-list-chip.got{background:var(--sage);border-color:var(--sage-dark);color:white;opacity:.65;}
+.cm-list-chip.sale{border-color:#e8855a;color:#b85a20;}
+.cm-store-aisles{flex:1;overflow-y:auto;padding:8px;}
+.cm-aisle-section{margin-bottom:10px;}
+.cm-aisle-label{font-family:'Cinzel',serif;font-size:.72rem;color:var(--mtext-light);padding:3px 8px;margin-bottom:5px;border-left:3px solid var(--sage);background:rgba(141,170,145,.12);border-radius:0 8px 8px 0;}
+.cm-items-row{display:flex;flex-wrap:wrap;gap:6px;padding:2px 2px 4px;}
+.cm-store-item{background:white;border:2px solid #e8d8b8;border-radius:14px;padding:7px 9px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:60px;box-shadow:0 2px 6px var(--mshadow);}
+.cm-store-item:active{transform:scale(.91);}
+.cm-store-item.grabbed{opacity:.35;pointer-events:none;}
+.cm-store-item.sale-item{border-color:#e8855a;background:#fff8f4;}
+.cm-store-item .si-emoji{font-size:1.5rem;line-height:1;}
+.cm-store-item .si-name{font-size:.56rem;font-weight:700;color:var(--mtext);text-align:center;}
+.cm-store-item .si-price{font-size:.6rem;font-weight:800;color:var(--sage-dark);}
+.cm-store-item.sale-item .si-price{color:#c05000;}
+.cm-sale-badge{font-size:.48rem;background:#e8855a;color:white;border-radius:6px;padding:1px 4px;font-weight:800;}
+.cm-cart-strip{flex-shrink:0;background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;padding:6px 12px;display:flex;align-items:center;gap:6px;min-height:44px;}
+.cm-cart-label{font-family:'Cinzel',serif;font-size:.72rem;opacity:.9;flex-shrink:0;}
+.cm-cart-emoji-row{display:flex;gap:3px;flex:1;flex-wrap:wrap;}
+.cm-cart-chip{font-size:1.1rem;background:rgba(255,255,255,.2);border-radius:8px;padding:2px 4px;animation:chipPop .2s ease;}
+@keyframes chipPop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+.cm-budget-bar{flex-shrink:0;background:#3d2c1e;color:white;padding:5px 12px;display:flex;align-items:center;justify-content:space-between;font-size:.75rem;font-weight:800;gap:8px;}
+.cm-budget-track{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden;}
+.cm-budget-fill{height:100%;background:linear-gradient(90deg,#8daa91,#f5d06e);border-radius:10px;transition:width .3s;}
+.cm-budget-fill.over{background:linear-gradient(90deg,#e8855a,#c97b7b);}
 
 /* WORDWEAVE */
 #ww-wrap{padding:14px 14px 40px;}
@@ -447,13 +456,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="go-title">🛒 Clover Market</div>
     <div class="go-score">⭐ <span id="cm-score-disp">0</span></div>
   </div>
-  <div class="go-body" id="cm-wrap">
-    <div class="cm-content" id="cm-content"></div>
-    <div class="cm-cart-bar" id="cm-cart-bar" style="display:none" onclick="cmGoCheckout()">
-      <div class="cm-cart-label">🛒 View Cart</div>
-      <div class="cm-cart-count" id="cm-cart-count">0 items</div>
-    </div>
-  </div>
+  <div class="go-body" id="cm-wrap"><!-- populated by JS --></div>
 </div>
 
 <!-- WORDWEAVE -->
@@ -805,20 +808,14 @@ window.closeGame = function(id) {
   if(el) el.classList.remove('active');
   document.getElementById('screen-hub').style.display = 'block';
   document.getElementById('screen-hub').classList.add('active');
-  if(id==='market') document.getElementById('cm-cart-bar').style.display='none';
+  if(id==='market'){clearInterval(cmTimer);cmScore=0;}
   if(id==='mahjong') clearInterval(mjTimer);
   if(id==='dice') clearInterval(sdTimer);
 };
 
 // ═══════════════════════════════════════════
-// CLOVER MARKET
+// CLOVER MARKET — rebuilt with Shelf Sort + Market Sweep
 // ═══════════════════════════════════════════
-const CM_AISLES = [
-  {id:'produce',label:'🥦 Produce'},{id:'dairy',label:'🧀 Dairy'},
-  {id:'bakery',label:'🍞 Bakery'},{id:'meat',label:'🥩 Meat & Fish'},
-  {id:'snacks',label:'🍿 Snacks'},{id:'frozen',label:'🧊 Frozen'},
-  {id:'beverages',label:'🧃 Beverages'},{id:'pantry',label:'🫙 Pantry'},
-];
 const CM_ITEMS = [
   {id:'apple',e:'🍎',n:'Apple',a:'produce',p:0.79},{id:'banana',e:'🍌',n:'Banana',a:'produce',p:0.49},
   {id:'carrot',e:'🥕',n:'Carrots',a:'produce',p:1.29},{id:'broccoli',e:'🥦',n:'Broccoli',a:'produce',p:1.89},
@@ -832,164 +829,341 @@ const CM_ITEMS = [
   {id:'chips',e:'🥔',n:'Chips',a:'snacks',p:3.49},{id:'popcorn',e:'🍿',n:'Popcorn',a:'snacks',p:2.99},
   {id:'cookies',e:'🍪',n:'Cookies',a:'snacks',p:4.29},{id:'icecream',e:'🍦',n:'Ice Cream',a:'frozen',p:5.49},
   {id:'pizza',e:'🍕',n:'Frozen Pizza',a:'frozen',p:6.99},{id:'waffles',e:'🧇',n:'Waffles',a:'frozen',p:4.49},
+  {id:'burrito',e:'🌯',n:'Frozen Burrito',a:'frozen',p:3.99},
   {id:'juice',e:'🧃',n:'Juice',a:'beverages',p:3.99},{id:'soda',e:'🥤',n:'Soda',a:'beverages',p:1.89},
   {id:'water',e:'💧',n:'Water',a:'beverages',p:1.49},{id:'coffee',e:'☕',n:'Coffee',a:'beverages',p:8.99},
   {id:'tea',e:'🍵',n:'Tea',a:'beverages',p:4.99},{id:'pasta',e:'🍝',n:'Pasta',a:'pantry',p:1.99},
   {id:'rice',e:'🍚',n:'Rice',a:'pantry',p:2.49},{id:'beans',e:'🫘',n:'Beans',a:'pantry',p:1.79},
   {id:'soup',e:'🍲',n:'Canned Soup',a:'pantry',p:2.29},{id:'honey',e:'🍯',n:'Honey',a:'pantry',p:5.99},
 ];
+const CM_AISLES=[
+  {id:'produce',label:'🥦 Produce'},{id:'dairy',label:'🧀 Dairy'},
+  {id:'bakery',label:'🍞 Bakery'},{id:'meat',label:'🥩 Meat & Fish'},
+  {id:'snacks',label:'🍿 Snacks'},{id:'frozen',label:'🧊 Frozen'},
+  {id:'beverages',label:'🧃 Beverages'},{id:'pantry',label:'🫙 Pantry'},
+];
 
-let cmScore=0,cmCart=[],cmList=[],cmSortSel=null,cmPayMethod=null,cmMode=null;
+let cmScore=0,cmMode=null,cmTimer=null,cmTimeLeft=0,cmCombo=0,cmComboTimer=null;
 
 function cmInit(){
-  cmScore=0;cmCart=[];cmList=[];cmSortSel=null;cmPayMethod=null;
+  cmScore=0;cmMode=null;clearInterval(cmTimer);cmCombo=0;
   document.getElementById('cm-score-disp').textContent='0';
-  document.getElementById('cm-cart-bar').style.display='none';
-  cmShowWelcome();
-}
-
-function cmShowWelcome(){
-  document.getElementById('cm-content').innerHTML=`
-    <div style="padding:20px 12px;">
+  const wrap=document.getElementById('cm-wrap');
+  wrap.innerHTML=`
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:24px;text-align:center;">
       <div class="cm-store-sign">🌿 Clover Market 🌿</div>
       <div class="cm-subtitle">Your cozy neighborhood store</div>
       <div class="cm-mode-cards" style="margin:0 auto;">
-        <div class="cm-mode-card sort" onclick="cmStartSort()"><div style="font-size:2rem">🗂️</div><div><div style="font-family:'Cinzel',serif;font-size:.95rem">Sort the Shelves</div><div style="font-size:.72rem;color:var(--mtext-light)">Drop groceries into the right aisles</div></div></div>
-        <div class="cm-mode-card shop" onclick="cmStartShop()"><div style="font-size:2rem">📋</div><div><div style="font-family:'Cinzel',serif;font-size:.95rem">Go Shopping</div><div style="font-size:.72rem;color:var(--mtext-light)">Follow your list and find everything</div></div></div>
-        <div class="cm-mode-card full" onclick="cmStartFull()"><div style="font-size:2rem">🛒</div><div><div style="font-family:'Cinzel',serif;font-size:.95rem">Full Market Run</div><div style="font-size:.72rem;color:var(--mtext-light)">Shop, sort, and check out!</div></div></div>
+        <div class="cm-mode-card shelf" onclick="cmStartShelfSort()">
+          <div style="font-size:2.2rem">🏪</div>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Shelf Sort</div>
+            <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Match 3 of a kind to clear the shelves! Beat the clock.</div>
+          </div>
+        </div>
+        <div class="cm-mode-card sweep" onclick="cmStartSweep()">
+          <div style="font-size:2.2rem">🏃</div>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Market Sweep</div>
+            <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Grab your list before time runs out — stay on budget!</div>
+          </div>
+        </div>
       </div>
     </div>`;
-  document.getElementById('cm-cart-bar').style.display='none';
 }
 
-function cmStartSort(){
-  cmMode='sort';cmSortSel=null;
-  const items=pick(CM_ITEMS,12);
-  const aisleIds=[...new Set(items.map(i=>i.a))];
-  const aisles=CM_AISLES.filter(a=>aisleIds.includes(a.id));
-  let html=`<div style="padding:12px;"><div class="cm-sort-header"><h3>🗂️ Sort the Shelves!</h3><p>Tap an item, then tap the right aisle.</p></div><div class="cm-tray" id="cm-tray">`;
-  items.forEach(item=>{html+=`<div class="cm-item" id="cmi-${item.id}" onclick="cmSelItem('${item.id}')">${item.e} ${item.n}</div>`;});
-  html+=`</div><div class="cm-aisles" id="cm-aisles">`;
-  aisles.forEach(a=>{html+=`<div class="cm-aisle" id="cma-${a.id}" onclick="cmDropAisle('${a.id}')"><div class="cm-aisle-head">${a.label}</div><div class="cm-aisle-items" id="cmai-${a.id}"></div></div>`;});
-  html+=`</div></div>`;
-  document.getElementById('cm-content').innerHTML=html;
-  window._cmItems=items;
+// ─── SHELF SORT ───────────────────────────────────────────
+// 12 slots (3×4), 4 item types × 3 each, tap to collect into 7-slot tray
+// 3 matching in tray = clear. Tray fills = game over.
+let ssSlots=[],ssTray=[],ssSel=null,ssLevel=1,ssTimeLeft=90,ssScore=0,ssCombo=0,ssComboTimer=null;
+
+function cmStartShelfSort(level){
+  cmMode='shelf'; ssLevel=level||1; ssScore=0; ssCombo=0; ssSel=null;
+  // Scale time and variety by level
+  ssTimeLeft = level>=3 ? 75 : level===2 ? 90 : 120;
+  const typeCount = level>=3 ? 6 : level===2 ? 5 : 4;
+  // Pick item types for this level
+  const types = shuffle([...CM_ITEMS]).slice(0,typeCount);
+  // Build 12 slots: 3 of each type for first 4 types, fill rest
+  ssSlots=[];
+  types.forEach(t=>{ssSlots.push(t.e,t.e,t.e);});
+  while(ssSlots.length<12) ssSlots.push(types[Math.floor(Math.random()*types.length)].e);
+  ssSlots=shuffle(ssSlots.slice(0,12));
+  ssTray=[];
+  ssRender();
+  // Start timer
+  clearInterval(cmTimer);
+  cmTimer=setInterval(()=>{
+    ssTimeLeft--;
+    const te=document.getElementById('cm-ss-timer');
+    if(te){te.textContent=ssTimeLeft;te.className='cm-timer'+(ssTimeLeft<=15?' urgent':'');}
+    if(ssTimeLeft<=0){clearInterval(cmTimer);ssGameOver();}
+  },1000);
 }
 
-window.cmSelItem=function(id){
-  document.querySelectorAll('.cm-item.cm-selected').forEach(e=>e.classList.remove('cm-selected'));
-  if(cmSortSel===id){cmSortSel=null;return;}
-  cmSortSel=id;
-  document.getElementById('cmi-'+id).classList.add('cm-selected');
-};
+function ssRender(){
+  const wrap=document.getElementById('cm-wrap');
+  wrap.innerHTML=`
+    <div class="cm-shelf-game">
+      <div class="cm-topbar">
+        <div class="cm-topbar-stat"><span class="cm-topbar-val">${ssLevel}</span><span class="cm-topbar-lbl">Level</span></div>
+        <div class="cm-timer${ssTimeLeft<=15?' urgent':''}" id="cm-ss-timer">${ssTimeLeft}</div>
+        <div class="cm-topbar-stat"><span class="cm-topbar-val" id="cm-ss-score">${ssScore}</span><span class="cm-topbar-lbl">Score</span></div>
+      </div>
+      <div class="cm-combo-bar"><div class="cm-combo${ssCombo>=2?' active':''}" id="cm-combo-lbl">${ssCombo>=2?'Combo x'+ssCombo:'Tap 3 matching items'}</div></div>
+      <div class="cm-shelves-grid" id="cm-ss-grid"></div>
+      <div class="cm-holding-tray" id="cm-ss-tray"></div>
+    </div>`;
+  ssRenderGrid();
+  ssRenderTray();
+}
 
-window.cmDropAisle=function(aisleId){
-  if(!cmSortSel){showToast('Tap an item first! 👆');return;}
-  const item=window._cmItems.find(i=>i.id===cmSortSel);
-  if(!item)return;
-  const correct=item.a===aisleId;
-  const ae=document.getElementById('cma-'+aisleId);
-  if(correct){
-    cmScore+=10;document.getElementById('cm-score-disp').textContent=cmScore;
-    showToast('✅ Correct! +10 pts');
-    ae.classList.add('cm-correct');setTimeout(()=>ae.classList.remove('cm-correct'),600);
-    const chip=document.createElement('div');chip.className='cm-aisle-chip';chip.textContent=`${item.e} ${item.n}`;
-    document.getElementById('cmai-'+aisleId).appendChild(chip);
-    document.getElementById('cmi-'+item.id).classList.add('cm-sorted');
-    cmSortSel=null;
-    if(!document.querySelector('.cm-item:not(.cm-sorted)')){setTimeout(()=>{confetti();cmSortWin();},400);}
-  } else {
-    showToast('❌ Not quite!');
-    ae.classList.add('cm-wrong');setTimeout(()=>ae.classList.remove('cm-wrong'),600);
+function ssRenderGrid(){
+  const grid=document.getElementById('cm-ss-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  for(let i=0;i<12;i++){
+    const slot=document.createElement('div');
+    if(ssSlots[i]){
+      slot.className='cm-shelf-slot'+(ssSel===i?' cm-slot-selected':'');
+      slot.textContent=ssSlots[i];
+      slot.onclick=()=>ssTapSlot(i);
+    } else {
+      slot.className='cm-shelf-slot cm-slot-empty';
+    }
+    grid.appendChild(slot);
   }
-};
-
-function cmSortWin(){
-  if(window.saveScore) saveScore('market',cmScore,'sort');
-  document.getElementById('cm-content').innerHTML=`<div class="cm-success"><div class="cm-success-emoji">🎉</div><h3>Shelves Sorted!</h3><p>The market looks wonderful ✨</p><div class="cm-success-details">✅ All items sorted!<br>🏆 Score: <strong>${cmScore} pts</strong><div class="cm-big-total">Amazing!</div></div><button class="cm-again-btn" onclick="cmInit()">Play Again 🛒</button></div>`;
 }
 
-function cmStartShop(listItems){
-  cmMode='shop';cmCart=[];
-  cmList=listItems||pick(CM_ITEMS,8);
-  document.getElementById('cm-cart-bar').style.display='flex';
-  const listIds=new Set(cmList.map(i=>i.id));
-  const aisleIds=[...new Set(cmList.map(i=>i.a))];
-  let html='<div style="padding:12px 12px 80px;">';
-  html+=`<div class="cm-list-card"><h4>📋 Today's List</h4><div class="cm-list-items">`;
-  cmList.forEach(item=>{html+=`<div class="cm-list-item" id="clr-${item.id}"><div class="cm-check" id="cc-${item.id}"></div>${item.e} ${item.n}</div>`;});
-  html+=`</div></div><div class="cm-shelves">`;
-  aisleIds.forEach(aid=>{
-    const aisle=CM_AISLES.find(a=>a.id===aid);
-    const aisleItems=cmList.filter(i=>i.a===aid);
-    const decoys=CM_ITEMS.filter(i=>i.a===aid&&!listIds.has(i.id));
-    // FIX: removed cm-on-list class — items are no longer visually highlighted on shelf
-    const shelf=shuffle([...aisleItems,...pick(decoys,2)]);
-    html+=`<div class="cm-shelf"><h5>${aisle.label}</h5><div class="cm-shelf-items">`;
-    shelf.forEach(item=>{html+=`<div class="cm-product" id="cmp-${item.id}" onclick="cmAddCart('${item.id}')">${item.e} ${item.n}</div>`;});
-    html+=`</div></div>`;
-  });
-  html+=`</div></div>`;
-  document.getElementById('cm-content').innerHTML=html;
-  document.getElementById('cm-cart-count').textContent='0 items';
+function ssRenderTray(){
+  const tray=document.getElementById('cm-ss-tray');
+  if(!tray)return;
+  const isFull=ssTray.length>=7;
+  tray.innerHTML=isFull?`<div class="cm-tray-warning">⚠️ Tray almost full!</div>`:'';
+  for(let i=0;i<7;i++){
+    const slot=document.createElement('div');
+    slot.className='cm-tray-slot'+(ssTray[i]?' filled':'')+(isFull&&i>=6?' cm-tray-danger':'');
+    if(ssTray[i]) slot.textContent=ssTray[i];
+    tray.appendChild(slot);
+  }
 }
 
-window.cmAddCart=function(itemId){
-  const item=CM_ITEMS.find(i=>i.id===itemId);
-  const btn=document.getElementById('cmp-'+itemId);
-  if(!item||btn?.classList.contains('cm-in-cart'))return;
-  cmCart.push(item);btn?.classList.add('cm-in-cart');
-  const n=cmCart.length;document.getElementById('cm-cart-count').textContent=n===1?'1 item':`${n} items`;
-  const lr=document.getElementById('clr-'+itemId);
-  if(lr){
-    lr.classList.add('cm-checked');const ck=document.getElementById('cc-'+itemId);if(ck)ck.textContent='✓';
-    cmScore+=5;document.getElementById('cm-score-disp').textContent=cmScore;showToast(`${item.e} Added! +5 pts`);
-    if(document.querySelectorAll('.cm-list-item.cm-checked').length===cmList.length)setTimeout(()=>showToast('🎉 List complete! Tap cart!',2500),500);
-  } else {showToast(`${item.e} In cart!`);}
-};
+function ssTapSlot(i){
+  if(!ssSlots[i])return;
+  // Add to tray
+  ssTray.push(ssSlots[i]);
+  ssSlots[i]=null;
+  ssSel=null;
+  // Check for 3-of-a-kind in tray
+  const counts={};
+  ssTray.forEach(e=>{counts[e]=(counts[e]||0)+1;});
+  const matched=Object.entries(counts).find(([e,c])=>c>=3);
+  if(matched){
+    const emoji=matched[0];
+    // Animate matching slots briefly then clear
+    ssCombo++;clearTimeout(ssComboTimer);
+    ssComboTimer=setTimeout(()=>{ssCombo=0;},3000);
+    const pts=(10+ssCombo*5)*ssLevel;
+    ssScore+=pts;
+    document.getElementById('cm-score-disp').textContent=ssScore;
+    showToast(ssCombo>=2?`🔥 Combo x${ssCombo}! +${pts}`:`✅ Match! +${pts}`);
+    // Remove 3 from tray
+    let removed=0;
+    ssTray=ssTray.filter(e=>{if(e===emoji&&removed<3){removed++;return false;}return true;});
+    // Check win — all slots cleared
+    const remaining=ssSlots.filter(Boolean).length;
+    if(remaining===0&&ssTray.filter(Boolean).length===0){
+      clearInterval(cmTimer);
+      setTimeout(()=>ssLevelClear(),300);
+      return;
+    }
+    ssRenderGrid();ssRenderTray();
+    const cl=document.getElementById('cm-combo-lbl');
+    if(cl){cl.className='cm-combo'+(ssCombo>=2?' active':'');cl.textContent=ssCombo>=2?'Combo x'+ssCombo:'Tap 3 matching items';}
+  } else if(ssTray.length>=7){
+    // Tray full — game over
+    clearInterval(cmTimer);
+    setTimeout(()=>ssGameOver(),400);
+    return;
+  } else {
+    ssRenderGrid();ssRenderTray();
+  }
+}
 
-window.cmGoCheckout=function(){
-  if(!cmCart.length){showToast('Cart is empty! 🛒');return;}
-  cmPayMethod=null;
-  document.getElementById('cm-cart-bar').style.display='none';
-  let rows=cmCart.map(i=>`<div class="cm-receipt-row"><span>${i.e} ${i.n}</span><span>$${i.p.toFixed(2)}</span></div>`).join('');
-  const total=cmCart.reduce((s,i)=>s+i.p,0);
-  document.getElementById('cm-content').innerHTML=`<div style="padding:14px;">
-    <h3 style="font-family:'Cinzel',serif;color:#5f7d63;text-align:center;margin-bottom:14px;">🧾 Checkout</h3>
-    <div class="cm-receipt"><div class="cm-receipt-title">🌿 Clover Market</div>${rows}<div class="cm-receipt-total"><span>Total</span><span>$${total.toFixed(2)}</span></div></div>
-    <div class="cm-pay-grid">
-      <div class="cm-pay-btn" id="cpb-cash" onclick="cmSelPay('cash')"><span class="cm-pay-icon">💵</span>Cash</div>
-      <div class="cm-pay-btn" id="cpb-card" onclick="cmSelPay('card')"><span class="cm-pay-icon">💳</span>Card</div>
-      <div class="cm-pay-btn" id="cpb-phone" onclick="cmSelPay('phone')"><span class="cm-pay-icon">📱</span>Phone Pay</div>
-      <div class="cm-pay-btn" id="cpb-points" onclick="cmSelPay('points')"><span class="cm-pay-icon">⭐</span>Points</div>
+function ssLevelClear(){
+  confetti();
+  const timeBonus=ssTimeLeft*2;
+  ssScore+=timeBonus;
+  if(window.saveScore) saveScore('market',ssScore,'shelf-sort-lv'+ssLevel);
+  const wrap=document.getElementById('cm-wrap');
+  const nextLv=ssLevel+1;
+  wrap.innerHTML=`<div class="cm-success">
+    <div class="cm-success-emoji">🎉</div>
+    <h3>Level ${ssLevel} Clear!</h3>
+    <p>${ssLevel>=3?'You cleared all levels — amazing! 🏆':'Ready for Level '+nextLv+'?'}</p>
+    <div class="cm-success-details">
+      ⏱ Time Bonus: +${timeBonus} pts<br>
+      🏆 Total Score: <strong>${ssScore} pts</strong>
+      <div class="cm-big-total">${ssCombo>=3?'🔥 Combo Master!':ssLevel>=3?'🌟 Champion!':'Nice work!'}</div>
     </div>
-    <button class="cm-confirm-btn" id="cm-confirm" onclick="cmConfirm()" disabled>Complete Purchase ✨</button></div>`;
+    ${ssLevel<3?`<button class="cm-again-btn" onclick="cmStartShelfSort(${nextLv})" style="background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;">Level ${nextLv} →</button>`:''}
+    <button class="cm-again-btn" onclick="cmStartShelfSort(1)" style="margin-top:8px;">Play Again 🏪</button>
+    <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
+  </div>`;
+}
+
+function ssGameOver(){
+  if(window.saveScore) saveScore('market',ssScore,'shelf-sort');
+  const wrap=document.getElementById('cm-wrap');
+  wrap.innerHTML=`<div class="cm-success">
+    <div class="cm-success-emoji">😅</div>
+    <h3>${ssTimeLeft<=0?'Time\'s Up!':'Tray Overflowed!'}</h3>
+    <p>${ssTimeLeft<=0?'The shelves needed more time…':'Too many items in the tray!'}</p>
+    <div class="cm-success-details">🏆 Score: <strong>${ssScore} pts</strong><div class="cm-big-total">Keep trying!</div></div>
+    <button class="cm-again-btn" onclick="cmStartShelfSort(1)">Try Again 🏪</button>
+    <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
+  </div>`;
+}
+
+// ─── MARKET SWEEP ─────────────────────────────────────────
+// Timed run: grab items from aisles to match your list, stay on budget
+let swList=[],swCart=[],swBudget=0,swSpent=0,swTimeLeft=0,swSaleItems=new Set();
+
+function cmStartSweep(){
+  cmMode='sweep';
+  swCart=[];swSpent=0;swSaleItems=new Set();
+  // Budget and time vary: give a tight budget
+  swBudget=20;swTimeLeft=90;
+  // Pick 6 list items
+  swList=pick(CM_ITEMS,6);
+  // Mark 2 random items as on-sale (20% off)
+  pick(CM_ITEMS.filter(i=>!swList.some(l=>l.id===i.id)),4).forEach(i=>swSaleItems.add(i.id));
+  // Also put 1 list item on sale for strategy
+  if(swList.length) swSaleItems.add(swList[Math.floor(Math.random()*swList.length)].id);
+  swRender();
+  clearInterval(cmTimer);
+  cmTimer=setInterval(()=>{
+    swTimeLeft--;
+    const te=document.getElementById('cm-sw-timer');
+    if(te){te.textContent=swTimeLeft;te.className='cm-timer'+(swTimeLeft<=20?' urgent':'');}
+    if(swTimeLeft<=0){clearInterval(cmTimer);swEndGame();}
+  },1000);
+}
+
+function swRender(){
+  const wrap=document.getElementById('cm-wrap');
+  const listIds=new Set(swList.map(i=>i.id));
+  const cartIds=new Set(swCart.map(i=>i.id));
+  const budgetPct=Math.min(swSpent/swBudget*100,100);
+  const over=swSpent>swBudget;
+
+  // Group all items by aisle
+  const byAisle={};
+  CM_ITEMS.forEach(item=>{
+    if(!byAisle[item.a]) byAisle[item.a]=[];
+    byAisle[item.a].push(item);
+  });
+
+  let aisleHtml='';
+  CM_AISLES.forEach(aisle=>{
+    const items=byAisle[aisle.id]||[];
+    if(!items.length)return;
+    let itemHtml='';
+    items.forEach(item=>{
+      const isSale=swSaleItems.has(item.id);
+      const isGrabbed=cartIds.has(item.id);
+      const price=isSale?(item.p*0.8):item.p;
+      itemHtml+=`<div class="cm-store-item${isSale?' sale-item':''}${isGrabbed?' grabbed':''}" onclick="swGrab('${item.id}')">
+        <div class="si-emoji">${item.e}</div>
+        <div class="si-name">${item.n}</div>
+        <div class="si-price">$${price.toFixed(2)}${isSale?'<div class="cm-sale-badge">SALE</div>':''}</div>
+      </div>`;
+    });
+    aisleHtml+=`<div class="cm-aisle-section">
+      <div class="cm-aisle-label">${aisle.label}</div>
+      <div class="cm-items-row">${itemHtml}</div>
+    </div>`;
+  });
+
+  let cartHtml=swCart.map(i=>`<span class="cm-cart-chip">${i.e}</span>`).join('');
+  let listChips=swList.map(i=>`<span class="cm-list-chip${cartIds.has(i.id)?' got':''}${swSaleItems.has(i.id)?' sale':''}">${i.e} ${i.n}</span>`).join('');
+
+  wrap.innerHTML=`
+    <div class="cm-sweep-game">
+      <div class="cm-topbar">
+        <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swSpent.toFixed(2)}</span><span class="cm-topbar-lbl">${over?'⚠️ Over!':'Spent'}</span></div>
+        <div class="cm-timer${swTimeLeft<=20?' urgent':''}" id="cm-sw-timer">${swTimeLeft}</div>
+        <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swBudget.toFixed(2)}</span><span class="cm-topbar-lbl">Budget</span></div>
+      </div>
+      <div class="cm-budget-bar">
+        <span style="opacity:.8">💰</span>
+        <div class="cm-budget-track"><div class="cm-budget-fill${over?' over':''}" style="width:${budgetPct}%"></div></div>
+        <span style="opacity:.8">${over?'⚠️ OVER':'$'+((swBudget-swSpent).toFixed(2))+' left'}</span>
+      </div>
+      <div class="cm-list-panel">
+        <div class="cm-list-title">📋 Your List — grab these! <span style="color:#e8855a;font-size:.65rem;">Orange = on sale 🏷️</span></div>
+        <div class="cm-list-chips">${listChips}</div>
+      </div>
+      <div class="cm-store-aisles">${aisleHtml}</div>
+      <div class="cm-cart-strip">
+        <div class="cm-cart-label">🛒 Cart:</div>
+        <div class="cm-cart-emoji-row">${cartHtml||'<span style="opacity:.5;font-size:.72rem;">empty</span>'}</div>
+        <button onclick="swEndGame()" style="background:rgba(0,0,0,.3);border:none;color:white;border-radius:12px;padding:5px 12px;font-family:Cinzel,serif;font-size:.7rem;cursor:pointer;flex-shrink:0;">Check Out</button>
+      </div>
+    </div>`;
+}
+
+window.swGrab=function(itemId){
+  const item=CM_ITEMS.find(i=>i.id===itemId);
+  if(!item||swCart.some(c=>c.id===itemId))return;
+  const isSale=swSaleItems.has(itemId);
+  const price=isSale?parseFloat((item.p*0.8).toFixed(2)):item.p;
+  swCart.push({...item,paidPrice:price,isSale});
+  swSpent=parseFloat((swSpent+price).toFixed(2));
+  const isOnList=swList.some(l=>l.id===itemId);
+  showToast(isOnList?`${item.e} Got it!${isSale?' 🏷️ Sale!':''}`:`${item.e} +$${price.toFixed(2)}`);
+  swRender();
+  // Re-apply timer text (render replaces DOM)
+  const te=document.getElementById('cm-sw-timer');
+  if(te){te.textContent=swTimeLeft;te.className='cm-timer'+(swTimeLeft<=20?' urgent':'');}
+  // Check if list complete
+  const listIds=new Set(swList.map(i=>i.id));
+  const gotAll=swList.every(i=>swCart.some(c=>c.id===i.id));
+  if(gotAll){clearInterval(cmTimer);setTimeout(swEndGame,300);}
 };
 
-window.cmSelPay=function(m){
-  cmPayMethod=m;
-  document.querySelectorAll('.cm-pay-btn').forEach(b=>b.classList.remove('cm-pay-selected'));
-  document.getElementById('cpb-'+m).classList.add('cm-pay-selected');
-  document.getElementById('cm-confirm').disabled=false;
-};
-
-window.cmConfirm=function(){
-  if(!cmPayMethod)return;confetti();
-  const total=cmCart.reduce((s,i)=>s+i.p,0);
-  const found=cmCart.filter(i=>cmList.some(l=>l.id===i.id)).length;
-  cmScore+=found*10;document.getElementById('cm-score-disp').textContent=cmScore;
-  if(window.saveScore) saveScore('market',cmScore,cmMode);
-  const lbl={cash:'💵 Cash',card:'💳 Card',phone:'📱 Phone Pay',points:'⭐ Points'};
-  document.getElementById('cm-content').innerHTML=`<div class="cm-success"><div class="cm-success-emoji">🎉</div><h3>All Done!</h3><p>Thanks for shopping at Clover Market 🌿</p><div class="cm-success-details">🛒 ${cmCart.length} items purchased<br>✅ ${found}/${cmList.length} list items found<br>💳 Paid with ${lbl[cmPayMethod]}<br>🏆 Score: <strong>${cmScore} pts</strong><div class="cm-big-total">Total: $${total.toFixed(2)}</div></div><button class="cm-again-btn" onclick="cmInit()">Shop Again 🛒</button></div>`;
-};
-
-// FIX: "Go back to market" button added to cart bar area
-window.cmBackToMarket=function(){
-  document.getElementById('cm-cart-bar').style.display='none';
-  cmInit();
-};
-
-function cmStartFull(){cmMode='full';cmStartShop();}
+function swEndGame(){
+  clearInterval(cmTimer);
+  const listIds=new Set(swList.map(i=>i.id));
+  const found=swCart.filter(i=>listIds.has(i.id)).length;
+  const saleCount=swCart.filter(i=>i.isSale).length;
+  const over=swSpent>swBudget;
+  const overAmt=Math.max(0,swSpent-swBudget);
+  // Score: 20pts per list item, 15pts per sale item, time bonus, -10 per $ over budget
+  let score=found*20+saleCount*15+swTimeLeft*2-Math.round(overAmt*10);
+  score=Math.max(score,0);
+  cmScore=score;
+  document.getElementById('cm-score-disp').textContent=score;
+  if(window.saveScore) saveScore('market',score,'sweep');
+  const gotAll=found===swList.length;
+  if(gotAll) confetti();
+  const wrap=document.getElementById('cm-wrap');
+  wrap.innerHTML=`<div class="cm-success">
+    <div class="cm-success-emoji">${gotAll?'🛒':over?'😬':'🌿'}</div>
+    <h3>${gotAll?'Sweep Complete!':over?'Over Budget…':'Shopping Done!'}</h3>
+    <p>${gotAll?'You got everything on the list! 🎉':over?'You went $'+overAmt.toFixed(2)+' over budget.':'You missed some items.'}</p>
+    <div class="cm-success-details">
+      ✅ List items: ${found}/${swList.length}<br>
+      🏷️ Sale finds: ${saleCount}<br>
+      💰 Spent: $${swSpent.toFixed(2)} of $${swBudget.toFixed(2)}<br>
+      ⏱ Time left: ${swTimeLeft}s<br>
+      🏆 Score: <strong>${score} pts</strong>
+      <div class="cm-big-total">${score>=100?'🌟 Incredible!':score>=60?'👏 Nice run!':'Keep sweeping!'}</div>
+    </div>
+    <button class="cm-again-btn" onclick="cmStartSweep()">Sweep Again 🏃</button>
+    <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
+  </div>`;
+}
 
 // ═══════════════════════════════════════════
 // WORDWEAVE
