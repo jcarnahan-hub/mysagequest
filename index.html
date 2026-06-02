@@ -1430,6 +1430,7 @@ window.wwPickPair=function(tile,w,side,pairs){
 const MJ_SYMS=['🦋','🌙','💎','🦄','🐉','🔮','📚','🧪','✨','⭐','🌺','🌸','💫','🪄','📖','⚗️','🗝️','🌟','🦊','🦅','🌈','🕯️','🧿','🌻','🫧','🏺','🌌','💜','🌿','🦚','🐺','⚡','🌠','🧭','🔯'];
 
 let mjBoard=[],mjSel=null,mjScore=0,mjPairs=0,mjHints=3,mjTimer=null,mjElapsed=0,mjLayout='turtle',mjDiff='easy';
+let mjFixedScale=1,mjFixedMinC=0,mjFixedMinR=0;
 
 function mjShowWelcome(){
   clearInterval(mjTimer);
@@ -1486,6 +1487,33 @@ window.mjStart=function(layout){
   });
   mjPairs=count/2;
   document.getElementById('mj-pairs').textContent=mjPairs;
+
+  // Calculate scale ONCE from the full board — never recalculate after tiles are removed
+  const allTiles=mjBoard;
+  const minC=Math.min(...allTiles.map(t=>t.col));
+  const maxC=Math.max(...allTiles.map(t=>t.col));
+  const minR=Math.min(...allTiles.map(t=>t.row));
+  const maxR=Math.max(...allTiles.map(t=>t.row));
+  const maxL=Math.max(...allTiles.map(t=>t.layer));
+  const boardW=(maxC-minC+1)*MJ_TW+maxL*MJ_LO+MJ_TW;
+  const boardH=(maxR-minR+1)*MJ_TH+maxL*MJ_LO+MJ_TH;
+  mjFixedMinC=minC; mjFixedMinR=minR;
+  // Apply scale after layout is visible so clientWidth/Height are available
+  requestAnimationFrame(()=>{
+    const wrapEl=document.getElementById('mj-board-wrap');
+    const boardEl=document.getElementById('mj-board');
+    if(!wrapEl||!boardEl)return;
+    const availW=wrapEl.clientWidth-16;
+    const availH=wrapEl.clientHeight-16;
+    mjFixedScale=(availW>0&&availH>0)?Math.min(availW/boardW,availH/boardH,1):1;
+    boardEl.style.width=boardW+'px';
+    boardEl.style.height=boardH+'px';
+    boardEl.style.transformOrigin='top left';
+    boardEl.style.transform=`scale(${mjFixedScale})`;
+    boardEl.parentElement.style.width=Math.ceil(boardW*mjFixedScale)+'px';
+    boardEl.parentElement.style.height=Math.ceil(boardH*mjFixedScale)+'px';
+  });
+
   mjRender();mjUpdateFree();
   mjTimer=setInterval(()=>{mjElapsed++;const m=Math.floor(mjElapsed/60),s=mjElapsed%60;document.getElementById('mj-time').textContent=`${m}:${s.toString().padStart(2,'0')}`;},1000);
 };
@@ -1562,19 +1590,13 @@ const MJ_TW=52,MJ_TH=64,MJ_LO=5;
 
 function mjRender(){
   const boardEl=document.getElementById('mj-board');
-  const wrapEl=document.getElementById('mj-board-wrap');
+  if(!boardEl)return;
   boardEl.innerHTML='';
   const tiles=mjBoard.filter(t=>!t.removed);
-  if(!tiles.length) return;
+  if(!tiles.length)return;
 
-  const minC=Math.min(...tiles.map(t=>t.col)),maxC=Math.max(...tiles.map(t=>t.col));
-  const minR=Math.min(...tiles.map(t=>t.row)),maxR=Math.max(...tiles.map(t=>t.row));
-  const maxL=Math.max(...tiles.map(t=>t.layer));
-
-  const boardW=(maxC-minC+1)*MJ_TW+maxL*MJ_LO+MJ_TW;
-  const boardH=(maxR-minR+1)*MJ_TH+maxL*MJ_LO+MJ_TH;
-  boardEl.style.width=boardW+'px';
-  boardEl.style.height=boardH+'px';
+  // Use stored fixed origin — board dimensions never change after game start
+  const minC=mjFixedMinC, minR=mjFixedMinR;
 
   [...mjBoard].sort((a,b)=>a.layer-b.layer).forEach(tile=>{
     if(tile.removed)return;
@@ -1587,22 +1609,7 @@ function mjRender(){
     el.onclick=()=>mjClick(tile.id);
     tile.el=el;boardEl.appendChild(el);
   });
-
-  // Scale board to fit the wrap container without scrolling
-  requestAnimationFrame(()=>{
-    const availW=wrapEl.clientWidth-16;
-    const availH=wrapEl.clientHeight-16;
-    if(availW>0&&availH>0){
-      const scaleX=availW/boardW;
-      const scaleY=availH/boardH;
-      const scale=Math.min(scaleX,scaleY,1); // never upscale
-      boardEl.style.transformOrigin='top left';
-      boardEl.style.transform=`scale(${scale})`;
-      // Shrink the wrapper's scroll area to the scaled size so no scrollbars appear
-      boardEl.parentElement.style.width=Math.ceil(boardW*scale)+'px';
-      boardEl.parentElement.style.height=Math.ceil(boardH*scale)+'px';
-    }
-  });
+  // Scale is already set and stays fixed — do not touch transform here
 }
 
 function mjIsFree(tile){
@@ -1642,7 +1649,6 @@ function mjClick(id){
       mjUpdateFree();
       if(mjPairs===0)setTimeout(()=>mjWin(),300);
       else if(!mjHasMoves())setTimeout(()=>mjLose(),500);
-      else mjRender(); // re-scale after removal
     },400);
     mjSel=null;showToast(`✨ Match! +${pts+bonus}`);
   } else {
