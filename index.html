@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="info_sagequest.png">
 <link rel="apple-touch-icon" href="info_sagequest.png">
 <link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#0d0b1a;--bg2:#13101f;--panel:#1c1730;--panel2:#241e3a;
@@ -352,6 +352,139 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .sd-roll-btn{width:100%;background:linear-gradient(135deg,var(--violet2),var(--violet));border:none;border-radius:14px;padding:14px;font-family:'Cinzel',serif;font-size:1rem;color:white;cursor:pointer;box-shadow:0 6px 20px var(--glow-violet);transition:all .2s;margin-bottom:10px;}
 .sd-roll-btn:hover{transform:translateY(-2px);}
 .sd-roll-btn:disabled{opacity:.45;cursor:default;transform:none;}
+
+/* ═══ SEALED VERDICT CSS ═══ */
+#sv-wrap{background:var(--bg);height:100%;overflow-y:auto;}
+.sv-case-file{background:#f5f0e8;border-radius:4px;max-width:600px;margin:0 auto;overflow:hidden;position:relative;}
+.sv-case-file::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#8B1A1A 0%,#6b0f0f 50%,#8B1A1A 100%);}
+.sv-case-header{background:#e8e0cc;border-bottom:2px solid #c8b89a;padding:1rem 1.25rem 0.75rem;margin-top:6px;}
+.sv-case-title{font-family:'Cinzel',serif;font-size:1.1rem;color:#8B1A1A;letter-spacing:1px;margin-bottom:2px;}
+.sv-case-scene{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:#7a6e5e;}
+.sv-case-meta{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;}
+.sv-badge{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:3px;letter-spacing:.5px;text-transform:uppercase;}
+.sv-badge-diff{background:#2c1a0a;color:#d4a017;border:1px solid #5a3a10;}
+.sv-puzzle-tabs{display:flex;border-bottom:1px solid #c8b89a;background:#ede5d4;}
+.sv-ptab{flex:1;padding:.6rem;font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:#7a6e5e;font-family:'Inter',sans-serif;border-bottom:3px solid transparent;transition:all .15s;}
+.sv-ptab.active{color:#8B1A1A;border-bottom-color:#8B1A1A;background:#f5f0e8;}
+.sv-puzzle-select{display:flex;gap:8px;padding:.75rem 1rem;border-bottom:1px solid #c8b89a;background:#ede5d4;overflow-x:auto;}
+.sv-puz-btn{font-family:'Cinzel',serif;font-size:.7rem;padding:4px 10px;border-radius:20px;border:1.5px solid #c8b89a;background:transparent;color:#7a6e5e;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.sv-puz-btn.active{background:#8B1A1A;color:#f5f0e8;border-color:#8B1A1A;}
+.sv-scene-wrap{padding:1rem 1rem .5rem;}
+.sv-scene-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:#7a6e5e;margin-bottom:.75rem;line-height:1.5;border-left:3px solid #8B1A1A;padding-left:.75rem;}
+.sv-grid-outer{display:flex;flex-direction:column;gap:3px;background:#c8b89a;padding:3px;border-radius:4px;border:2px solid #c8b89a;}
+.sv-grid-row-labels{display:grid;grid-template-columns:28px repeat(4,1fr);gap:3px;}
+.sv-col-label{font-size:.7rem;font-weight:700;color:#7a6e5e;text-align:center;padding:2px 0;font-family:'Cinzel',serif;letter-spacing:1px;}
+.sv-grid-row{display:grid;grid-template-columns:28px repeat(4,1fr);gap:3px;}
+.sv-row-label{font-size:.7rem;font-weight:700;color:#7a6e5e;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;}
+.sv-cell{aspect-ratio:1;background:#f5f0e8;border-radius:3px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:background .12s;border:2px solid transparent;flex-direction:column;gap:2px;min-height:64px;}
+.sv-cell:hover:not(.sv-blocked):not(.sv-victim){background:#ede0c8;}
+.sv-cell.sv-selected{border-color:#b8860b;background:#fdf6e0;}
+.sv-cell.sv-blocked{background:#2a2018;cursor:not-allowed;border-radius:3px;}
+.sv-cell.sv-blocked::after{content:'✕';color:#4a3a28;font-size:1.2rem;}
+.sv-cell.sv-victim{background:#f5e8e8;border:2px dashed #8B1A1A;}
+.sv-suspect-token{width:80%;height:80%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;font-family:'Cinzel',serif;transition:all .15s;flex-direction:column;gap:1px;position:relative;}
+.sv-suspect-name-tiny{font-size:.48rem;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.3px;text-align:center;line-height:1;color:inherit;opacity:.85;max-width:90%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.sv-cell.sv-correct .sv-suspect-token{box-shadow:0 0 0 2px #4a6741,0 0 8px rgba(74,103,65,.3);}
+.sv-cell.sv-wrong .sv-suspect-token{box-shadow:0 0 0 2px #c0392b,0 0 8px rgba(192,57,43,.3);}
+.sv-border-top{border-top:3px solid #8B1A1A !important;}
+.sv-border-left{border-left:3px solid #8B1A1A !important;}
+.sv-border-bottom{border-bottom:3px solid #8B1A1A !important;}
+.sv-border-right{border-right:3px solid #8B1A1A !important;}
+.sv-room-label{position:absolute;top:3px;left:3px;font-size:.5rem;color:#8B1A1A;font-family:'Cinzel',serif;opacity:.5;pointer-events:none;letter-spacing:.3px;line-height:1;}
+.sv-cell-x{font-size:.7rem;color:rgba(139,26,26,.35);position:absolute;top:2px;right:3px;pointer-events:none;}
+.sv-victim-row{display:flex;align-items:center;gap:8px;padding:6px 1rem;background:rgba(139,26,26,.06);border-top:1px solid #c8b89a;border-bottom:1px solid #c8b89a;}
+.sv-victim-label{font-family:'Playfair Display',serif;font-style:italic;font-size:.78rem;color:#8B1A1A;}
+.sv-victim-info{font-size:.72rem;color:#7a6e5e;}
+.sv-suspects-panel{padding:.75rem 1rem;border-top:1px solid #c8b89a;}
+.sv-suspects-title{font-family:'Cinzel',serif;font-size:.9rem;color:#8B1A1A;letter-spacing:1px;margin-bottom:.6rem;}
+.sv-suspects-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.sv-suspect-chip{display:flex;align-items:center;gap:5px;padding:5px 10px 5px 6px;border-radius:20px;border:1.5px solid #c8b89a;background:#ede5d4;cursor:pointer;font-size:.72rem;font-weight:600;color:#1a1208;font-family:'Inter',sans-serif;transition:all .15s;user-select:none;}
+.sv-suspect-chip.sv-placed{opacity:.4;cursor:default;}
+.sv-suspect-chip.sv-selected-suspect{border-color:#b8860b;background:#fdf6e0;box-shadow:0 0 0 2px rgba(184,134,11,.3);}
+.sv-chip-icon{font-size:1rem;}
+.sv-status-bar{padding:.5rem 1rem;font-size:.75rem;color:#7a6e5e;font-style:italic;min-height:32px;display:flex;align-items:center;gap:6px;}
+.sv-status-bar.sv-success{color:#4a6741;font-style:normal;font-weight:600;}
+.sv-status-bar.sv-error{color:#c0392b;font-style:normal;}
+.sv-controls-row{display:flex;gap:8px;padding:.75rem 1rem;background:#e8e0cc;border-top:1px solid #c8b89a;flex-wrap:wrap;}
+.sv-btn{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.5px;padding:6px 14px;border-radius:3px;border:1.5px solid;cursor:pointer;transition:all .15s;}
+.sv-btn-primary{background:#8B1A1A;color:#f5f0e8;border-color:#8B1A1A;}
+.sv-btn-primary:hover{background:#a02020;}
+.sv-btn-secondary{background:transparent;color:#7a6e5e;border-color:#c8b89a;}
+.sv-btn-secondary:hover{background:#ede5d4;color:#1a1208;}
+.sv-btn-clear{background:transparent;color:#8B1A1A;border-color:rgba(139,26,26,.3);}
+.sv-btn-clear:hover{background:rgba(139,26,26,.08);}
+.sv-clues-panel{padding:0 1rem 1rem;}
+.sv-clues-title{font-family:'Cinzel',serif;font-size:.9rem;color:#8B1A1A;letter-spacing:1px;margin-bottom:.5rem;border-bottom:1px solid #c8b89a;padding-bottom:4px;}
+.sv-clue-item{display:flex;gap:8px;padding:5px 0;border-bottom:1px dashed #c8b89a;align-items:flex-start;}
+.sv-clue-item:last-child{border-bottom:none;}
+.sv-clue-num{font-family:'Cinzel',serif;font-size:.75rem;color:#b8860b;min-width:18px;font-weight:700;}
+.sv-clue-icon{font-size:1rem;min-width:20px;text-align:center;line-height:1.4;}
+.sv-clue-text{font-size:.75rem;color:#1a1208;line-height:1.5;flex:1;}
+.sv-clue-text strong{color:#8B1A1A;font-weight:600;}
+.sv-howto-panel{padding:1rem;}
+.sv-howto-section{margin-bottom:1rem;}
+.sv-howto-section h3{font-family:'Cinzel',serif;font-size:.9rem;color:#8B1A1A;margin-bottom:.4rem;}
+.sv-howto-section p,.sv-howto-section li{font-size:.78rem;color:#1a1208;line-height:1.6;margin-bottom:.25rem;}
+.sv-howto-section ul{padding-left:1.2rem;}
+.sv-howto-rule{background:#ede5d4;border-left:3px solid #b8860b;padding:.5rem .75rem;border-radius:0 4px 4px 0;margin-bottom:.4rem;font-size:.75rem;color:#1a1208;line-height:1.5;}
+.sv-victory-overlay{display:none;position:fixed;inset:0;background:rgba(26,18,8,.85);z-index:200;align-items:center;justify-content:center;padding:1rem;}
+.sv-victory-overlay.show{display:flex;}
+.sv-victory-card{background:#f5f0e8;border-radius:6px;padding:2rem;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);border-top:6px solid #8B1A1A;}
+.sv-victory-icon{font-size:3rem;margin-bottom:.75rem;}
+.sv-victory-title{font-family:'Cinzel',serif;font-size:1.5rem;color:#8B1A1A;margin-bottom:.5rem;letter-spacing:2px;}
+.sv-victory-text{font-family:'Playfair Display',serif;font-style:italic;font-size:.9rem;color:#7a6e5e;margin-bottom:1rem;line-height:1.6;}
+.sv-murderer-reveal{font-family:'Cinzel',serif;font-size:1.1rem;color:#8B1A1A;margin:.75rem 0;padding:.75rem;background:rgba(139,26,26,.08);border:1px dashed #8B1A1A;border-radius:4px;}
+
+/* ═══ SAGEWORDS CSS ═══ */
+#sw-wrap{background:#EDE6D6;height:100%;overflow-y:auto;font-family:'Inter',sans-serif;}
+.sw-card{background:#F7F2E9;border-radius:12px;box-shadow:0 4px 20px rgba(44,36,22,.12);max-width:560px;margin:0 auto 1rem;overflow:hidden;}
+.sw-puzzle-selector{display:flex;gap:6px;padding:.75rem 1rem;border-bottom:1px solid rgba(138,154,132,.3);background:#E5DCC8;overflow-x:auto;scrollbar-width:none;}
+.sw-puzzle-selector::-webkit-scrollbar{display:none;}
+.sw-psel-btn{font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid rgba(138,154,132,.3);background:transparent;color:#6B6B6B;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:all .15s;}
+.sw-psel-btn.active{background:#8A9A84;color:white;border-color:#8A9A84;}
+.sw-tabs{display:flex;border-bottom:1px solid rgba(138,154,132,.3);}
+.sw-tab{flex:1;padding:.6rem;font-size:.75rem;font-weight:600;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:#6B6B6B;border-bottom:3px solid transparent;font-family:'Inter',sans-serif;transition:all .15s;}
+.sw-tab.active{color:#5C7056;border-bottom-color:#5C7056;background:#F7F2E9;}
+.sw-grid-wrap{padding:1rem;display:flex;flex-direction:column;align-items:center;gap:.75rem;}
+.sw-cw-grid{display:grid;gap:2px;background:#3C3C3C;padding:2px;border-radius:4px;border:2px solid #3C3C3C;}
+.sw-cw-cell{width:min(9vw,44px);height:min(9vw,44px);background:#F7F2E9;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:background .1s;user-select:none;}
+.sw-cw-cell.sw-black{background:#3C3C3C;cursor:default;}
+.sw-cw-cell.sw-selected{background:#fdf6e0;}
+.sw-cw-cell.sw-word-hl{background:#e8f0e8;}
+.sw-cw-cell.sw-correct{background:#d4edda;}
+.sw-cw-cell.sw-incorrect{background:#f8d7da;}
+.sw-cell-num{position:absolute;top:1px;left:2px;font-size:calc(min(9vw,44px) * 0.22);font-weight:700;color:#5C7056;line-height:1;pointer-events:none;}
+.sw-cell-letter{font-size:calc(min(9vw,44px) * 0.52);font-weight:700;color:#2C2416;font-family:'Playfair Display',serif;line-height:1;}
+#sw-hiddenInput{position:fixed;left:-9999px;opacity:0;width:1px;height:1px;}
+.sw-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+.sw-btn{font-size:.75rem;font-weight:600;padding:6px 14px;border-radius:20px;border:1.5px solid rgba(138,154,132,.3);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;background:transparent;color:#3C3C3C;}
+.sw-btn:hover{border-color:#8A9A84;color:#5C7056;}
+.sw-btn-primary{background:#8A9A84;color:white;border-color:#8A9A84;}
+.sw-btn-primary:hover{background:#5C7056;}
+.sw-status-bar{text-align:center;font-size:.75rem;color:#6B6B6B;font-style:italic;min-height:24px;padding:0 1rem .5rem;}
+.sw-status-bar.sw-success{color:#5C7056;font-weight:600;font-style:normal;}
+.sw-status-bar.sw-error{color:#c0392b;font-style:normal;}
+.sw-clues-panel{padding:.75rem 1rem;}
+.sw-clues-direction{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:#2C2416;margin-bottom:.5rem;border-bottom:2px solid rgba(138,154,132,.3);padding-bottom:4px;}
+.sw-clue-row{display:flex;gap:8px;padding:5px 0;border-bottom:1px dashed rgba(138,154,132,.3);cursor:pointer;align-items:flex-start;transition:background .1s;border-radius:3px;padding-left:4px;}
+.sw-clue-row:last-child{border-bottom:none;}
+.sw-clue-row:hover{background:rgba(138,154,132,.08);}
+.sw-clue-row.sw-active-clue{background:rgba(196,154,60,.12);}
+.sw-clue-row.sw-solved-clue{opacity:.45;}
+.sw-clue-n{font-size:.72rem;font-weight:700;color:#5C7056;min-width:24px;}
+.sw-clue-txt{font-size:.75rem;color:#3C3C3C;line-height:1.5;flex:1;}
+.sw-keyboard{display:grid;grid-template-rows:repeat(3,1fr);gap:4px;padding:.75rem;border-top:1px solid rgba(138,154,132,.3);background:#E5DCC8;}
+.sw-kb-row{display:flex;gap:4px;justify-content:center;}
+.sw-kb-key{width:min(9.5vw,40px);height:min(9.5vw,40px);background:#F7F2E9;border:1px solid rgba(138,154,132,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#2C2416;transition:all .1s;box-shadow:0 2px 0 rgba(44,36,22,.15);}
+.sw-kb-key:active{transform:translateY(1px);box-shadow:none;}
+.sw-kb-key.sw-kb-wide{width:min(14vw,58px);font-size:.65rem;}
+.sw-kb-key:hover{background:#B8C4B3;border-color:#8A9A84;}
+.sw-victory-overlay{display:none;position:fixed;inset:0;background:rgba(44,36,22,.7);z-index:200;align-items:center;justify-content:center;padding:1rem;}
+.sw-victory-overlay.show{display:flex;}
+.sw-victory-card{background:#F7F2E9;border-radius:12px;padding:2rem;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);border-top:5px solid #8A9A84;}
+.sw-victory-icon{font-size:2.5rem;margin-bottom:.5rem;}
+.sw-victory-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#2C2416;margin-bottom:.5rem;}
+.sw-victory-text{font-size:.85rem;color:#6B6B6B;line-height:1.6;margin-bottom:1rem;font-style:italic;}
 </style>
 </head>
 <body>
@@ -431,7 +564,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="gc-stats"><div class="gc-stat">6 merge chains</div><div class="gc-stat">5 recipes</div><div class="gc-stat hi" id="best-hearth">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
     </div>
-    <!-- FIX: Starfall Dice is now its own properly closed card, not nested inside Arcane Hearth -->
     <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(168,85,247,0.08),transparent)" onclick="openGame('dice')">
       <div class="gc-top">
         <div class="gc-icon" style="background:linear-gradient(135deg,#2a1060,#12082a);border:1px solid rgba(168,85,247,.3)">🎲</div>
@@ -439,6 +571,22 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       </div>
       <div class="gc-stats"><div class="gc-stat">3 modes</div><div class="gc-stat">13 categories</div><div class="gc-stat hi" id="best-dice">Best: —</div></div>
       <button class="gc-play-btn">Play ▶</button>
+    </div>
+    <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(139,26,26,0.08),transparent)" onclick="openGame('sealed')">
+      <div class="gc-top">
+        <div class="gc-icon" style="background:linear-gradient(135deg,#2a0808,#1a0404);border:1px solid rgba(139,26,26,.4)">🔍</div>
+        <div style="flex:1"><div class="gc-name">SealedVerdict</div><div class="gc-desc">Place every suspect, read the clues, and deduce the murderer in this logic mystery.</div></div>
+      </div>
+      <div class="gc-stats"><div class="gc-stat">3 cases</div><div class="gc-stat">4×4 grid</div><div class="gc-stat hi" id="best-sealed">Best: —</div></div>
+      <button class="gc-play-btn" style="background:linear-gradient(135deg,#6b0f0f,#8B1A1A);box-shadow:0 4px 14px rgba(139,26,26,.4);">Play ▶</button>
+    </div>
+    <div class="game-card" style="--card-glow:linear-gradient(135deg,rgba(138,154,132,0.08),transparent)" onclick="openGame('sagewords')">
+      <div class="gc-top">
+        <div class="gc-icon" style="background:linear-gradient(135deg,#1a2a18,#0d1a0c);border:1px solid rgba(138,154,132,.4)">✏️</div>
+        <div style="flex:1"><div class="gc-name">SageWords Crossword</div><div class="gc-desc">Fill the grid, across and down — three hand-crafted crossword puzzles await.</div></div>
+      </div>
+      <div class="gc-stats"><div class="gc-stat">3 puzzles</div><div class="gc-stat">Check &amp; reveal</div><div class="gc-stat hi" id="best-sagewords">Best: —</div></div>
+      <button class="gc-play-btn" style="background:linear-gradient(135deg,#3d5c3a,#5C7056);box-shadow:0 4px 14px rgba(138,154,132,.4);">Play ▶</button>
     </div>
   </div>
   <div class="section-head"><h2>🏅 Badges</h2><div class="section-line"></div></div>
@@ -456,7 +604,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="go-title">🛒 Clover Market</div>
     <div class="go-score">⭐ <span id="cm-score-disp">0</span></div>
   </div>
-  <div class="go-body" id="cm-wrap"><!-- populated by JS --></div>
+  <div class="go-body" id="cm-wrap"></div>
 </div>
 
 <!-- WORDWEAVE -->
@@ -504,7 +652,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
       <div id="mj-board" style="position:relative;"></div>
     </div>
   </div>
-  <!-- FIX: overlay buttons call mjRestartGame() which hides overlays before restarting -->
   <div class="mj-overlay" id="mj-win">
     <div class="ov-gem">🦋</div>
     <div class="ov-title" id="mj-win-title">Magnificent!</div>
@@ -572,15 +719,149 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   </div>
 </div>
 
-<!-- STARFALL DICE — FIX: now a proper overlay instead of separate page -->
+<!-- STARFALL DICE -->
 <div id="game-dice" class="game-overlay">
   <div class="go-topbar">
     <button class="go-back" onclick="closeGame('dice')">← Hub</button>
     <div class="go-title">🎲 Starfall Dice</div>
     <div class="go-score">⭐ <span id="sd-score-disp">0</span></div>
   </div>
-  <div class="go-body" id="sd-wrap">
-    <!-- populated by JS -->
+  <div class="go-body" id="sd-wrap"></div>
+</div>
+
+<!-- SEALED VERDICT -->
+<div id="game-sealed" class="game-overlay">
+  <div class="go-topbar">
+    <button class="go-back" onclick="closeGame('sealed')">← Hub</button>
+    <div class="go-title">🔍 SealedVerdict</div>
+    <div class="go-score">⭐ <span id="sv-score-disp">0</span></div>
+  </div>
+  <div class="go-body" id="sv-wrap">
+    <div class="sv-case-file">
+      <div class="sv-case-header">
+        <div class="sv-case-title" id="sv-caseTitle">CASE #1 — THE DINNER PARTY</div>
+        <div class="sv-case-scene" id="sv-caseScene"></div>
+        <div class="sv-case-meta">
+          <span class="sv-badge sv-badge-diff" id="sv-caseDiff">● Easy</span>
+        </div>
+      </div>
+      <div class="sv-puzzle-select" id="sv-puzzleSelect"></div>
+      <div class="sv-puzzle-tabs">
+        <button class="sv-ptab active" onclick="svSwitchTab('puzzle')">🔍 Crime Scene</button>
+        <button class="sv-ptab" onclick="svSwitchTab('clues')">📋 Clues</button>
+        <button class="sv-ptab" onclick="svSwitchTab('howto')">❓ How to Play</button>
+      </div>
+      <div id="sv-tab-puzzle">
+        <div class="sv-scene-wrap">
+          <div class="sv-scene-intro" id="sv-sceneIntro"></div>
+          <div class="sv-grid-outer" id="sv-murdokuGrid"></div>
+        </div>
+        <div class="sv-victim-row">
+          <span>🩸</span>
+          <span class="sv-victim-label">Victim:</span>
+          <span class="sv-victim-info" id="sv-victimInfo"></span>
+        </div>
+        <div class="sv-suspects-panel">
+          <div class="sv-suspects-title">SUSPECTS — tap to select, then tap a cell to place</div>
+          <div class="sv-suspects-grid" id="sv-suspectsGrid"></div>
+        </div>
+        <div class="sv-status-bar" id="sv-statusBar">Select a suspect, then tap a cell to place them.</div>
+        <div class="sv-controls-row">
+          <button class="sv-btn sv-btn-primary" onclick="svCheckSolution()">🔍 Check Solution</button>
+          <button class="sv-btn sv-btn-secondary" onclick="svShowHint()">💡 Hint</button>
+          <button class="sv-btn sv-btn-clear" onclick="svClearAll()">↺ Clear All</button>
+        </div>
+      </div>
+      <div id="sv-tab-clues" style="display:none;">
+        <div class="sv-clues-panel">
+          <div class="sv-clues-title" id="sv-cluesTitle">WITNESS STATEMENTS</div>
+          <div id="sv-cluesList"></div>
+        </div>
+      </div>
+      <div id="sv-tab-howto" style="display:none;">
+        <div class="sv-howto-panel">
+          <div class="sv-howto-section"><h3>🎯 Objective</h3><p>Place every suspect in their exact location on the crime scene. Deduce the killer — the one alone with the victim.</p></div>
+          <div class="sv-howto-section"><h3>📐 The Rules</h3>
+            <div class="sv-howto-rule">⬛ <strong>One suspect per row</strong> — no two suspects share a row.</div>
+            <div class="sv-howto-rule">⬛ <strong>One suspect per column</strong> — no two suspects share a column.</div>
+            <div class="sv-howto-rule">🔴 <strong>Area rule</strong> — each room contains exactly one suspect.</div>
+            <div class="sv-howto-rule">🩸 <strong>The victim</strong> is fixed. The murderer is whoever ends up alone with them in the same area.</div>
+          </div>
+          <div class="sv-howto-section"><h3>🎮 How to Play</h3><ul>
+            <li>Tap a <strong>suspect chip</strong> to select them.</li>
+            <li>Tap an <strong>empty cell</strong> to place them.</li>
+            <li>Tap an <strong>occupied cell</strong> to remove the suspect.</li>
+            <li>Use the <strong>Clues tab</strong> to read witness statements.</li>
+            <li>Hit <strong>Check Solution</strong> when all suspects are placed.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sv-victory-overlay" id="sv-victoryOverlay">
+    <div class="sv-victory-card">
+      <div class="sv-victory-icon">🔍</div>
+      <div class="sv-victory-title">CASE CLOSED</div>
+      <div class="sv-victory-text" id="sv-victoryText"></div>
+      <div class="sv-murderer-reveal" id="sv-murdererReveal"></div>
+      <br>
+      <button class="sv-btn sv-btn-primary" onclick="svNextPuzzle()">Next Case →</button>
+      <button class="sv-btn sv-btn-secondary" style="margin-left:8px;" onclick="document.getElementById('sv-victoryOverlay').classList.remove('show')">Review Scene</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAGEWORDS CROSSWORD -->
+<div id="game-sagewords" class="game-overlay">
+  <div class="go-topbar">
+    <button class="go-back" onclick="closeGame('sagewords')">← Hub</button>
+    <div class="go-title">✏️ SageWords</div>
+    <div class="go-score">⭐ <span id="sw-score-disp">0</span></div>
+  </div>
+  <div class="go-body" id="sw-wrap">
+    <div class="sw-card">
+      <div class="sw-puzzle-selector" id="sw-puzzleSelector"></div>
+      <div class="sw-tabs">
+        <button class="sw-tab active" onclick="swSwitchTab('grid')">⬜ Puzzle</button>
+        <button class="sw-tab" onclick="swSwitchTab('across')">→ Across</button>
+        <button class="sw-tab" onclick="swSwitchTab('down')">↓ Down</button>
+      </div>
+      <div id="sw-tab-grid">
+        <div class="sw-grid-wrap">
+          <div class="sw-cw-grid" id="sw-cwGrid"></div>
+          <div class="sw-controls">
+            <button class="sw-btn sw-btn-primary" onclick="swCheckAll()">✓ Check</button>
+            <button class="sw-btn" onclick="swRevealLetter()">💡 Reveal Letter</button>
+            <button class="sw-btn" onclick="swRevealWord()">📖 Reveal Word</button>
+            <button class="sw-btn" onclick="swClearGrid()" style="color:#C49A3C;border-color:rgba(196,154,60,.4)">↺ Clear</button>
+          </div>
+          <div class="sw-status-bar" id="sw-statusBar">Tap a white square to begin.</div>
+        </div>
+        <div class="sw-keyboard" id="sw-keyboard"></div>
+      </div>
+      <div id="sw-tab-across" style="display:none;">
+        <div class="sw-clues-panel">
+          <div class="sw-clues-direction">Across</div>
+          <div id="sw-cluesAcross"></div>
+        </div>
+      </div>
+      <div id="sw-tab-down" style="display:none;">
+        <div class="sw-clues-panel">
+          <div class="sw-clues-direction">Down</div>
+          <div id="sw-cluesDown"></div>
+        </div>
+      </div>
+    </div>
+    <input id="sw-hiddenInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"/>
+  </div>
+  <div class="sw-victory-overlay" id="sw-victoryOverlay">
+    <div class="sw-victory-card">
+      <div class="sw-victory-icon">🎉</div>
+      <div class="sw-victory-title">Puzzle Complete!</div>
+      <div class="sw-victory-text" id="sw-victoryText">Every word found. You have a gift for this.</div>
+      <button class="sw-btn sw-btn-primary" onclick="swNextPuzzle()">Next Puzzle →</button>
+      <button class="sw-btn" style="margin-left:8px;" onclick="document.getElementById('sw-victoryOverlay').classList.remove('show')">Review</button>
+    </div>
   </div>
 </div>
 
@@ -599,7 +880,6 @@ const firebaseConfig = {
   messagingSenderId: "509146425867",
   appId: "1:509146425867:web:93e457b218b5e1188c350e"
 };
-  
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -611,10 +891,8 @@ let userData = {totalScore:0,gamesPlayed:0,badges:[],activity:[],bestScores:{},s
 window.signInWithGoogle = async () => {
   const errEl = document.getElementById('signin-error');
   if(errEl) errEl.textContent = 'Opening Google sign-in...';
-  try {
-    await auth.signInWithPopup(provider);
-  } catch(e) {
-    console.error('Sign-in error:', e.code);
+  try { await auth.signInWithPopup(provider); }
+  catch(e) {
     if(errEl) errEl.textContent = 'Error: ' + e.code;
     if(e.code==='auth/popup-blocked'||e.code==='auth/popup-closed-by-user'){
       if(errEl) errEl.textContent = 'Trying redirect...';
@@ -622,7 +900,7 @@ window.signInWithGoogle = async () => {
     }
   }
 };
-  
+
 window.doSignOut = async () => {
   if(confirm('Sign out of SageQuest?')) await auth.signOut();
 };
@@ -658,7 +936,9 @@ const BADGES = [
   {id:'hearth_keeper',icon:'🏰',name:'Hearth Keeper',desc:'Play The Arcane Hearth'},
   {id:'starfall',icon:'☄️',name:'Starfall!',desc:'Score a STARFALL in Dice'},
   {id:'dice_master',icon:'🎲',name:'Dice Master',desc:'Score 200+ in Starfall Dice'},
-  {id:'dual_quest',icon:'⚔️',name:'Dual Quest',desc:'Play all games'},
+  {id:'detective',icon:'🔍',name:'Detective',desc:'Solve a SealedVerdict case'},
+  {id:'word_nook',icon:'✏️',name:'Word Nook',desc:'Complete a SageWords puzzle'},
+  {id:'dual_quest',icon:'⚔️',name:'Dual Quest',desc:'Play all 7 games'},
   {id:'thousand_pts',icon:'👑',name:'Royalty',desc:'Reach 1000 total points'},
 ];
 window.BADGES = BADGES;
@@ -675,13 +955,16 @@ function checkBadges(game, score) {
   if(game==='mahjong') earn('mahjong_master');
   if(game==='hearth') earn('hearth_keeper');
   if(game==='dice' && score>=200) earn('dice_master');
-  if(userData.bestScores.market&&userData.bestScores.words&&userData.bestScores.mahjong&&userData.bestScores.hearth&&userData.bestScores.dice) earn('dual_quest');
+  if(game==='sealed') earn('detective');
+  if(game==='sagewords') earn('word_nook');
+  const bs = userData.bestScores;
+  if(bs.market&&bs.words&&bs.mahjong&&bs.hearth&&bs.dice&&bs.sealed&&bs.sagewords) earn('dual_quest');
   if(userData.totalScore>=1000) earn('thousand_pts');
 }
 
-auth.getRedirectResult().then(result => {
-  if(result && result.user) console.log('Redirect sign-in OK:', result.user.email);
-}).catch(e => { console.warn('Redirect result:', e.code); });
+auth.getRedirectResult().then(result=>{
+  if(result&&result.user) console.log('Redirect sign-in OK:',result.user.email);
+}).catch(e=>{console.warn('Redirect result:',e.code);});
 
 auth.onAuthStateChanged(async (user) => {
   if(user) {
@@ -689,71 +972,66 @@ auth.onAuthStateChanged(async (user) => {
     try {
       const snap = await db.collection('users').doc(user.uid).get();
       if(snap.exists) userData = {...userData, ...snap.data()};
-    } catch(e) { console.warn('Load failed:', e.code); }
-    document.getElementById('screen-signin').style.display = 'none';
+    } catch(e) { console.warn('Load failed:',e.code); }
+    document.getElementById('screen-signin').style.display='none';
     document.getElementById('screen-signin').classList.remove('active');
-    document.getElementById('screen-hub').style.display = 'block';
+    document.getElementById('screen-hub').style.display='block';
     document.getElementById('screen-hub').classList.add('active');
     updateHubUI();
   } else {
-    document.getElementById('screen-signin').style.display = 'flex';
+    document.getElementById('screen-signin').style.display='flex';
     document.getElementById('screen-signin').classList.add('active');
-    document.getElementById('screen-hub').style.display = 'none';
+    document.getElementById('screen-hub').style.display='none';
     document.getElementById('screen-hub').classList.remove('active');
   }
 });
 
 function updateHubUI() {
-  const av = document.getElementById('nav-avatar');
-  if(av) av.src = currentUser?.photoURL||'';
-  const hn = document.getElementById('hub-name');
-  if(hn) hn.textContent = currentUser?.displayName?.split(' ')[0]||'Adventurer';
-  document.getElementById('nav-score').textContent = userData.totalScore;
-  document.getElementById('stat-total').textContent = userData.totalScore;
-  document.getElementById('stat-games').textContent = userData.gamesPlayed;
-  document.getElementById('stat-badges').textContent = userData.badges.length;
-  document.getElementById('stat-streak').textContent = userData.streak||0;
-  const bs = userData.bestScores;
-  document.getElementById('best-market').textContent = 'Best: '+(bs.market?bs.market+'pts':'—');
-  document.getElementById('best-words').textContent = 'Best: '+(bs.words?bs.words+'pts':'—');
-  document.getElementById('best-mahjong').textContent = 'Best: '+(bs.mahjong?bs.mahjong+'pts':'—');
-  document.getElementById('best-hearth').textContent = 'Best: '+(bs.hearth?bs.hearth+'pts':'—');
-  const bd = document.getElementById('best-dice');
-  if(bd) bd.textContent = 'Best: '+(bs.dice?bs.dice+'pts':'—');
+  const av=document.getElementById('nav-avatar');
+  if(av) av.src=currentUser?.photoURL||'';;
+  const hn=document.getElementById('hub-name');
+  if(hn) hn.textContent=currentUser?.displayName?.split(' ')[0]||'Adventurer';
+  document.getElementById('nav-score').textContent=userData.totalScore;
+  document.getElementById('stat-total').textContent=userData.totalScore;
+  document.getElementById('stat-games').textContent=userData.gamesPlayed;
+  document.getElementById('stat-badges').textContent=userData.badges.length;
+  document.getElementById('stat-streak').textContent=userData.streak||0;
+  const bs=userData.bestScores;
+  document.getElementById('best-market').textContent='Best: '+(bs.market?bs.market+'pts':'—');
+  document.getElementById('best-words').textContent='Best: '+(bs.words?bs.words+'pts':'—');
+  document.getElementById('best-mahjong').textContent='Best: '+(bs.mahjong?bs.mahjong+'pts':'—');
+  document.getElementById('best-hearth').textContent='Best: '+(bs.hearth?bs.hearth+'pts':'—');
+  const bd=document.getElementById('best-dice');if(bd)bd.textContent='Best: '+(bs.dice?bs.dice+'pts':'—');
+  const bsv=document.getElementById('best-sealed');if(bsv)bsv.textContent='Best: '+(bs.sealed?bs.sealed+'pts':'—');
+  const bsw=document.getElementById('best-sagewords');if(bsw)bsw.textContent='Best: '+(bs.sagewords?bs.sagewords+'pts':'—');
   renderBadges();
   renderActivity();
 }
 
 function renderBadges() {
-  const el = document.getElementById('badges-scroll');
-  if(!el) return;
-  el.innerHTML = '';
-  BADGES.forEach(b => {
-    const earned = userData.badges.includes(b.id);
-    const chip = document.createElement('div');
-    chip.className = 'badge-chip '+(earned?'earned':'locked');
-    chip.title = b.desc;
-    chip.innerHTML = `<span class="badge-icon">${b.icon}</span><span class="badge-name">${b.name}</span>`;
+  const el=document.getElementById('badges-scroll');if(!el)return;
+  el.innerHTML='';
+  BADGES.forEach(b=>{
+    const earned=userData.badges.includes(b.id);
+    const chip=document.createElement('div');
+    chip.className='badge-chip '+(earned?'earned':'locked');
+    chip.title=b.desc;
+    chip.innerHTML=`<span class="badge-icon">${b.icon}</span><span class="badge-name">${b.name}</span>`;
     el.appendChild(chip);
   });
 }
 
 function renderActivity() {
-  const el = document.getElementById('activity-list');
-  if(!el) return;
-  if(!userData.activity||!userData.activity.length) {
-    el.innerHTML = '<div class="empty-activity">No games played yet — start your quest! ✨</div>';
-    return;
-  }
-  el.innerHTML = '';
-  const icons={market:'🛒',words:'💎',mahjong:'🦋',hearth:'🏰',dice:'🎲'};
-  const names={market:'Clover Market',words:'WordWeave',mahjong:'SageMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice'};
-  userData.activity.slice(0,5).forEach(a => {
-    const row = document.createElement('div');
-    row.className = 'activity-row';
-    const d = new Date(a.time);
-    const ts = d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-    row.innerHTML = `<div class="ar-icon">${icons[a.game]||'🎮'}</div><div class="ar-text">${names[a.game]||a.game} · ${a.mode||''} · ${ts}</div><div class="ar-pts">+${a.score}</div>`;
+  const el=document.getElementById('activity-list');if(!el)return;
+  if(!userData.activity||!userData.activity.length){el.innerHTML='<div class="empty-activity">No games played yet — start your quest! ✨</div>';return;}
+  el.innerHTML='';
+  const icons={market:'🛒',words:'💎',mahjong:'🦋',hearth:'🏰',dice:'🎲',sealed:'🔍',sagewords:'✏️'};
+  const names={market:'Clover Market',words:'WordWeave',mahjong:'SageMahjong',hearth:'Arcane Hearth',dice:'Starfall Dice',sealed:'SealedVerdict',sagewords:'SageWords'};
+  userData.activity.slice(0,5).forEach(a=>{
+    const row=document.createElement('div');row.className='activity-row';
+    const d=new Date(a.time);
+    const ts=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    row.innerHTML=`<div class="ar-icon">${icons[a.game]||'🎮'}</div><div class="ar-text">${names[a.game]||a.game} · ${a.mode||''} · ${ts}</div><div class="ar-pts">+${a.score}</div>`;
     el.appendChild(row);
   });
 }
@@ -790,31 +1068,34 @@ function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.fl
 function pick(a,n){return shuffle(a).slice(0,n);}
 function rand(a){return a[Math.floor(Math.random()*a.length)];}
 
-// GAME OVERLAY MANAGER
 window.openGame = function(id) {
   document.getElementById('screen-hub').classList.remove('active');
-  document.getElementById('screen-hub').style.display = 'none';
-  const el = document.getElementById('game-'+id);
+  document.getElementById('screen-hub').style.display='none';
+  const el=document.getElementById('game-'+id);
   if(el) el.classList.add('active');
   if(id==='market') cmInit();
   else if(id==='words') wwInit();
   else if(id==='mahjong') mjShowWelcome();
   else if(id==='hearth') ahShowWelcome();
   else if(id==='dice') sdInit();
+  else if(id==='sealed') svInit();
+  else if(id==='sagewords') swInit();
 };
 
 window.closeGame = function(id) {
-  const el = document.getElementById('game-'+id);
+  const el=document.getElementById('game-'+id);
   if(el) el.classList.remove('active');
-  document.getElementById('screen-hub').style.display = 'block';
+  document.getElementById('screen-hub').style.display='block';
   document.getElementById('screen-hub').classList.add('active');
   if(id==='market'){clearInterval(cmTimer);cmScore=0;}
   if(id==='mahjong') clearInterval(mjTimer);
   if(id==='dice') clearInterval(sdTimer);
 };
+</script>
 
+<script>
 // ═══════════════════════════════════════════
-// CLOVER MARKET — rebuilt with Shelf Sort + Market Sweep
+// CLOVER MARKET
 // ═══════════════════════════════════════════
 const CM_ITEMS = [
   {id:'apple',e:'🍎',n:'Apple',a:'produce',p:0.79},{id:'banana',e:'🍌',n:'Banana',a:'produce',p:0.49},
@@ -856,42 +1137,31 @@ function cmInit(){
       <div class="cm-mode-cards" style="margin:0 auto;">
         <div class="cm-mode-card shelf" onclick="cmStartShelfSort()">
           <div style="font-size:2.2rem">🏪</div>
-          <div>
-            <div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Shelf Sort</div>
-            <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Match 3 of a kind to clear the shelves! Beat the clock.</div>
-          </div>
+          <div><div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Shelf Sort</div>
+          <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Match 3 of a kind to clear the shelves! Beat the clock.</div></div>
         </div>
         <div class="cm-mode-card sweep" onclick="cmStartSweep()">
           <div style="font-size:2.2rem">🏃</div>
-          <div>
-            <div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Market Sweep</div>
-            <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Grab your list before time runs out — stay on budget!</div>
-          </div>
+          <div><div style="font-family:'Cinzel',serif;font-size:1rem;color:#3d2c1e;">Market Sweep</div>
+          <div style="font-size:.72rem;color:#7a5c44;margin-top:3px;">Grab your list before time runs out — stay on budget!</div></div>
         </div>
       </div>
     </div>`;
 }
 
-// ─── SHELF SORT ───────────────────────────────────────────
-// 12 slots (3×4), 4 item types × 3 each, tap to collect into 7-slot tray
-// 3 matching in tray = clear. Tray fills = game over.
 let ssSlots=[],ssTray=[],ssSel=null,ssLevel=1,ssTimeLeft=90,ssScore=0,ssCombo=0,ssComboTimer=null;
 
 function cmStartShelfSort(level){
-  cmMode='shelf'; ssLevel=level||1; ssScore=0; ssCombo=0; ssSel=null;
-  // Scale time and variety by level
-  ssTimeLeft = level>=3 ? 75 : level===2 ? 90 : 120;
-  const typeCount = level>=3 ? 6 : level===2 ? 5 : 4;
-  // Pick item types for this level
-  const types = shuffle([...CM_ITEMS]).slice(0,typeCount);
-  // Build 12 slots: 3 of each type for first 4 types, fill rest
+  cmMode='shelf';ssLevel=level||1;ssScore=0;ssCombo=0;ssSel=null;
+  ssTimeLeft=level>=3?75:level===2?90:120;
+  const typeCount=level>=3?6:level===2?5:4;
+  const types=shuffle([...CM_ITEMS]).slice(0,typeCount);
   ssSlots=[];
   types.forEach(t=>{ssSlots.push(t.e,t.e,t.e);});
   while(ssSlots.length<12) ssSlots.push(types[Math.floor(Math.random()*types.length)].e);
   ssSlots=shuffle(ssSlots.slice(0,12));
   ssTray=[];
   ssRender();
-  // Start timer
   clearInterval(cmTimer);
   cmTimer=setInterval(()=>{
     ssTimeLeft--;
@@ -903,41 +1173,34 @@ function cmStartShelfSort(level){
 
 function ssRender(){
   const wrap=document.getElementById('cm-wrap');
-  wrap.innerHTML=`
-    <div class="cm-shelf-game">
-      <div class="cm-topbar">
-        <div class="cm-topbar-stat"><span class="cm-topbar-val">${ssLevel}</span><span class="cm-topbar-lbl">Level</span></div>
-        <div class="cm-timer${ssTimeLeft<=15?' urgent':''}" id="cm-ss-timer">${ssTimeLeft}</div>
-        <div class="cm-topbar-stat"><span class="cm-topbar-val" id="cm-ss-score">${ssScore}</span><span class="cm-topbar-lbl">Score</span></div>
-      </div>
-      <div class="cm-combo-bar"><div class="cm-combo${ssCombo>=2?' active':''}" id="cm-combo-lbl">${ssCombo>=2?'Combo x'+ssCombo:'Tap 3 matching items'}</div></div>
-      <div class="cm-shelves-grid" id="cm-ss-grid"></div>
-      <div class="cm-holding-tray" id="cm-ss-tray"></div>
-    </div>`;
-  ssRenderGrid();
-  ssRenderTray();
+  wrap.innerHTML=`<div class="cm-shelf-game">
+    <div class="cm-topbar">
+      <div class="cm-topbar-stat"><span class="cm-topbar-val">${ssLevel}</span><span class="cm-topbar-lbl">Level</span></div>
+      <div class="cm-timer${ssTimeLeft<=15?' urgent':''}" id="cm-ss-timer">${ssTimeLeft}</div>
+      <div class="cm-topbar-stat"><span class="cm-topbar-val" id="cm-ss-score">${ssScore}</span><span class="cm-topbar-lbl">Score</span></div>
+    </div>
+    <div class="cm-combo-bar"><div class="cm-combo${ssCombo>=2?' active':''}" id="cm-combo-lbl">${ssCombo>=2?'Combo x'+ssCombo:'Tap 3 matching items'}</div></div>
+    <div class="cm-shelves-grid" id="cm-ss-grid"></div>
+    <div class="cm-holding-tray" id="cm-ss-tray"></div>
+  </div>`;
+  ssRenderGrid();ssRenderTray();
 }
 
 function ssRenderGrid(){
-  const grid=document.getElementById('cm-ss-grid');
-  if(!grid)return;
+  const grid=document.getElementById('cm-ss-grid');if(!grid)return;
   grid.innerHTML='';
   for(let i=0;i<12;i++){
     const slot=document.createElement('div');
     if(ssSlots[i]){
       slot.className='cm-shelf-slot'+(ssSel===i?' cm-slot-selected':'');
-      slot.textContent=ssSlots[i];
-      slot.onclick=()=>ssTapSlot(i);
-    } else {
-      slot.className='cm-shelf-slot cm-slot-empty';
-    }
+      slot.textContent=ssSlots[i];slot.onclick=()=>ssTapSlot(i);
+    } else {slot.className='cm-shelf-slot cm-slot-empty';}
     grid.appendChild(slot);
   }
 }
 
 function ssRenderTray(){
-  const tray=document.getElementById('cm-ss-tray');
-  if(!tray)return;
+  const tray=document.getElementById('cm-ss-tray');if(!tray)return;
   const isFull=ssTray.length>=7;
   tray.innerHTML=isFull?`<div class="cm-tray-warning">⚠️ Tray almost full!</div>`:'';
   for(let i=0;i<7;i++){
@@ -950,62 +1213,34 @@ function ssRenderTray(){
 
 function ssTapSlot(i){
   if(!ssSlots[i])return;
-  // Add to tray
-  ssTray.push(ssSlots[i]);
-  ssSlots[i]=null;
-  ssSel=null;
-  // Check for 3-of-a-kind in tray
-  const counts={};
-  ssTray.forEach(e=>{counts[e]=(counts[e]||0)+1;});
+  ssTray.push(ssSlots[i]);ssSlots[i]=null;ssSel=null;
+  const counts={};ssTray.forEach(e=>{counts[e]=(counts[e]||0)+1;});
   const matched=Object.entries(counts).find(([e,c])=>c>=3);
   if(matched){
     const emoji=matched[0];
-    // Animate matching slots briefly then clear
-    ssCombo++;clearTimeout(ssComboTimer);
-    ssComboTimer=setTimeout(()=>{ssCombo=0;},3000);
-    const pts=(10+ssCombo*5)*ssLevel;
-    ssScore+=pts;
+    ssCombo++;clearTimeout(ssComboTimer);ssComboTimer=setTimeout(()=>{ssCombo=0;},3000);
+    const pts=(10+ssCombo*5)*ssLevel;ssScore+=pts;
     document.getElementById('cm-score-disp').textContent=ssScore;
     showToast(ssCombo>=2?`🔥 Combo x${ssCombo}! +${pts}`:`✅ Match! +${pts}`);
-    // Remove 3 from tray
-    let removed=0;
-    ssTray=ssTray.filter(e=>{if(e===emoji&&removed<3){removed++;return false;}return true;});
-    // Check win — all slots cleared
+    let removed=0;ssTray=ssTray.filter(e=>{if(e===emoji&&removed<3){removed++;return false;}return true;});
     const remaining=ssSlots.filter(Boolean).length;
-    if(remaining===0&&ssTray.filter(Boolean).length===0){
-      clearInterval(cmTimer);
-      setTimeout(()=>ssLevelClear(),300);
-      return;
-    }
+    if(remaining===0&&ssTray.filter(Boolean).length===0){clearInterval(cmTimer);setTimeout(()=>ssLevelClear(),300);return;}
     ssRenderGrid();ssRenderTray();
     const cl=document.getElementById('cm-combo-lbl');
     if(cl){cl.className='cm-combo'+(ssCombo>=2?' active':'');cl.textContent=ssCombo>=2?'Combo x'+ssCombo:'Tap 3 matching items';}
-  } else if(ssTray.length>=7){
-    // Tray full — game over
-    clearInterval(cmTimer);
-    setTimeout(()=>ssGameOver(),400);
-    return;
-  } else {
-    ssRenderGrid();ssRenderTray();
-  }
+  } else if(ssTray.length>=7){clearInterval(cmTimer);setTimeout(()=>ssGameOver(),400);return;}
+  else {ssRenderGrid();ssRenderTray();}
 }
 
 function ssLevelClear(){
-  confetti();
-  const timeBonus=ssTimeLeft*2;
-  ssScore+=timeBonus;
+  confetti();const timeBonus=ssTimeLeft*2;ssScore+=timeBonus;
   if(window.saveScore) saveScore('market',ssScore,'shelf-sort-lv'+ssLevel);
-  const wrap=document.getElementById('cm-wrap');
   const nextLv=ssLevel+1;
-  wrap.innerHTML=`<div class="cm-success">
-    <div class="cm-success-emoji">🎉</div>
-    <h3>Level ${ssLevel} Clear!</h3>
+  document.getElementById('cm-wrap').innerHTML=`<div class="cm-success">
+    <div class="cm-success-emoji">🎉</div><h3>Level ${ssLevel} Clear!</h3>
     <p>${ssLevel>=3?'You cleared all levels — amazing! 🏆':'Ready for Level '+nextLv+'?'}</p>
-    <div class="cm-success-details">
-      ⏱ Time Bonus: +${timeBonus} pts<br>
-      🏆 Total Score: <strong>${ssScore} pts</strong>
-      <div class="cm-big-total">${ssCombo>=3?'🔥 Combo Master!':ssLevel>=3?'🌟 Champion!':'Nice work!'}</div>
-    </div>
+    <div class="cm-success-details">⏱ Time Bonus: +${timeBonus} pts<br>🏆 Total Score: <strong>${ssScore} pts</strong>
+    <div class="cm-big-total">${ssCombo>=3?'🔥 Combo Master!':ssLevel>=3?'🌟 Champion!':'Nice work!'}</div></div>
     ${ssLevel<3?`<button class="cm-again-btn" onclick="cmStartShelfSort(${nextLv})" style="background:linear-gradient(135deg,#5f7d63,#8daa91);color:white;">Level ${nextLv} →</button>`:''}
     <button class="cm-again-btn" onclick="cmStartShelfSort(1)" style="margin-top:8px;">Play Again 🏪</button>
     <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
@@ -1014,31 +1249,22 @@ function ssLevelClear(){
 
 function ssGameOver(){
   if(window.saveScore) saveScore('market',ssScore,'shelf-sort');
-  const wrap=document.getElementById('cm-wrap');
-  wrap.innerHTML=`<div class="cm-success">
-    <div class="cm-success-emoji">😅</div>
-    <h3>${ssTimeLeft<=0?'Time\'s Up!':'Tray Overflowed!'}</h3>
+  document.getElementById('cm-wrap').innerHTML=`<div class="cm-success">
+    <div class="cm-success-emoji">😅</div><h3>${ssTimeLeft<=0?'Time\'s Up!':'Tray Overflowed!'}</h3>
     <p>${ssTimeLeft<=0?'The shelves needed more time…':'Too many items in the tray!'}</p>
-    <div class="cm-success-details">🏆 Score: <strong>${ssScore} pts</strong><div class="cm-big-total">Keep trying!</div></div>
+    <div class="cm-success-details">🏆 Score: <strong>${ssScore} pts</strong></div>
     <button class="cm-again-btn" onclick="cmStartShelfSort(1)">Try Again 🏪</button>
     <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
   </div>`;
 }
 
-// ─── MARKET SWEEP ─────────────────────────────────────────
-// Timed run: grab items from aisles to match your list, stay on budget
 let swList=[],swCart=[],swBudget=0,swSpent=0,swTimeLeft=0,swSaleItems=new Set();
 
 function cmStartSweep(){
-  cmMode='sweep';
-  swCart=[];swSpent=0;swSaleItems=new Set();
-  // Budget and time vary: give a tight budget
+  cmMode='sweep';swCart=[];swSpent=0;swSaleItems=new Set();
   swBudget=20;swTimeLeft=90;
-  // Pick 6 list items
   swList=pick(CM_ITEMS,6);
-  // Mark 2 random items as on-sale (20% off)
   pick(CM_ITEMS.filter(i=>!swList.some(l=>l.id===i.id)),4).forEach(i=>swSaleItems.add(i.id));
-  // Also put 1 list item on sale for strategy
   if(swList.length) swSaleItems.add(swList[Math.floor(Math.random()*swList.length)].id);
   swRender();
   clearInterval(cmTimer);
@@ -1052,65 +1278,41 @@ function cmStartSweep(){
 
 function swRender(){
   const wrap=document.getElementById('cm-wrap');
-  const listIds=new Set(swList.map(i=>i.id));
   const cartIds=new Set(swCart.map(i=>i.id));
   const budgetPct=Math.min(swSpent/swBudget*100,100);
   const over=swSpent>swBudget;
-
-  // Group all items by aisle
-  const byAisle={};
-  CM_ITEMS.forEach(item=>{
-    if(!byAisle[item.a]) byAisle[item.a]=[];
-    byAisle[item.a].push(item);
-  });
-
+  const byAisle={};CM_ITEMS.forEach(item=>{if(!byAisle[item.a])byAisle[item.a]=[];byAisle[item.a].push(item);});
   let aisleHtml='';
   CM_AISLES.forEach(aisle=>{
-    const items=byAisle[aisle.id]||[];
-    if(!items.length)return;
+    const items=byAisle[aisle.id]||[];if(!items.length)return;
     let itemHtml='';
     items.forEach(item=>{
-      const isSale=swSaleItems.has(item.id);
-      const isGrabbed=cartIds.has(item.id);
+      const isSale=swSaleItems.has(item.id);const isGrabbed=cartIds.has(item.id);
       const price=isSale?(item.p*0.8):item.p;
       itemHtml+=`<div class="cm-store-item${isSale?' sale-item':''}${isGrabbed?' grabbed':''}" onclick="swGrab('${item.id}')">
-        <div class="si-emoji">${item.e}</div>
-        <div class="si-name">${item.n}</div>
-        <div class="si-price">$${price.toFixed(2)}${isSale?'<div class="cm-sale-badge">SALE</div>':''}</div>
-      </div>`;
+        <div class="si-emoji">${item.e}</div><div class="si-name">${item.n}</div>
+        <div class="si-price">$${price.toFixed(2)}${isSale?'<div class="cm-sale-badge">SALE</div>':''}</div></div>`;
     });
-    aisleHtml+=`<div class="cm-aisle-section">
-      <div class="cm-aisle-label">${aisle.label}</div>
-      <div class="cm-items-row">${itemHtml}</div>
-    </div>`;
+    aisleHtml+=`<div class="cm-aisle-section"><div class="cm-aisle-label">${aisle.label}</div><div class="cm-items-row">${itemHtml}</div></div>`;
   });
-
   let cartHtml=swCart.map(i=>`<span class="cm-cart-chip">${i.e}</span>`).join('');
   let listChips=swList.map(i=>`<span class="cm-list-chip${cartIds.has(i.id)?' got':''}${swSaleItems.has(i.id)?' sale':''}">${i.e} ${i.n}</span>`).join('');
-
-  wrap.innerHTML=`
-    <div class="cm-sweep-game">
-      <div class="cm-topbar">
-        <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swSpent.toFixed(2)}</span><span class="cm-topbar-lbl">${over?'⚠️ Over!':'Spent'}</span></div>
-        <div class="cm-timer${swTimeLeft<=20?' urgent':''}" id="cm-sw-timer">${swTimeLeft}</div>
-        <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swBudget.toFixed(2)}</span><span class="cm-topbar-lbl">Budget</span></div>
-      </div>
-      <div class="cm-budget-bar">
-        <span style="opacity:.8">💰</span>
-        <div class="cm-budget-track"><div class="cm-budget-fill${over?' over':''}" style="width:${budgetPct}%"></div></div>
-        <span style="opacity:.8">${over?'⚠️ OVER':'$'+((swBudget-swSpent).toFixed(2))+' left'}</span>
-      </div>
-      <div class="cm-list-panel">
-        <div class="cm-list-title">📋 Your List — grab these! <span style="color:#e8855a;font-size:.65rem;">Orange = on sale 🏷️</span></div>
-        <div class="cm-list-chips">${listChips}</div>
-      </div>
-      <div class="cm-store-aisles">${aisleHtml}</div>
-      <div class="cm-cart-strip">
-        <div class="cm-cart-label">🛒 Cart:</div>
-        <div class="cm-cart-emoji-row">${cartHtml||'<span style="opacity:.5;font-size:.72rem;">empty</span>'}</div>
-        <button onclick="swEndGame()" style="background:rgba(0,0,0,.3);border:none;color:white;border-radius:12px;padding:5px 12px;font-family:Cinzel,serif;font-size:.7rem;cursor:pointer;flex-shrink:0;">Check Out</button>
-      </div>
-    </div>`;
+  wrap.innerHTML=`<div class="cm-sweep-game">
+    <div class="cm-topbar">
+      <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swSpent.toFixed(2)}</span><span class="cm-topbar-lbl">${over?'⚠️ Over!':'Spent'}</span></div>
+      <div class="cm-timer${swTimeLeft<=20?' urgent':''}" id="cm-sw-timer">${swTimeLeft}</div>
+      <div class="cm-topbar-stat"><span class="cm-topbar-val">$${swBudget.toFixed(2)}</span><span class="cm-topbar-lbl">Budget</span></div>
+    </div>
+    <div class="cm-budget-bar"><span style="opacity:.8">💰</span>
+      <div class="cm-budget-track"><div class="cm-budget-fill${over?' over':''}" style="width:${budgetPct}%"></div></div>
+      <span style="opacity:.8">${over?'⚠️ OVER':'$'+((swBudget-swSpent).toFixed(2))+' left'}</span></div>
+    <div class="cm-list-panel"><div class="cm-list-title">📋 Your List — grab these! <span style="color:#e8855a;font-size:.65rem;">Orange = on sale 🏷️</span></div>
+      <div class="cm-list-chips">${listChips}</div></div>
+    <div class="cm-store-aisles">${aisleHtml}</div>
+    <div class="cm-cart-strip"><div class="cm-cart-label">🛒 Cart:</div>
+      <div class="cm-cart-emoji-row">${cartHtml||'<span style="opacity:.5;font-size:.72rem;">empty</span>'}</div>
+      <button onclick="swEndGame()" style="background:rgba(0,0,0,.3);border:none;color:white;border-radius:12px;padding:5px 12px;font-family:Cinzel,serif;font-size:.7rem;cursor:pointer;flex-shrink:0;">Check Out</button>
+    </div></div>`;
 }
 
 window.swGrab=function(itemId){
@@ -1118,16 +1320,11 @@ window.swGrab=function(itemId){
   if(!item||swCart.some(c=>c.id===itemId))return;
   const isSale=swSaleItems.has(itemId);
   const price=isSale?parseFloat((item.p*0.8).toFixed(2)):item.p;
-  swCart.push({...item,paidPrice:price,isSale});
-  swSpent=parseFloat((swSpent+price).toFixed(2));
+  swCart.push({...item,paidPrice:price,isSale});swSpent=parseFloat((swSpent+price).toFixed(2));
   const isOnList=swList.some(l=>l.id===itemId);
   showToast(isOnList?`${item.e} Got it!${isSale?' 🏷️ Sale!':''}`:`${item.e} +$${price.toFixed(2)}`);
   swRender();
-  // Re-apply timer text (render replaces DOM)
-  const te=document.getElementById('cm-sw-timer');
-  if(te){te.textContent=swTimeLeft;te.className='cm-timer'+(swTimeLeft<=20?' urgent':'');}
-  // Check if list complete
-  const listIds=new Set(swList.map(i=>i.id));
+  const te=document.getElementById('cm-sw-timer');if(te){te.textContent=swTimeLeft;te.className='cm-timer'+(swTimeLeft<=20?' urgent':'');}
   const gotAll=swList.every(i=>swCart.some(c=>c.id===i.id));
   if(gotAll){clearInterval(cmTimer);setTimeout(swEndGame,300);}
 };
@@ -1137,38 +1334,27 @@ function swEndGame(){
   const listIds=new Set(swList.map(i=>i.id));
   const found=swCart.filter(i=>listIds.has(i.id)).length;
   const saleCount=swCart.filter(i=>i.isSale).length;
-  const over=swSpent>swBudget;
-  const overAmt=Math.max(0,swSpent-swBudget);
-  // Score: 20pts per list item, 15pts per sale item, time bonus, -10 per $ over budget
-  let score=found*20+saleCount*15+swTimeLeft*2-Math.round(overAmt*10);
-  score=Math.max(score,0);
-  cmScore=score;
-  document.getElementById('cm-score-disp').textContent=score;
+  const over=swSpent>swBudget;const overAmt=Math.max(0,swSpent-swBudget);
+  let score=found*20+saleCount*15+swTimeLeft*2-Math.round(overAmt*10);score=Math.max(score,0);
+  cmScore=score;document.getElementById('cm-score-disp').textContent=score;
   if(window.saveScore) saveScore('market',score,'sweep');
-  const gotAll=found===swList.length;
-  if(gotAll) confetti();
-  const wrap=document.getElementById('cm-wrap');
-  wrap.innerHTML=`<div class="cm-success">
+  const gotAll=found===swList.length;if(gotAll) confetti();
+  document.getElementById('cm-wrap').innerHTML=`<div class="cm-success">
     <div class="cm-success-emoji">${gotAll?'🛒':over?'😬':'🌿'}</div>
     <h3>${gotAll?'Sweep Complete!':over?'Over Budget…':'Shopping Done!'}</h3>
-    <p>${gotAll?'You got everything on the list! 🎉':over?'You went $'+overAmt.toFixed(2)+' over budget.':'You missed some items.'}</p>
-    <div class="cm-success-details">
-      ✅ List items: ${found}/${swList.length}<br>
-      🏷️ Sale finds: ${saleCount}<br>
-      💰 Spent: $${swSpent.toFixed(2)} of $${swBudget.toFixed(2)}<br>
-      ⏱ Time left: ${swTimeLeft}s<br>
-      🏆 Score: <strong>${score} pts</strong>
-      <div class="cm-big-total">${score>=100?'🌟 Incredible!':score>=60?'👏 Nice run!':'Keep sweeping!'}</div>
-    </div>
+    <p>${gotAll?'You got everything! 🎉':over?'You went $'+overAmt.toFixed(2)+' over budget.':'You missed some items.'}</p>
+    <div class="cm-success-details">✅ List items: ${found}/${swList.length}<br>🏷️ Sale finds: ${saleCount}<br>💰 Spent: $${swSpent.toFixed(2)} of $${swBudget.toFixed(2)}<br>⏱ Time left: ${swTimeLeft}s<br>🏆 Score: <strong>${score} pts</strong>
+    <div class="cm-big-total">${score>=100?'🌟 Incredible!':score>=60?'👏 Nice run!':'Keep sweeping!'}</div></div>
     <button class="cm-again-btn" onclick="cmStartSweep()">Sweep Again 🏃</button>
     <button class="cm-again-btn" onclick="cmInit()" style="margin-top:8px;background:linear-gradient(135deg,#c8b890,#e8d5b0);color:#3d2c1e;">Main Menu</button>
   </div>`;
 }
+</script>
 
+<script>
 // ═══════════════════════════════════════════
 // WORDWEAVE
 // ═══════════════════════════════════════════
-// FIX: All connection puzzles now have exactly 4 words per category
 const WW_CONN=[
   {title:"What are they all?",cats:[
     {name:"🌿 Garden Things",c:0,words:["Rose","Shovel","Snail","Hose"]},
@@ -1179,7 +1365,6 @@ const WW_CONN=[
   {title:"Hidden connections…",cats:[
     {name:"🍕 Pizza Toppings",c:0,words:["Pepperoni","Anchovy","Arugula","Ricotta"]},
     {name:"☁️ Cloud Types",c:1,words:["Cumulus","Stratus","Nimbus","Cirrus"]},
-    // FIX: added Werewolf back so Movie Monsters has 4 words
     {name:"🎬 Movie Monsters",c:2,words:["Godzilla","Frankenstein","Dracula","Werewolf"]},
     {name:"🌺 Tropical Flowers",c:3,words:["Hibiscus","Plumeria","Orchid","Heliconia"]},
   ]},
@@ -1203,7 +1388,6 @@ const WW_CONN=[
   ]},
 ];
 
-// FIX: Word Pairs now has enough pairs for all difficulties; uses index tracking to avoid repeats
 const WW_PAIRS=[
   {title:"Perfect pairs!",sub:"Tap left, then its match on the right",pairs:[["Salt","Pepper"],["Sun","Moon"],["Cat","Dog"],["Bread","Butter"],["Romeo","Juliet"],["Thunder","Lightning"]]},
   {title:"Word partners",sub:"Find each word's companion",pairs:[["Peanut Butter","Jelly"],["Bow","Arrow"],["Cup","Saucer"],["Hammer","Nail"],["Stars","Stripes"],["Needle","Thread"]]},
@@ -1213,15 +1397,12 @@ const WW_PAIRS=[
 ];
 
 let wwScore=0,wwLives=0,wwDiff='easy',wwPuzzle=null,wwSel=[],wwSolved=[],wwPairA=null,wwPairB=null,wwMatched=new Set(),wwStart=0;
-// FIX: track used puzzle indices to avoid repeating
 let wwUsedConn=[],wwUsedPairs=[];
 
 function wwInit(){
   wwScore=0;wwDiff='easy';
-  const wrap=document.getElementById('ww-wrap');
-  wrap.innerHTML=`<div class="gm-welcome">
-    <div class="gm-icon">💎</div>
-    <div class="gm-title">WordWeave</div>
+  document.getElementById('ww-wrap').innerHTML=`<div class="gm-welcome">
+    <div class="gm-icon">💎</div><div class="gm-title">WordWeave</div>
     <div class="gm-sub">✦ Find the hidden connections ✦</div>
     <div style="font-size:.72rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Difficulty</div>
     <div class="diff-row" style="width:100%;max-width:340px;margin-bottom:16px;">
@@ -1236,13 +1417,11 @@ function wwInit(){
   document.getElementById('ww-score-disp').textContent='0';
 }
 
-// FIX: pick non-repeating puzzle
-function wwPickPuzzle(arr, usedArr) {
-  if(usedArr.length >= arr.length) usedArr.length = 0; // reset when all used
-  const available = arr.map((_,i)=>i).filter(i=>!usedArr.includes(i));
-  const idx = available[Math.floor(Math.random()*available.length)];
-  usedArr.push(idx);
-  return arr[idx];
+function wwPickPuzzle(arr,usedArr){
+  if(usedArr.length>=arr.length) usedArr.length=0;
+  const available=arr.map((_,i)=>i).filter(i=>!usedArr.includes(i));
+  const idx=available[Math.floor(Math.random()*available.length)];
+  usedArr.push(idx);return arr[idx];
 }
 
 window.wwSetDiff=function(d){
@@ -1254,10 +1433,9 @@ window.wwSetDiff=function(d){
 window.wwStartConn=function(){
   wwSel=[];wwSolved=[];wwStart=Date.now();
   wwLives=wwDiff==='easy'?5:wwDiff==='medium'?4:3;
-  wwPuzzle=wwPickPuzzle(WW_CONN, wwUsedConn);
+  wwPuzzle=wwPickPuzzle(WW_CONN,wwUsedConn);
   const allWords=shuffle(wwPuzzle.cats.flatMap(cat=>cat.words.map(w=>({w,cat}))));
-  const wrap=document.getElementById('ww-wrap');
-  wrap.innerHTML=`<div style="padding:12px;">
+  document.getElementById('ww-wrap').innerHTML=`<div style="padding:12px;">
     <div style="font-family:'Cinzel',serif;font-size:1rem;text-align:center;color:var(--text);margin-bottom:3px;">${wwPuzzle.title}</div>
     <div style="font-size:.72rem;color:var(--text2);text-align:center;margin-bottom:8px;">Select 4 · ${wwLives} mistakes allowed</div>
     <div class="ww-lives" id="ww-lives"></div>
@@ -1272,18 +1450,15 @@ window.wwStartConn=function(){
   wwRenderLives();
   const grid=document.getElementById('ww-grid');
   allWords.forEach(({w,cat})=>{
-    const t=document.createElement('div');
-    t.className='ww-tile';t.textContent=w;t.dataset.w=w;t.dataset.cat=cat.name;
-    t.onclick=()=>wwToggle(t,w,cat);
-    grid.appendChild(t);
+    const t=document.createElement('div');t.className='ww-tile';t.textContent=w;t.dataset.w=w;t.dataset.cat=cat.name;
+    t.onclick=()=>wwToggle(t,w,cat);grid.appendChild(t);
   });
 };
 
 function wwRenderLives(){
   const el=document.getElementById('ww-lives');if(!el)return;
   const max=wwDiff==='easy'?5:wwDiff==='medium'?4:3;
-  el.innerHTML='';
-  for(let i=0;i<max;i++){const l=document.createElement('div');l.className='ww-life'+(i>=wwLives?' lost':'');l.textContent='💜';el.appendChild(l);}
+  el.innerHTML='';for(let i=0;i<max;i++){const l=document.createElement('div');l.className='ww-life'+(i>=wwLives?' lost':'');l.textContent='💜';el.appendChild(l);}
 }
 
 window.wwToggle=function(tile,w,cat){
@@ -1301,8 +1476,7 @@ window.wwClear=function(){
 
 window.wwSubmit=function(){
   if(wwSel.length!==4)return;
-  const cats=wwSel.map(s=>s.cat.name);
-  const allSame=cats.every(c=>c===cats[0]);
+  const cats=wwSel.map(s=>s.cat.name);const allSame=cats.every(c=>c===cats[0]);
   if(allSame){
     const cat=wwSel[0].cat;
     wwSel.forEach(s=>{const t=document.querySelector(`[data-w="${s.w}"]`);if(t){t.classList.remove('ww-selected');t.classList.add('wws'+cat.c);}});
@@ -1319,21 +1493,19 @@ window.wwSubmit=function(){
   } else {
     wwLives--;wwRenderLives();
     wwSel.forEach(s=>{const t=document.querySelector(`[data-w="${s.w}"]`);if(t){t.classList.add('ww-shake');setTimeout(()=>t.classList.remove('ww-shake'),450);}});
-    const mc={}; wwSel.map(s=>s.cat.name).forEach(c=>mc[c]=(mc[c]||0)+1);
+    const mc={};wwSel.map(s=>s.cat.name).forEach(c=>mc[c]=(mc[c]||0)+1);
     showToast(Math.max(...Object.values(mc))===3?'💡 One away!':'❌ Not quite! '+wwLives+' left');
     if(wwLives<=0)setTimeout(()=>wwLose(),500);
   }
 };
 
 function wwWin(mode){
-  confetti();
-  const e=Math.round((Date.now()-wwStart)/1000);
+  confetti();const e=Math.round((Date.now()-wwStart)/1000);
   const bonus=e<60?100:e<120?50:0;wwScore+=bonus;
   document.getElementById('ww-score-disp').textContent=wwScore;
   if(window.saveScore) saveScore('words',wwScore,mode);
   const m=Math.floor(e/60),s=e%60;
-  // FIX: Play Again buttons call the correct mode function, not wwInit()
-  const againFn = mode==='connections' ? 'wwStartConn()' : 'wwStartPairs()';
+  const againFn=mode==='connections'?'wwStartConn()':'wwStartPairs()';
   document.getElementById('ww-wrap').innerHTML=`<div class="gm-welcome"><div class="gm-icon">💎</div>
     <div class="gm-title" style="font-size:1.5rem;">${rand(['Brilliant! ✦','Magnificent! ✦','Dazzling! ✦'])}</div>
     <div class="gm-sub">Puzzle complete!</div>
@@ -1352,13 +1524,11 @@ function wwLose(){
 window.wwStartPairs=function(){
   wwPairA=null;wwPairB=null;wwMatched=new Set();wwStart=Date.now();wwScore=0;
   wwLives=wwDiff==='easy'?999:wwDiff==='medium'?5:3;
-  wwPuzzle=wwPickPuzzle(WW_PAIRS, wwUsedPairs);
+  wwPuzzle=wwPickPuzzle(WW_PAIRS,wwUsedPairs);
   const count=wwDiff==='easy'?4:wwDiff==='medium'?5:6;
   const chosen=shuffle(wwPuzzle.pairs).slice(0,count);
-  const lefts=shuffle(chosen.map(p=>p[0]));
-  const rights=shuffle(chosen.map(p=>p[1]));
-  const wrap=document.getElementById('ww-wrap');
-  wrap.innerHTML=`<div style="padding:12px;">
+  const lefts=shuffle(chosen.map(p=>p[0]));const rights=shuffle(chosen.map(p=>p[1]));
+  document.getElementById('ww-wrap').innerHTML=`<div style="padding:12px;">
     <div style="font-family:'Cinzel',serif;font-size:1rem;text-align:center;margin-bottom:3px;">${wwPuzzle.title}</div>
     <div style="font-size:.72rem;color:var(--text2);text-align:center;margin-bottom:10px;">${wwPuzzle.sub}</div>
     <div class="ww-lives" id="ww-lives2"></div>
@@ -1372,8 +1542,7 @@ window.wwStartPairs=function(){
     const lt=wwMakePtile(lefts[i],'left',chosen);
     const conn=document.createElement('div');conn.className='ww-pconn';conn.textContent='—';
     const rt=wwMakePtile(rights[i],'right',chosen);
-    row.appendChild(lt);row.appendChild(conn);row.appendChild(rt);
-    board.appendChild(row);
+    row.appendChild(lt);row.appendChild(conn);row.appendChild(rt);board.appendChild(row);
   }
 };
 
@@ -1381,8 +1550,7 @@ function wwRenderLives2(){
   const el=document.getElementById('ww-lives2');if(!el)return;
   const max=wwDiff==='easy'?0:wwDiff==='medium'?5:3;
   if(max===0){el.innerHTML='<div style="font-size:.7rem;color:var(--text3);text-align:center;margin-bottom:6px;">♾️ Unlimited tries</div>';return;}
-  el.innerHTML='';
-  for(let i=0;i<max;i++){const l=document.createElement('div');l.className='ww-life'+(i>=wwLives?' lost':'');l.textContent='💜';el.appendChild(l);}
+  el.innerHTML='';for(let i=0;i<max;i++){const l=document.createElement('div');l.className='ww-life'+(i>=wwLives?' lost':'');l.textContent='💜';el.appendChild(l);}
 }
 
 function wwMakePtile(w,side,pairs){
@@ -1412,8 +1580,7 @@ window.wwPickPair=function(tile,w,side,pairs){
       showToast(rand(['💎 Match!','✨ Yes!','🌟 Perfect!'])+' +'+pts);
       const total=wwDiff==='easy'?4:wwDiff==='medium'?5:6;
       const pb=document.getElementById('ww-pb2');if(pb)pb.style.width=(wwMatched.size/total*100)+'%';
-      wwPairA=null;wwPairB=null;
-      if(wwMatched.size===total)setTimeout(()=>wwWin('pairs'),400);
+      wwPairA=null;wwPairB=null;if(wwMatched.size===total)setTimeout(()=>wwWin('pairs'),400);
     } else {
       const a=wwPairA,b=wwPairB;
       a.tile.classList.add('ww-wrong');b.tile.classList.add('ww-wrong');
@@ -1423,7 +1590,9 @@ window.wwPickPair=function(tile,w,side,pairs){
     }
   }
 };
+</script>
 
+<script>
 // ═══════════════════════════════════════════
 // SAGEMAHJONG
 // ═══════════════════════════════════════════
@@ -1441,7 +1610,6 @@ function mjShowWelcome(){
   mjSel=null;mjBoard=[];
 }
 
-// FIX: mjRestartGame hides overlays before starting to avoid stacking
 window.mjRestartGame=function(){
   document.getElementById('mj-win').classList.remove('show');
   document.getElementById('mj-lose').classList.remove('show');
@@ -1449,181 +1617,96 @@ window.mjRestartGame=function(){
 };
 
 window.mjSetDiff=function(d){
-  mjDiff=d;
-  ['easy','med','hard'].forEach(x=>{const el=document.getElementById('mj-d-'+x);if(el)el.classList.remove('active');});
+  mjDiff=d;['easy','med','hard'].forEach(x=>{const el=document.getElementById('mj-d-'+x);if(el)el.classList.remove('active');});
   const el=document.getElementById('mj-d-'+(d==='medium'?'med':d));if(el)el.classList.add('active');
 };
 
 window.mjStart=function(layout){
-  mjLayout=layout;mjSel=null;mjScore=0;mjHints=3;mjElapsed=0;
-  clearInterval(mjTimer);
+  mjLayout=layout;mjSel=null;mjScore=0;mjHints=3;mjElapsed=0;clearInterval(mjTimer);
   document.getElementById('mj-welcome').style.display='none';
   document.getElementById('mj-board-wrap').style.display='block';
-  // Reset any previous scale so measurements are fresh
   const boardEl=document.getElementById('mj-board');
-  boardEl.style.transform='';
-  boardEl.style.width='';
-  boardEl.style.height='';
-  boardEl.parentElement.style.width='';
-  boardEl.parentElement.style.height='';
+  boardEl.style.transform='';boardEl.style.width='';boardEl.style.height='';
+  boardEl.parentElement.style.width='';boardEl.parentElement.style.height='';
   document.getElementById('mj-score').textContent='0';
   document.getElementById('mj-score-disp').textContent='0';
   const hb=document.getElementById('mj-hint-btn');if(hb){hb.disabled=false;}
   document.getElementById('mj-hints').textContent='(3)';
-
   const positions=layout==='turtle'?mjTurtle():layout==='dragon'?mjDragon():mjPyramid();
-  // FIX: ensure even number of tiles and enough unique symbols
-  const count=Math.floor(positions.length/2)*2;
-  const pos=positions.slice(0,count);
-  const pairCount=count/2;
-  // Use enough unique symbols to guarantee solvable board
-  const symsPool=shuffle([...MJ_SYMS]);
-  let pool=[];
+  const count=Math.floor(positions.length/2)*2;const pos=positions.slice(0,count);const pairCount=count/2;
+  const symsPool=shuffle([...MJ_SYMS]);let pool=[];
   for(let i=0;i<pairCount;i++) pool.push(symsPool[i%symsPool.length],symsPool[i%symsPool.length]);
-  pool=shuffle(pool);
-  mjBoard=[];
-  shuffle(pos).forEach(([col,row,layer],i)=>{
-    mjBoard.push({id:i,col,row,layer,sym:pool[i],removed:false,el:null});
-  });
-  mjPairs=count/2;
-  document.getElementById('mj-pairs').textContent=mjPairs;
-
-  // Calculate scale ONCE from the full board — never recalculate after tiles are removed
+  pool=shuffle(pool);mjBoard=[];
+  shuffle(pos).forEach(([col,row,layer],i)=>{mjBoard.push({id:i,col,row,layer,sym:pool[i],removed:false,el:null});});
+  mjPairs=count/2;document.getElementById('mj-pairs').textContent=mjPairs;
   const allTiles=mjBoard;
-  const minC=Math.min(...allTiles.map(t=>t.col));
-  const maxC=Math.max(...allTiles.map(t=>t.col));
-  const minR=Math.min(...allTiles.map(t=>t.row));
-  const maxR=Math.max(...allTiles.map(t=>t.row));
+  const minC=Math.min(...allTiles.map(t=>t.col));const maxC=Math.max(...allTiles.map(t=>t.col));
+  const minR=Math.min(...allTiles.map(t=>t.row));const maxR=Math.max(...allTiles.map(t=>t.row));
   const maxL=Math.max(...allTiles.map(t=>t.layer));
-  const boardW=(maxC-minC+1)*MJ_TW+maxL*MJ_LO+MJ_TW;
-  const boardH=(maxR-minR+1)*MJ_TH+maxL*MJ_LO+MJ_TH;
-  mjFixedMinC=minC; mjFixedMinR=minR;
-  // Apply scale after layout is visible so clientWidth/Height are available
+  const boardW=(maxC-minC+1)*MJ_TW+maxL*MJ_LO+MJ_TW;const boardH=(maxR-minR+1)*MJ_TH+maxL*MJ_LO+MJ_TH;
+  mjFixedMinC=minC;mjFixedMinR=minR;
   requestAnimationFrame(()=>{
-    const wrapEl=document.getElementById('mj-board-wrap');
-    const boardEl=document.getElementById('mj-board');
+    const wrapEl=document.getElementById('mj-board-wrap');const boardEl=document.getElementById('mj-board');
     if(!wrapEl||!boardEl)return;
-    const availW=wrapEl.clientWidth-16;
-    const availH=wrapEl.clientHeight-16;
+    const availW=wrapEl.clientWidth-16;const availH=wrapEl.clientHeight-16;
     mjFixedScale=(availW>0&&availH>0)?Math.min(availW/boardW,availH/boardH,1):1;
-    boardEl.style.width=boardW+'px';
-    boardEl.style.height=boardH+'px';
-    boardEl.style.transformOrigin='top left';
-    boardEl.style.transform=`scale(${mjFixedScale})`;
+    boardEl.style.width=boardW+'px';boardEl.style.height=boardH+'px';
+    boardEl.style.transformOrigin='top left';boardEl.style.transform=`scale(${mjFixedScale})`;
     boardEl.parentElement.style.width=Math.ceil(boardW*mjFixedScale)+'px';
     boardEl.parentElement.style.height=Math.ceil(boardH*mjFixedScale)+'px';
   });
-
   mjRender();mjUpdateFree();
   mjTimer=setInterval(()=>{mjElapsed++;const m=Math.floor(mjElapsed/60),s=mjElapsed%60;document.getElementById('mj-time').textContent=`${m}:${s.toString().padStart(2,'0')}`;},1000);
 };
 
-// MOBILE-FIRST LAYOUTS — compact, few layers, all tiles visible on screen
-// Each entry: [col, row, layer]  (0-based, small grids)
-
-// LAYOUTS — each row is a strip of tiles side by side.
-// Only tiles at the END of a strip (or on top of a stack) are free.
-// Strips are kept short (2–4 tiles wide) so many ends are exposed at once.
-// Format: [col, row, layer]
-
 function mjTurtle(){
-  // Turtle shape: horizontal strips of varying length, 2 layers in centre
-  // Layer 0: 9 strips of width 4 (cols 0-3 or 4-7), rows 0-8
   const pos=[];
-  // Left half — 5 strips
-  [[0,4],[0,3],[0,3],[0,3],[0,4]].forEach(([c,w],r)=>{
-    for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);
-  });
-  // Right half — mirror (cols 4-7)
-  [[4,4],[4,3],[4,3],[4,3],[4,4]].forEach(([c,w],r)=>{
-    for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);
-  });
-  // Layer 1: centre strips (shorter)
-  [[1,2],[1,2],[1,2]].forEach(([c,w],r)=>{
-    for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);
-  });
-  [[5,2],[5,2],[5,2]].forEach(([c,w],r)=>{
-    for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);
-  });
-  // Layer 2: single tile "head"
-  pos.push([3,2,2],[4,2,2]);
-  return pos;
+  [[0,4],[0,3],[0,3],[0,3],[0,4]].forEach(([c,w],r)=>{for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);});
+  [[4,4],[4,3],[4,3],[4,3],[4,4]].forEach(([c,w],r)=>{for(let cc=c;cc<c+w;cc++) pos.push([cc,r,0]);});
+  [[1,2],[1,2],[1,2]].forEach(([c,w],r)=>{for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);});
+  [[5,2],[5,2],[5,2]].forEach(([c,w],r)=>{for(let cc=c;cc<c+w;cc++) pos.push([cc,r+1,1]);});
+  pos.push([3,2,2],[4,2,2]);return pos;
 }
-
 function mjDragon(){
-  // Dragon: a winding S-path of short strips
   const pos=[];
-  // Head (top)
-  for(let c=0;c<4;c++) pos.push([c,0,0]);
-  // Body curves down
-  for(let c=2;c<6;c++) pos.push([c,1,0]);
-  for(let c=4;c<8;c++) pos.push([c,2,0]);
-  for(let c=3;c<7;c++) pos.push([c,3,0]);
-  for(let c=1;c<5;c++) pos.push([c,4,0]);
-  // Tail
-  for(let c=0;c<3;c++) pos.push([c,5,0]);
-  // Layer 1 on top of middle section
-  for(let c=3;c<6;c++) pos.push([c,2,1]);
-  for(let c=2;c<5;c++) pos.push([c,3,1]);
-  // Tip
-  pos.push([4,2,2]);
-  return pos;
+  for(let c=0;c<4;c++) pos.push([c,0,0]);for(let c=2;c<6;c++) pos.push([c,1,0]);
+  for(let c=4;c<8;c++) pos.push([c,2,0]);for(let c=3;c<7;c++) pos.push([c,3,0]);
+  for(let c=1;c<5;c++) pos.push([c,4,0]);for(let c=0;c<3;c++) pos.push([c,5,0]);
+  for(let c=3;c<6;c++) pos.push([c,2,1]);for(let c=2;c<5;c++) pos.push([c,3,1]);
+  pos.push([4,2,2]);return pos;
 }
-
 function mjPyramid(){
-  // Classic pyramid: each row is one strip, getting shorter toward top
-  // All layer 0, arranged so bottom is widest
-  const pos=[];
-  // Rows from bottom to top, shrinking
-  const rows=[8,6,4,2];
-  rows.forEach((w,layer)=>{
-    const startCol=Math.floor((8-w)/2);
-    for(let c=startCol;c<startCol+w;c++) pos.push([c,layer,layer]);
-  });
-  // Fill row 0 with extra tiles so we have enough pairs
-  for(let c=0;c<8;c++) pos.push([c,4,0]);
-  for(let c=1;c<7;c++) pos.push([c,5,0]);
-  return pos;
+  const pos=[];const rows=[8,6,4,2];
+  rows.forEach((w,layer)=>{const startCol=Math.floor((8-w)/2);for(let c=startCol;c<startCol+w;c++) pos.push([c,layer,layer]);});
+  for(let c=0;c<8;c++) pos.push([c,4,0]);for(let c=1;c<7;c++) pos.push([c,5,0]);return pos;
 }
 
 const MJ_TW=52,MJ_TH=64,MJ_LO=5;
 
 function mjRender(){
-  const boardEl=document.getElementById('mj-board');
-  if(!boardEl)return;
+  const boardEl=document.getElementById('mj-board');if(!boardEl)return;
   boardEl.innerHTML='';
-  const tiles=mjBoard.filter(t=>!t.removed);
-  if(!tiles.length)return;
-
-  // Use stored fixed origin — board dimensions never change after game start
-  const minC=mjFixedMinC, minR=mjFixedMinR;
-
+  const tiles=mjBoard.filter(t=>!t.removed);if(!tiles.length)return;
+  const minC=mjFixedMinC,minR=mjFixedMinR;
   [...mjBoard].sort((a,b)=>a.layer-b.layer).forEach(tile=>{
     if(tile.removed)return;
-    const el=document.createElement('div');el.className='mj-tile';el.textContent=tile.sym;
-    el.dataset.id=tile.id;
-    const x=(tile.col-minC)*MJ_TW+tile.layer*MJ_LO+4;
-    const y=(tile.row-minR)*MJ_TH-tile.layer*MJ_LO+4;
+    const el=document.createElement('div');el.className='mj-tile';el.textContent=tile.sym;el.dataset.id=tile.id;
+    const x=(tile.col-minC)*MJ_TW+tile.layer*MJ_LO+4;const y=(tile.row-minR)*MJ_TH-tile.layer*MJ_LO+4;
     el.style.left=x+'px';el.style.top=y+'px';el.style.zIndex=tile.layer*10+tile.row;
     const lv=document.createElement('span');lv.className='mj-lv';lv.textContent='';el.appendChild(lv);
-    el.onclick=()=>mjClick(tile.id);
-    tile.el=el;boardEl.appendChild(el);
+    el.onclick=()=>mjClick(tile.id);tile.el=el;boardEl.appendChild(el);
   });
-  // Scale is already set and stays fixed — do not touch transform here
 }
 
 function mjIsFree(tile){
   if(tile.removed)return false;
-  // A tile is free if nothing sits directly on top of it (same col, same row, one layer up)
   return !mjBoard.some(t=>!t.removed&&t.layer===tile.layer+1&&t.col===tile.col&&t.row===tile.row);
 }
 
 function mjUpdateFree(){
   mjBoard.forEach(tile=>{
     if(tile.removed||!tile.el)return;
-    const free=mjIsFree(tile);
-    tile.el.classList.toggle('free',free);
-    tile.el.classList.toggle('blocked',!free);
+    const free=mjIsFree(tile);tile.el.classList.toggle('free',free);tile.el.classList.toggle('blocked',!free);
   });
 }
 
@@ -1631,30 +1714,21 @@ function mjClick(id){
   const tile=mjBoard.find(t=>t.id===id);
   if(!tile||tile.removed||!mjIsFree(tile))return;
   mjBoard.forEach(t=>{if(t.el)t.el.classList.remove('mj-hint');});
-  if(mjSel===null){
-    mjSel=tile;tile.el.classList.add('mj-selected');
-  } else if(mjSel.id===tile.id){
-    tile.el.classList.remove('mj-selected');mjSel=null;
-  } else if(mjSel.sym===tile.sym){
+  if(mjSel===null){mjSel=tile;tile.el.classList.add('mj-selected');}
+  else if(mjSel.id===tile.id){tile.el.classList.remove('mj-selected');mjSel=null;}
+  else if(mjSel.sym===tile.sym){
     const pts=mjDiff==='easy'?10:mjDiff==='medium'?20:35;
-    const bonus=Math.max(0,Math.floor((300-mjElapsed)/10));
-    mjScore+=pts+bonus;
-    document.getElementById('mj-score').textContent=mjScore;
-    document.getElementById('mj-score-disp').textContent=mjScore;
+    const bonus=Math.max(0,Math.floor((300-mjElapsed)/10));mjScore+=pts+bonus;
+    document.getElementById('mj-score').textContent=mjScore;document.getElementById('mj-score-disp').textContent=mjScore;
     mjSel.el.classList.remove('mj-selected');mjSel.el.classList.add('mj-matched');tile.el.classList.add('mj-matched');
     const s=mjSel,t2=tile;
     setTimeout(()=>{
       s.removed=true;t2.removed=true;if(s.el)s.el.remove();if(t2.el)t2.el.remove();
-      mjPairs--;document.getElementById('mj-pairs').textContent=mjPairs;
-      mjUpdateFree();
-      if(mjPairs===0)setTimeout(()=>mjWin(),300);
-      else if(!mjHasMoves())setTimeout(()=>mjLose(),500);
+      mjPairs--;document.getElementById('mj-pairs').textContent=mjPairs;mjUpdateFree();
+      if(mjPairs===0)setTimeout(()=>mjWin(),300);else if(!mjHasMoves())setTimeout(()=>mjLose(),500);
     },400);
     mjSel=null;showToast(`✨ Match! +${pts+bonus}`);
-  } else {
-    mjSel.el.classList.remove('mj-selected');tile.el.classList.add('mj-selected');mjSel=tile;
-    showToast('Not a match! 🔮');
-  }
+  } else {mjSel.el.classList.remove('mj-selected');tile.el.classList.add('mj-selected');mjSel=tile;showToast('Not a match! 🔮');}
 }
 
 function mjHasMoves(){
@@ -1667,24 +1741,19 @@ window.mjUseHint=function(){
   if(mjHints<=0)return;
   mjBoard.forEach(t=>{if(t.el)t.el.classList.remove('mj-hint');});
   const free=mjBoard.filter(t=>!t.removed&&mjIsFree(t));
-  for(let i=0;i<free.length;i++){
-    for(let j=i+1;j<free.length;j++){
-      if(free[i].sym===free[j].sym){
-        free[i].el.classList.add('mj-hint');free[j].el.classList.add('mj-hint');
-        mjHints--;document.getElementById('mj-hints').textContent=`(${mjHints})`;
-        if(mjHints<=0){const hb=document.getElementById('mj-hint-btn');if(hb)hb.disabled=true;}
-        showToast('💡 Hint used!');
-        setTimeout(()=>{free[i].el?.classList.remove('mj-hint');free[j].el?.classList.remove('mj-hint');},2500);
-        return;
-      }
+  for(let i=0;i<free.length;i++){for(let j=i+1;j<free.length;j++){
+    if(free[i].sym===free[j].sym){
+      free[i].el.classList.add('mj-hint');free[j].el.classList.add('mj-hint');mjHints--;
+      document.getElementById('mj-hints').textContent=`(${mjHints})`;
+      if(mjHints<=0){const hb=document.getElementById('mj-hint-btn');if(hb)hb.disabled=true;}
+      showToast('💡 Hint used!');
+      setTimeout(()=>{free[i].el?.classList.remove('mj-hint');free[j].el?.classList.remove('mj-hint');},2500);return;
     }
-  }
-  showToast('No matches available!');
+  }}showToast('No matches available!');
 };
 
 function mjWin(){
-  clearInterval(mjTimer);confetti();
-  if(window.saveScore) saveScore('mahjong',mjScore,mjLayout);
+  clearInterval(mjTimer);confetti();if(window.saveScore) saveScore('mahjong',mjScore,mjLayout);
   const m=Math.floor(mjElapsed/60),s=mjElapsed%60;
   document.getElementById('mj-win-title').textContent=rand(['Magnificent! ✦','Brilliant! ✦','Dazzling! ✦']);
   document.getElementById('mj-win-stats').innerHTML=`<div class="ov-row"><span class="ol">⏱ Time</span><span class="ov">${m}:${s.toString().padStart(2,'0')}</span></div><div class="ov-row"><span class="ol">⭐ Score</span><span class="ov">${mjScore}</span></div><div class="ov-row"><span class="ol">💡 Hints Used</span><span class="ov">${3-mjHints}</span></div><div class="ov-row"><span class="ol">💎 Difficulty</span><span class="ov">${mjDiff}</span></div>`;
@@ -1692,16 +1761,15 @@ function mjWin(){
 }
 
 function mjLose(){
-  clearInterval(mjTimer);
-  if(window.saveScore) saveScore('mahjong',mjScore,mjLayout);
+  clearInterval(mjTimer);if(window.saveScore) saveScore('mahjong',mjScore,mjLayout);
   document.getElementById('mj-lose-stats').innerHTML=`<div class="ov-row"><span class="ol">⭐ Score</span><span class="ov">${mjScore}</span></div><div class="ov-row"><span class="ol">🀄 Pairs Cleared</span><span class="ov">${Math.floor(mjBoard.length/2)-mjPairs}</span></div>`;
   document.getElementById('mj-lose').classList.add('show');
 }
+</script>
 
+<script>
 // ═══════════════════════════════════════════
 // THE ARCANE HEARTH
-// FIX: Starting gold increased to 60 so players can make initial purchases
-// FIX: Added more starting items for better recipe progression
 // ═══════════════════════════════════════════
 const AH_CHAINS={
   herb:{items:[{e:'🌱',n:'Seedling'},{e:'🌿',n:'Herb'},{e:'🍃',n:'Moon Leaf'},{e:'🌺',n:'Bloom'},{e:'🌸',n:'Starbloom'}]},
@@ -1711,7 +1779,6 @@ const AH_CHAINS={
   tome:{items:[{e:'📄',n:'Scroll'},{e:'📜',n:'Rune Scroll'},{e:'📓',n:'Spellbook'},{e:'📚',n:'Tome'},{e:'📖',n:'Grand Grimoire'}]},
   creature:{items:[{e:'🥚',n:'Egg'},{e:'🐛',n:'Larva'},{e:'🦋',n:'Butterfly'},{e:'🦄',n:'Unicorn'},{e:'🐉',n:'Dragon'}]},
 };
-
 const AH_RECIPES=[
   {id:'moonbrew',n:'Moon Brew',icon:'🌙',req:[['herb',3],['potion',2]],gold:50,xp:30,lv:1},
   {id:'stardust',n:'Stardust Elixir',icon:'⭐',req:[['crystal',3],['flame',3]],gold:80,xp:50,lv:2},
@@ -1719,14 +1786,12 @@ const AH_RECIPES=[
   {id:'dragon',n:'Dragon Essence',icon:'🐉',req:[['creature',5],['flame',4]],gold:300,xp:200,lv:4},
   {id:'bloom',n:'Crystal Bloom',icon:'🌸',req:[['herb',5],['crystal',5]],gold:250,xp:150,lv:4},
 ];
-
 const AH_SHOP=[
   {e:'🌱',n:'Seedling',cost:8,gives:'herb_1',lv:1},{e:'🪨',n:'Pebble',cost:8,gives:'crystal_1',lv:1},
   {e:'🕯️',n:'Candle',cost:8,gives:'flame_1',lv:1},{e:'💧',n:'Dew Drop',cost:10,gives:'potion_1',lv:1},
   {e:'📄',n:'Scroll',cost:15,gives:'tome_1',lv:2},{e:'🥚',n:'Mystery Egg',cost:25,gives:'creature_1',lv:2},
   {e:'🌿',n:'Herb',cost:30,gives:'herb_2',lv:3},{e:'💠',n:'Crystal Shard',cost:30,gives:'crystal_2',lv:3},
 ];
-
 const AH_WORLDS=[
   {lv:1,scene:'🌱📜🕯️',n:'The Humble Hearth',desc:'A small cottage with a flickering fire'},
   {lv:2,scene:'🏡📚🔮',n:'The Study',desc:'Books fill the shelves, a crystal ball appears'},
@@ -1734,58 +1799,39 @@ const AH_WORLDS=[
   {lv:4,scene:'🏯🐉✨',n:'The Dragon Keep',desc:'A dragon perches on the tower!'},
   {lv:5,scene:'🌌🦄🌟',n:'The Arcane Sanctum',desc:'A legendary realm of pure magic'},
 ];
-
 const AH_COLS=5,AH_ROWS=6;
 let ahGrid=[],ahSel=null,ahGold=0,ahXp=0,ahLv=1,ahMerges=0,ahDone=new Set();
 
 function ahGetItem(key){
-  if(!key)return null;
-  const[chain,lv]=key.split('_');
-  const c=AH_CHAINS[chain];if(!c)return null;
-  const item=c.items[parseInt(lv)-1];if(!item)return null;
-  return{...item,chain,lv:parseInt(lv),maxLv:c.items.length,key};
+  if(!key)return null;const[chain,lv]=key.split('_');const c=AH_CHAINS[chain];if(!c)return null;
+  const item=c.items[parseInt(lv)-1];if(!item)return null;return{...item,chain,lv:parseInt(lv),maxLv:c.items.length,key};
 }
 
-function ahShowWelcome(){
-  document.getElementById('ah-welcome').style.display='block';
-  document.getElementById('ah-game').style.display='none';
-}
+function ahShowWelcome(){document.getElementById('ah-welcome').style.display='block';document.getElementById('ah-game').style.display='none';}
 
 window.ahStart=function(){
-  ahGrid=Array(AH_COLS*AH_ROWS).fill(null);
-  // FIX: more starting items and gold so first recipe is achievable
-  ahGold=60;ahXp=0;ahLv=1;ahMerges=0;ahSel=null;ahDone=new Set();
+  ahGrid=Array(AH_COLS*AH_ROWS).fill(null);ahGold=60;ahXp=0;ahLv=1;ahMerges=0;ahSel=null;ahDone=new Set();
   const starters=['herb_1','herb_1','herb_1','crystal_1','crystal_1','flame_1','flame_1','potion_1'];
   const slots=shuffle([...Array(ahGrid.length).keys()]);
   starters.forEach((item,i)=>{ahGrid[slots[i]]=item;});
-  document.getElementById('ah-welcome').style.display='none';
-  document.getElementById('ah-game').style.display='flex';
+  document.getElementById('ah-welcome').style.display='none';document.getElementById('ah-game').style.display='flex';
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
 };
 
 function ahUpdateHUD(){
-  document.getElementById('ah-gold').textContent=ahGold;
-  document.getElementById('ah-xp').textContent=ahXp;
-  document.getElementById('ah-lv').textContent=ahLv;
-  document.getElementById('ah-merges').textContent=ahMerges;
+  document.getElementById('ah-gold').textContent=ahGold;document.getElementById('ah-xp').textContent=ahXp;
+  document.getElementById('ah-lv').textContent=ahLv;document.getElementById('ah-merges').textContent=ahMerges;
   document.getElementById('ah-gold-disp').textContent=ahGold;
 }
 
 function ahRenderGrid(){
-  const el=document.getElementById('ah-grid');
-  el.style.gridTemplateColumns=`repeat(${AH_COLS},68px)`;
-  el.innerHTML='';
+  const el=document.getElementById('ah-grid');el.style.gridTemplateColumns=`repeat(${AH_COLS},68px)`;el.innerHTML='';
   for(let i=0;i<ahGrid.length;i++){
     const cell=document.createElement('div');cell.className='ah-cell';cell.dataset.i=i;
     const item=ahGetItem(ahGrid[i]);
-    if(item){
-      cell.classList.add('has-item');cell.textContent=item.e;
-      const lv=document.createElement('span');lv.className='ah-lv';lv.textContent='★'+item.lv;cell.appendChild(lv);
-      cell.title=item.n;
-    }
+    if(item){cell.classList.add('has-item');cell.textContent=item.e;const lv=document.createElement('span');lv.className='ah-lv';lv.textContent='★'+item.lv;cell.appendChild(lv);cell.title=item.n;}
     if(ahSel===i) cell.classList.add('ah-selected');
-    cell.onclick=()=>ahCellClick(i);
-    el.appendChild(cell);
+    cell.onclick=()=>ahCellClick(i);el.appendChild(cell);
   }
 }
 
@@ -1796,27 +1842,19 @@ function ahRenderSide(){
   let rHtml='<div class="ah-section"><h4>📜 Recipes</h4>';
   const vis=AH_RECIPES.filter(r=>r.lv<=ahLv);
   if(!vis.length) rHtml+='<div style="font-size:.62rem;color:var(--text3);text-align:center;padding:6px;">Level up to unlock!</div>';
-  vis.forEach(r=>{
-    const req=r.req.map(([ch,lv])=>ahGetItem(`${ch}_${lv}`)?.e||'?').join('+');
-    rHtml+=`<div class="ah-recipe${ahDone.has(r.id)?' done':''}"><div class="ah-recipe-title">${r.icon} ${r.n}</div><div class="ah-recipe-chain">${req}</div><div class="ah-recipe-reward">🪙${r.gold} ·✨${r.xp}${ahDone.has(r.id)?' ·✅':''}</div></div>`;
-  });
+  vis.forEach(r=>{const req=r.req.map(([ch,lv])=>ahGetItem(`${ch}_${lv}`)?.e||'?').join('+');
+    rHtml+=`<div class="ah-recipe${ahDone.has(r.id)?' done':''}"><div class="ah-recipe-title">${r.icon} ${r.n}</div><div class="ah-recipe-chain">${req}</div><div class="ah-recipe-reward">🪙${r.gold} ·✨${r.xp}${ahDone.has(r.id)?' ·✅':''}</div></div>`;});
   rHtml+='</div>';side.innerHTML+=rHtml;
   let sHtml='<div class="ah-section"><h4>🛒 Shop</h4>';
-  AH_SHOP.filter(s=>s.lv<=ahLv).forEach(item=>{
-    const canAfford=ahGold>=item.cost;
-    const hasFree=ahGrid.some(c=>c===null);
-    const cant=!canAfford||!hasFree;
-    sHtml+=`<div class="ah-shop-item${cant?' cant':''}" onclick="${cant?'':'ahBuy(\''+item.gives+'\','+item.cost+')'}" title="${!canAfford?'Need more gold':'No free cells'}"><span class="ah-shop-icon">${item.e}</span><div><div class="ah-shop-name">${item.n}</div><div class="ah-shop-cost">🪙${item.cost}</div></div></div>`;
-  });
+  AH_SHOP.filter(s=>s.lv<=ahLv).forEach(item=>{const canAfford=ahGold>=item.cost;const hasFree=ahGrid.some(c=>c===null);const cant=!canAfford||!hasFree;
+    sHtml+=`<div class="ah-shop-item${cant?' cant':''}" onclick="${cant?'':'ahBuy(\''+item.gives+'\','+item.cost+')'}" title="${!canAfford?'Need more gold':'No free cells'}"><span class="ah-shop-icon">${item.e}</span><div><div class="ah-shop-name">${item.n}</div><div class="ah-shop-cost">🪙${item.cost}</div></div></div>`;});
   sHtml+='</div>';side.innerHTML+=sHtml;
 }
 
 function ahCellClick(idx){
-  if(ahSel===null){
-    if(ahGrid[idx]){ahSel=idx;ahRenderGrid();showToast(ahGetItem(ahGrid[idx])?.n||'');}
-  } else if(ahSel===idx){
-    ahSel=null;ahRenderGrid();
-  } else {
+  if(ahSel===null){if(ahGrid[idx]){ahSel=idx;ahRenderGrid();showToast(ahGetItem(ahGrid[idx])?.n||'');}}
+  else if(ahSel===idx){ahSel=null;ahRenderGrid();}
+  else {
     const fromKey=ahGrid[ahSel];const toKey=ahGrid[idx];
     if(fromKey&&toKey&&fromKey===toKey){ahMerge(ahSel,idx);}
     else if(!toKey){ahGrid[idx]=ahGrid[ahSel];ahGrid[ahSel]=null;ahSel=null;ahRenderGrid();showToast('Moved! ✨');}
@@ -1827,14 +1865,10 @@ function ahCellClick(idx){
 function ahMerge(from,to){
   const item=ahGetItem(ahGrid[from]);if(!item)return;
   if(item.lv>=item.maxLv){showToast(`${item.e} Already max level!`);ahSel=null;ahRenderGrid();return;}
-  const nextKey=`${item.chain}_${item.lv+1}`;
-  const next=ahGetItem(nextKey);
-  ahGrid[from]=null;ahGrid[to]=nextKey;ahMerges++;
-  ahXp+=10*item.lv;ahSel=null;
+  const nextKey=`${item.chain}_${item.lv+1}`;const next=ahGetItem(nextKey);
+  ahGrid[from]=null;ahGrid[to]=nextKey;ahMerges++;ahXp+=10*item.lv;ahSel=null;
   const gr=item.lv>=2?(item.lv-1)*5:0;if(gr>0)ahGold+=gr;
-  ahCheckRecipes();
-  if(ahXp>=ahLv*100)ahLevelUp();
-  ahUpdateHUD();ahRenderGrid();ahRenderSide();
+  ahCheckRecipes();if(ahXp>=ahLv*100)ahLevelUp();ahUpdateHUD();ahRenderGrid();ahRenderSide();
   showToast(`✨ ${next?.e||'?'} ${next?.n||''}!`);
   if(next?.lv===next?.maxLv){confetti();setTimeout(()=>showToast(`🌟 LEGENDARY: ${next.e} ${next.n}!`,3000),300);}
 }
@@ -1845,40 +1879,33 @@ function ahCheckRecipes(){
     const copy=[...ahGrid];
     const found=r.req.every(([ch,lv])=>{const k=`${ch}_${lv}`;const i=copy.findIndex(c=>c===k);if(i===-1)return false;copy[i]=null;return true;});
     if(found){
-      const copy2=[...ahGrid];
-      r.req.forEach(([ch,lv])=>{const k=`${ch}_${lv}`;const i=copy2.findIndex(c=>c===k);if(i!==-1)copy2[i]=null;});
+      const copy2=[...ahGrid];r.req.forEach(([ch,lv])=>{const k=`${ch}_${lv}`;const i=copy2.findIndex(c=>c===k);if(i!==-1)copy2[i]=null;});
       ahGrid=[...copy2];ahGold+=r.gold;ahXp+=r.xp;ahDone.add(r.id);
-      confetti();setTimeout(()=>showToast(`${r.icon} ${r.n}! +🪙${r.gold} +✨${r.xp}`,3000),200);
-      ahUpdateHUD();ahRenderGrid();
+      confetti();setTimeout(()=>showToast(`${r.icon} ${r.n}! +🪙${r.gold} +✨${r.xp}`,3000),200);ahUpdateHUD();ahRenderGrid();
     }
   });
 }
 
 function ahLevelUp(){
-  const old=ahLv;ahLv=Math.min(ahLv+1,5);if(ahLv===old)return;
-  ahXp=ahXp-(old*100);
-  const stage=AH_WORLDS.find(w=>w.lv===ahLv);
-  const banner=document.getElementById('ah-lvup');
+  const old=ahLv;ahLv=Math.min(ahLv+1,5);if(ahLv===old)return;ahXp=ahXp-(old*100);
+  const stage=AH_WORLDS.find(w=>w.lv===ahLv);const banner=document.getElementById('ah-lvup');
   document.getElementById('ah-lvup-sub').textContent=`${stage?.n||'New level'}! New items unlocked!`;
   banner.classList.remove('hide');banner.classList.add('show');
   setTimeout(()=>{banner.classList.remove('show');banner.classList.add('hide');},2500);
-  confetti();showToast(`🎉 Level ${ahLv}!`,3000);
-  ahRenderSide();
+  confetti();showToast(`🎉 Level ${ahLv}!`,3000);ahRenderSide();
 }
 
 window.ahBuy=function(gives,cost){
-  const fi=ahGrid.findIndex(c=>c===null);
-  if(fi===-1){showToast('No free cells! Merge first.');return;}
+  const fi=ahGrid.findIndex(c=>c===null);if(fi===-1){showToast('No free cells! Merge first.');return;}
   if(ahGold<cost){showToast('Not enough gold!');return;}
-  ahGold-=cost;ahGrid[fi]=gives;
-  const item=ahGetItem(gives);
-  showToast(`${item?.e||'?'} ${item?.n||''} added!`);
+  ahGold-=cost;ahGrid[fi]=gives;const item=ahGetItem(gives);showToast(`${item?.e||'?'} ${item?.n||''} added!`);
   ahUpdateHUD();ahRenderGrid();ahRenderSide();
 };
+</script>
 
+<script>
 // ═══════════════════════════════════════════
 // STARFALL DICE
-// FIX: Full inline implementation — no longer routes to game-dice.html
 // ═══════════════════════════════════════════
 const SD_FACES=['⭐','🌙','💎','🔮','✨','🌟'];
 const SD_CATS=[
@@ -1899,17 +1926,11 @@ const SD_CATS=[
 
 let sdDice=[],sdHeld=[],sdRollsLeft=3,sdScores={},sdRound=0,sdTotalRounds=13,sdTimer=null,sdMode='classic';
 
-function sdInit(){
-  sdScores={};sdRound=0;sdRollsLeft=3;sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);
-  document.getElementById('sd-score-disp').textContent='0';
-  sdShowWelcome();
-}
+function sdInit(){sdScores={};sdRound=0;sdRollsLeft=3;sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);document.getElementById('sd-score-disp').textContent='0';sdShowWelcome();}
 
 function sdShowWelcome(){
   document.getElementById('sd-wrap').innerHTML=`<div class="gm-welcome">
-    <div class="gm-icon">🎲</div>
-    <div class="gm-title">Starfall Dice</div>
-    <div class="gm-sub">✦ Roll · Hold · Score ✦</div>
+    <div class="gm-icon">🎲</div><div class="gm-title">Starfall Dice</div><div class="gm-sub">✦ Roll · Hold · Score ✦</div>
     <div class="gm-card" onclick="sdStartGame('classic')"><div class="gm-card-icon">🎲</div><div><div class="gm-card-label">Classic</div><div class="gm-card-desc">13 rounds, score every category</div></div></div>
     <div class="gm-card" onclick="sdStartGame('speed')"><div class="gm-card-icon">⚡</div><div><div class="gm-card-label">Speed Round</div><div class="gm-card-desc">5 rounds, go for the top score!</div></div></div>
     <div class="gm-card" onclick="sdStartGame('challenge')"><div class="gm-card-icon">🔮</div><div><div class="gm-card-label">Challenge</div><div class="gm-card-desc">Only 1 roll per round — think fast!</div></div></div>
@@ -1917,20 +1938,15 @@ function sdShowWelcome(){
 }
 
 window.sdStartGame=function(mode){
-  sdMode=mode;sdScores={};sdRound=0;
-  sdTotalRounds=mode==='speed'?5:13;
-  sdRollsLeft=mode==='challenge'?1:3;
-  sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);
-  sdRenderGame();
-  sdRoll();
+  sdMode=mode;sdScores={};sdRound=0;sdTotalRounds=mode==='speed'?5:13;
+  sdRollsLeft=mode==='challenge'?1:3;sdDice=[0,0,0,0,0];sdHeld=new Array(5).fill(false);
+  sdRenderGame();sdRoll();
 };
 
 function sdRenderGame(){
   const total=Object.values(sdScores).reduce((s,v)=>s+v,0);
   document.getElementById('sd-score-disp').textContent=total;
-  const usedCats=new Set(Object.keys(sdScores));
-  const availCats=SD_CATS.filter(c=>!usedCats.has(c.id));
-
+  const usedCats=new Set(Object.keys(sdScores));const availCats=SD_CATS.filter(c=>!usedCats.has(c.id));
   let html=`<div style="padding:12px;">
     <div class="sd-info-row">
       <div class="sd-info-chip sd-rolls-left">🎲 ${sdRollsLeft} roll${sdRollsLeft!==1?'s':''} left</div>
@@ -1938,87 +1954,42 @@ function sdRenderGame(){
       <div class="sd-info-chip sd-total">⭐ ${total} pts</div>
     </div>
     <div class="sd-dice-row" id="sd-dice-row">`;
-  sdDice.forEach((f,i)=>{
-    html+=`<div class="sd-die${sdHeld[i]?' sd-held':''}" onclick="sdToggleHold(${i})">${SD_FACES[f]}</div>`;
-  });
-  html+=`</div>
-    <button class="sd-roll-btn" id="sd-roll-btn" onclick="sdRoll()" ${sdRollsLeft<=0?'disabled':''}>
-      ${sdRollsLeft>0?'🎲 Roll Dice!':'Choose a category below ↓'}
-    </button>
-    <div class="sd-cats" id="sd-cats">`;
-  availCats.forEach(cat=>{
-    const poss=cat.score(sdDice);
-    html+=`<div class="sd-cat${poss>0?' sd-cat-best':''}" onclick="sdSelectCat('${cat.id}')">
-      <div>
-        <div class="sd-cat-name">${cat.n}</div>
-        <div style="font-size:.65rem;color:var(--text3)">${cat.desc}</div>
-      </div>
-      <div style="text-align:right">
-        ${poss>0?`<div class="sd-cat-poss">+${poss}</div>`:''}
-        <div class="sd-cat-pts" style="font-size:.7rem;color:var(--text3)">score</div>
-      </div>
-    </div>`;
-  });
-  // Already scored
-  Object.entries(sdScores).forEach(([id,pts])=>{
-    const cat=SD_CATS.find(c=>c.id===id);
-    html+=`<div class="sd-cat sd-cat-used"><div class="sd-cat-name">${cat?.n||id}</div><div class="sd-cat-pts">${pts} pts ✓</div></div>`;
-  });
-  html+=`</div></div>`;
-  document.getElementById('sd-wrap').innerHTML=html;
+  sdDice.forEach((f,i)=>{html+=`<div class="sd-die${sdHeld[i]?' sd-held':''}" onclick="sdToggleHold(${i})">${SD_FACES[f]}</div>`;});
+  html+=`</div><button class="sd-roll-btn" id="sd-roll-btn" onclick="sdRoll()" ${sdRollsLeft<=0?'disabled':''}>${sdRollsLeft>0?'🎲 Roll Dice!':'Choose a category below ↓'}</button><div class="sd-cats" id="sd-cats">`;
+  availCats.forEach(cat=>{const poss=cat.score(sdDice);
+    html+=`<div class="sd-cat${poss>0?' sd-cat-best':''}" onclick="sdSelectCat('${cat.id}')"><div><div class="sd-cat-name">${cat.n}</div><div style="font-size:.65rem;color:var(--text3)">${cat.desc}</div></div><div style="text-align:right">${poss>0?`<div class="sd-cat-poss">+${poss}</div>`:''}<div class="sd-cat-pts" style="font-size:.7rem;color:var(--text3)">score</div></div></div>`;});
+  Object.entries(sdScores).forEach(([id,pts])=>{const cat=SD_CATS.find(c=>c.id===id);
+    html+=`<div class="sd-cat sd-cat-used"><div class="sd-cat-name">${cat?.n||id}</div><div class="sd-cat-pts">${pts} pts ✓</div></div>`;});
+  html+=`</div></div>`;document.getElementById('sd-wrap').innerHTML=html;
 }
 
 window.sdToggleHold=function(i){
-  if(sdRollsLeft>=(sdMode==='challenge'?1:3))return; // can only hold after first roll
-  sdHeld[i]=!sdHeld[i];sdRenderGame();
+  if(sdRollsLeft>=(sdMode==='challenge'?1:3))return;sdHeld[i]=!sdHeld[i];sdRenderGame();
 };
 
 window.sdRoll=function(){
-  if(sdRollsLeft<=0)return;
-  sdDice=sdDice.map((f,i)=>sdHeld[i]?f:Math.floor(Math.random()*6));
-  sdRollsLeft--;
-  sdHeld=new Array(5).fill(false);
-  sdRenderGame();
-  // Animate dice
-  document.querySelectorAll('.sd-die').forEach(d=>{
-    d.classList.add('sd-rolling');
-    setTimeout(()=>d.classList.remove('sd-rolling'),400);
-  });
+  if(sdRollsLeft<=0)return;sdDice=sdDice.map((f,i)=>sdHeld[i]?f:Math.floor(Math.random()*6));
+  sdRollsLeft--;sdHeld=new Array(5).fill(false);sdRenderGame();
+  document.querySelectorAll('.sd-die').forEach(d=>{d.classList.add('sd-rolling');setTimeout(()=>d.classList.remove('sd-rolling'),400);});
 };
 
 window.sdSelectCat=function(catId){
   if(sdScores[catId]!==undefined)return;
-  const cat=SD_CATS.find(c=>c.id===catId);
-  if(!cat)return;
-  const pts=cat.score(sdDice);
-  sdScores[catId]=pts;
-  if(catId==='starfall'&&pts>0){
-    confetti();showToast('✦ STARFALL! ✦ +50',3000);
-    if(window.saveScore) checkBadges('dice',999); // trigger starfall badge
-  }
+  const cat=SD_CATS.find(c=>c.id===catId);if(!cat)return;
+  const pts=cat.score(sdDice);sdScores[catId]=pts;
+  if(catId==='starfall'&&pts>0){confetti();showToast('✦ STARFALL! ✦ +50',3000);}
   sdRound++;
-  if(sdRound>=sdTotalRounds){
-    setTimeout(sdEndGame,300);
-  } else {
-    sdRollsLeft=sdMode==='challenge'?1:3;
-    sdDice=sdDice.map(()=>Math.floor(Math.random()*6));
-    sdHeld=new Array(5).fill(false);
-    showToast(`${pts>0?'+'+pts+' pts!':'Scored 0'}`,1500);
-    sdRenderGame();
-  }
+  if(sdRound>=sdTotalRounds){setTimeout(sdEndGame,300);}
+  else{sdRollsLeft=sdMode==='challenge'?1:3;sdDice=sdDice.map(()=>Math.floor(Math.random()*6));sdHeld=new Array(5).fill(false);showToast(`${pts>0?'+'+pts+' pts!':'Scored 0'}`,1500);sdRenderGame();}
 };
 
 function sdEndGame(){
   const total=Object.values(sdScores).reduce((s,v)=>s+v,0);
-  if(window.saveScore) saveScore('dice',total,sdMode);
-  confetti();
-  let breakdown=Object.entries(sdScores).map(([id,pts])=>{
-    const cat=SD_CATS.find(c=>c.id===id);
-    return `<div class="ww-result-row"><span class="rl">${cat?.n||id}</span><span class="rv">${pts}</span></div>`;
-  }).join('');
+  if(window.saveScore) saveScore('dice',total,sdMode);confetti();
+  let breakdown=Object.entries(sdScores).map(([id,pts])=>{const cat=SD_CATS.find(c=>c.id===id);
+    return `<div class="ww-result-row"><span class="rl">${cat?.n||id}</span><span class="rv">${pts}</span></div>`;}).join('');
   document.getElementById('sd-wrap').innerHTML=`<div class="gm-welcome">
-    <div class="gm-icon">🎲</div>
-    <div class="gm-title" style="font-size:1.5rem;">${total>=200?'Legendary! ✦':total>=100?'Brilliant! ✦':'Quest Complete!'}</div>
+    <div class="gm-icon">🎲</div><div class="gm-title" style="font-size:1.5rem;">${total>=200?'Legendary! ✦':total>=100?'Brilliant! ✦':'Quest Complete!'}</div>
     <div class="gm-sub">Final Score: ${total} pts</div>
     <div class="ww-result-card" style="max-height:40vh;overflow-y:auto;">${breakdown}</div>
     <button class="gm-btn" onclick="sdStartGame('${sdMode}')">Play Again ✦</button>
@@ -2026,5 +1997,617 @@ function sdEndGame(){
   </div>`;
 }
 </script>
+
+<script>
+// ═══════════════════════════════════════════
+// SEALED VERDICT
+// ═══════════════════════════════════════════
+const SV_PUZZLES = [
+  {
+    id:0,
+    title:"CASE #1 — THE DINNER PARTY",
+    scene:"The Hartwell Estate · Grand Dining Room · Saturday, 9:47 PM",
+    difficulty:"Easy",
+    intro:"Victoria Hartwell was found dead at her own dinner party. Four guests were present in the dining room. Each was seated in a different area of the long table. The killer never left the room.",
+    victim:{name:"Victoria Hartwell",cell:[3,3],desc:"Found slumped at the head of the table — Area D, seat 4."},
+    areas:[[[0,0],[0,1],[1,0],[1,1]],[[0,2],[0,3],[1,2],[1,3]],[[2,0],[2,1],[3,0],[3,1]],[[2,2],[2,3],[3,2],[3,3]]],
+    areaNames:["Sitting Room End","Wine Cabinet End","Kitchen End","Head of Table"],
+    blocked:[],
+    suspects:[
+      {id:"A",name:"Col. Drake",icon:"🎩",color:"#2c4a6e",light:"#d6e4f0"},
+      {id:"B",name:"Lady Wren",icon:"💃",color:"#6e2c4a",light:"#f0d6e4"},
+      {id:"C",name:"Dr. Finch",icon:"🔬",color:"#2c6e4a",light:"#d6f0e4"},
+      {id:"D",name:"Mrs. Bloom",icon:"🌸",color:"#6e5a2c",light:"#f0ead6"},
+    ],
+    solution:{"0,0":"C","1,3":"A","2,1":"D","3,2":"B"},
+    murderer:"B",
+    clues:[
+      {suspect:"A",icon:"🎩",text:"<strong>Col. Drake</strong> was seated in the top-left area of the room (Area A)."},
+      {suspect:"B",icon:"💃",text:"<strong>Lady Wren</strong> was not beside the victim. She was in Area D."},
+      {suspect:"C",icon:"🔬",text:"<strong>Dr. Finch</strong> was in column 1 (the leftmost column)."},
+      {suspect:"D",icon:"🌸",text:"<strong>Mrs. Bloom</strong> was beside Col. Drake — they shared a border."},
+      {suspect:null,icon:"🩸",text:"The victim was alone with the murderer in the Head of Table area. The murderer sat directly beside the victim."},
+      {suspect:null,icon:"🕯️",text:"Each of the four areas had exactly one guest."},
+    ]
+  },
+  {
+    id:1,
+    title:"CASE #2 — THE LIBRARY AFTER HOURS",
+    scene:"Blackwood Manor · The Grand Library · Sunday, 11:15 PM",
+    difficulty:"Medium",
+    intro:"Archibald Penn was found dead among the stacks. The library is divided into four reading alcoves. Four scholars attended the private reading that evening. Someone never went home.",
+    victim:{name:"Archibald Penn",cell:[3,3],desc:"Found behind the Reference shelf — bottom-right alcove."},
+    areas:[[[0,0],[0,1],[1,0],[1,1]],[[0,2],[0,3],[1,2],[1,3]],[[2,0],[2,1],[3,0],[3,1]],[[2,2],[2,3],[3,2],[3,3]]],
+    areaNames:["Classics Alcove","Mysteries Alcove","Sciences Alcove","Reference Alcove"],
+    blocked:[],
+    suspects:[
+      {id:"A",name:"Prof. Grey",icon:"📚",color:"#3a3a6e",light:"#e0e0f5"},
+      {id:"B",name:"Miss Faye",icon:"🪶",color:"#6e3a3a",light:"#f5e0e0"},
+      {id:"C",name:"Lord Ashby",icon:"🎭",color:"#3a6e3a",light:"#e0f5e0"},
+      {id:"D",name:"Capt. Stone",icon:"⚓",color:"#4a5e2c",light:"#eaf0d6"},
+    ],
+    solution:{"0,3":"A","1,0":"D","2,3":"C","3,1":"B"},
+    murderer:"C",
+    clues:[
+      {suspect:"A",icon:"📚",text:"<strong>Prof. Grey</strong> was in the top row, far right column."},
+      {suspect:"B",icon:"🪶",text:"<strong>Miss Faye</strong> was in the same row as the victim, but not in the same area."},
+      {suspect:"C",icon:"🎭",text:"<strong>Lord Ashby</strong> was in column 4. He was not in the top half of the library."},
+      {suspect:"D",icon:"⚓",text:"<strong>Capt. Stone</strong> was directly below Prof. Grey."},
+      {suspect:null,icon:"🩸",text:"The victim was alone in the Reference Alcove with the murderer, who sat beside him."},
+      {suspect:null,icon:"📖",text:"Every alcove had exactly one person."},
+    ]
+  },
+  {
+    id:2,
+    title:"CASE #3 — THE GREENHOUSE",
+    scene:"Edelweiss Estate · The Victorian Greenhouse · Monday, 6:00 AM",
+    difficulty:"Hard",
+    intro:"Rosalind Vance was found among the orchids at dawn. The greenhouse has four distinct zones. Her gardening club of four was the only group with access that morning.",
+    victim:{name:"Rosalind Vance",cell:[2,3],desc:"Found by the east orchid bed — Exotic Zone, row 3."},
+    areas:[[[0,0],[0,1],[1,0],[1,1]],[[0,2],[0,3],[1,2],[1,3]],[[2,0],[2,1],[3,0],[3,1]],[[2,2],[2,3],[3,2],[3,3]]],
+    areaNames:["Herb Garden","Tropical Zone","Rose Beds","Exotic Zone"],
+    blocked:[],
+    suspects:[
+      {id:"A",name:"Mr. Thorne",icon:"🌿",color:"#2a5a2a",light:"#d8f0d8"},
+      {id:"B",name:"Nora Bell",icon:"🌺",color:"#7a2a5a",light:"#f5d8ea"},
+      {id:"C",name:"Sir Rowan",icon:"🪨",color:"#5a5a2a",light:"#f0f0d8"},
+      {id:"D",name:"Eva Marsh",icon:"🦋",color:"#2a5a7a",light:"#d8eef5"},
+    ],
+    solution:{"0,2":"A","1,1":"D","2,3":"B","3,0":"C"},
+    murderer:"B",
+    clues:[
+      {suspect:"A",icon:"🌿",text:"<strong>Mr. Thorne</strong> was in the Tropical Zone, but not in its bottom row."},
+      {suspect:"B",icon:"🌺",text:"<strong>Nora Bell</strong> was in the Exotic Zone. She was beside the victim."},
+      {suspect:"C",icon:"🪨",text:"<strong>Sir Rowan</strong> was in the bottom-left cell of the entire grid."},
+      {suspect:"D",icon:"🦋",text:"<strong>Eva Marsh</strong> was in column 2, not in the top row."},
+      {suspect:null,icon:"🩸",text:"The victim was found in the Exotic Zone. The murderer was in that same zone, directly beside her."},
+      {suspect:null,icon:"🌱",text:"One suspect occupied each greenhouse zone."},
+    ]
+  }
+];
+
+let svCurrentIdx=0, svPuzzle=null, svPlacement={}, svSelectedSuspect=null, svMarkedX={};
+
+function svInit(){
+  svCurrentIdx=0;svLoadPuzzle(0);
+}
+
+function svLoadPuzzle(idx){
+  svCurrentIdx=idx;svPuzzle=SV_PUZZLES[idx];svPlacement={};svMarkedX={};svSelectedSuspect=null;
+  document.getElementById('sv-caseTitle').textContent=svPuzzle.title;
+  document.getElementById('sv-caseScene').textContent=svPuzzle.scene;
+  document.getElementById('sv-caseDiff').textContent='● '+svPuzzle.difficulty;
+  document.getElementById('sv-sceneIntro').textContent=svPuzzle.intro;
+  document.getElementById('sv-victimInfo').textContent=svPuzzle.victim.name+' — '+svPuzzle.victim.desc;
+  document.getElementById('sv-cluesTitle').textContent='WITNESS STATEMENTS — '+svPuzzle.title;
+  svRenderPuzzleButtons();svRenderGrid();svRenderSuspects();svRenderClues();
+  svSetStatus('Select a suspect below, then tap a cell to place them.');
+  document.getElementById('sv-victoryOverlay').classList.remove('show');
+  svSwitchTab('puzzle');
+}
+
+function svRenderPuzzleButtons(){
+  const wrap=document.getElementById('sv-puzzleSelect');
+  wrap.innerHTML=SV_PUZZLES.map((p,i)=>`<button class="sv-puz-btn${i===svCurrentIdx?' active':''}" onclick="svLoadPuzzle(${i})">Case #${i+1}</button>`).join('');
+}
+
+function svGetCellArea(r,c){
+  for(let a=0;a<svPuzzle.areas.length;a++){
+    if(svPuzzle.areas[a].some(([ar,ac])=>ar===r&&ac===c)) return a;
+  }
+  return -1;
+}
+
+function svIsAreaTopEdge(r,c){const a=svGetCellArea(r,c);if(a<0)return false;return !svPuzzle.areas[a].some(([ar,ac])=>ar===r-1&&ac===c);}
+function svIsAreaLeftEdge(r,c){const a=svGetCellArea(r,c);if(a<0)return false;return !svPuzzle.areas[a].some(([ar,ac])=>ar===r&&ac===c-1);}
+function svIsAreaBottomEdge(r,c){const a=svGetCellArea(r,c);if(a<0)return false;return !svPuzzle.areas[a].some(([ar,ac])=>ar===r+1&&ac===c);}
+function svIsAreaRightEdge(r,c){const a=svGetCellArea(r,c);if(a<0)return false;return !svPuzzle.areas[a].some(([ar,ac])=>ar===r&&ac===c+1);}
+function svIsBlocked(r,c){return svPuzzle.blocked.some(([br,bc])=>br===r&&bc===c);}
+function svIsVictim(r,c){return svPuzzle.victim.cell[0]===r&&svPuzzle.victim.cell[1]===c;}
+
+function svRenderGrid(){
+  const grid=document.getElementById('sv-murdokuGrid');grid.innerHTML='';
+  const labelRow=document.createElement('div');labelRow.className='sv-grid-row-labels';
+  labelRow.innerHTML='<div class="sv-col-label"></div>'+['1','2','3','4'].map(l=>`<div class="sv-col-label">${l}</div>`).join('');
+  grid.appendChild(labelRow);
+  for(let r=0;r<4;r++){
+    const row=document.createElement('div');row.className='sv-grid-row';
+    const rl=document.createElement('div');rl.className='sv-row-label';rl.textContent='ABCD'[r];row.appendChild(rl);
+    for(let c=0;c<4;c++){
+      const cell=document.createElement('div');cell.className='sv-cell';cell.dataset.r=r;cell.dataset.c=c;
+      const borderStyle=[];
+      if(svIsAreaTopEdge(r,c)) borderStyle.push('border-top:3px solid #8B1A1A');
+      if(svIsAreaLeftEdge(r,c)) borderStyle.push('border-left:3px solid #8B1A1A');
+      if(svIsAreaBottomEdge(r,c)) borderStyle.push('border-bottom:3px solid #8B1A1A');
+      if(svIsAreaRightEdge(r,c)) borderStyle.push('border-right:3px solid #8B1A1A');
+      if(borderStyle.length) cell.style.cssText+=borderStyle.join(';')+';';
+      if(svIsBlocked(r,c)){
+        cell.classList.add('sv-blocked');
+      } else if(svIsVictim(r,c)){
+        cell.classList.add('sv-victim');
+        cell.innerHTML=`<div style="font-size:1.4rem">🩸</div><div style="font-size:.5rem;color:#8B1A1A;font-family:'Cinzel',serif;letter-spacing:.5px;">VICTIM</div>`;
+      } else {
+        const a=svGetCellArea(r,c);
+        const isFirst=a>=0&&svPuzzle.areas[a][0][0]===r&&svPuzzle.areas[a][0][1]===c;
+        if(isFirst){const rl2=document.createElement('div');rl2.className='sv-room-label';rl2.textContent=svPuzzle.areaNames[a].split(' ')[0];cell.appendChild(rl2);}
+        const key=`${r},${c}`;
+        if(svPlacement[key]){
+          const s=svPuzzle.suspects.find(x=>x.id===svPlacement[key]);
+          if(s) cell.innerHTML+=`<div class="sv-suspect-token" style="background:${s.light};color:${s.color};"><div>${s.icon}</div><div class="sv-suspect-name-tiny">${s.name}</div></div>`;
+        } else if(svMarkedX[key]){
+          const x=document.createElement('div');x.className='sv-cell-x';x.textContent='✕';cell.appendChild(x);
+        }
+        cell.addEventListener('click',()=>svOnCellClick(r,c));
+        cell.addEventListener('contextmenu',e=>{e.preventDefault();svToggleMark(r,c);});
+      }
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+  }
+}
+
+function svOnCellClick(r,c){
+  if(svIsBlocked(r,c)||svIsVictim(r,c)) return;
+  const key=`${r},${c}`;
+  if(svPlacement[key]){
+    const removed=svPlacement[key];delete svPlacement[key];svSelectedSuspect=null;
+    svSetStatus(`Removed ${svPuzzle.suspects.find(s=>s.id===removed)?.name} from cell.`);
+  } else if(svSelectedSuspect){
+    const rowConflict=Object.entries(svPlacement).some(([k,v])=>{const[pr]=k.split(',').map(Number);return pr===r&&v===svSelectedSuspect;});
+    const colConflict=Object.entries(svPlacement).some(([k,v])=>{const[,pc]=k.split(',').map(Number);return pc===c&&v===svSelectedSuspect;});
+    if(rowConflict||colConflict){svSetStatus(`${svPuzzle.suspects.find(s=>s.id===svSelectedSuspect)?.name} is already in that row or column!`,'sv-error');return;}
+    svPlacement[key]=svSelectedSuspect;delete svMarkedX[key];
+    const sName=svPuzzle.suspects.find(s=>s.id===svSelectedSuspect)?.name;
+    svSetStatus(`Placed ${sName}. Select another suspect to continue.`);svSelectedSuspect=null;
+  } else {svSetStatus('Select a suspect from the panel below first.');}
+  svRenderGrid();svRenderSuspects();
+}
+
+function svToggleMark(r,c){
+  const key=`${r},${c}`;
+  if(!svPlacement[key]){if(svMarkedX[key])delete svMarkedX[key];else svMarkedX[key]=true;svRenderGrid();}
+}
+
+function svRenderSuspects(){
+  const grid=document.getElementById('sv-suspectsGrid');
+  const placed=new Set(Object.values(svPlacement));
+  grid.innerHTML=svPuzzle.suspects.map(s=>`
+    <div class="sv-suspect-chip${placed.has(s.id)?' sv-placed':''}${svSelectedSuspect===s.id?' sv-selected-suspect':''}"
+         onclick="svSelectSuspect('${s.id}')"
+         style="border-color:${svSelectedSuspect===s.id?s.color:''};background:${svSelectedSuspect===s.id?s.light:''};">
+      <span class="sv-chip-icon">${s.icon}</span><span>${s.name}</span>
+    </div>`).join('');
+}
+
+window.svSelectSuspect=function(id){
+  const placed=new Set(Object.values(svPlacement));
+  if(placed.has(id)){svSetStatus('That suspect is already placed. Click their cell to remove.');return;}
+  svSelectedSuspect=svSelectedSuspect===id?null:id;
+  const s=svPuzzle.suspects.find(x=>x.id===id);
+  if(svSelectedSuspect) svSetStatus(`${s.name} selected — now tap a cell to place them.`);
+  else svSetStatus('Selection cleared.');
+  svRenderSuspects();
+};
+
+function svRenderClues(){
+  const list=document.getElementById('sv-cluesList');
+  list.innerHTML=svPuzzle.clues.map((cl,i)=>`
+    <div class="sv-clue-item">
+      <span class="sv-clue-num">${i+1}.</span>
+      <span class="sv-clue-icon">${cl.icon}</span>
+      <span class="sv-clue-text">${cl.text}</span>
+    </div>`).join('');
+}
+
+window.svSwitchTab=function(tab){
+  ['puzzle','clues','howto'].forEach(t=>{
+    document.getElementById(`sv-tab-${t}`).style.display=t===tab?'':'none';
+  });
+  document.querySelectorAll('.sv-ptab').forEach((btn,i)=>{
+    btn.classList.toggle('active',['puzzle','clues','howto'][i]===tab);
+  });
+};
+
+window.svCheckSolution=function(){
+  const sol=svPuzzle.solution;
+  if(Object.keys(svPlacement).length<svPuzzle.suspects.length){svSetStatus('Not all suspects have been placed yet.','sv-error');return;}
+  let allCorrect=true;
+  for(const [key,id] of Object.entries(sol)){if(svPlacement[key]!==id){allCorrect=false;break;}}
+  if(allCorrect){
+    const murderer=svPuzzle.suspects.find(s=>s.id===svPuzzle.murderer);
+    document.getElementById('sv-victoryText').textContent='Brilliant detective work. All suspects have been correctly placed on the crime scene.';
+    document.getElementById('sv-murdererReveal').innerHTML=`${murderer.icon} The murderer is <strong>${murderer.name}</strong>`;
+    document.getElementById('sv-victoryOverlay').classList.add('show');
+    confetti();
+    const score=svCurrentIdx===0?50:svCurrentIdx===1?100:150;
+    if(window.saveScore) saveScore('sealed',score,'case-'+(svCurrentIdx+1));
+  } else {
+    svSetStatus('Something is not right. Check your clues again.','sv-error');
+    for(const [key,id] of Object.entries(svPlacement)){
+      const[r,c]=key.split(',').map(Number);
+      const cellEl=document.querySelector(`.sv-cell[data-r="${r}"][data-c="${c}"]`);
+      if(cellEl){const correct=sol[key]===id;cellEl.classList.toggle('sv-correct',correct);cellEl.classList.toggle('sv-wrong',!correct&&sol[key]!==undefined);setTimeout(()=>{cellEl.classList.remove('sv-correct','sv-wrong');},1500);}
+    }
+  }
+};
+
+window.svShowHint=function(){
+  const sol=svPuzzle.solution;
+  const remaining=Object.entries(sol).filter(([k,v])=>svPlacement[k]!==v);
+  if(remaining.length===0){svSetStatus('All suspects are correctly placed!');return;}
+  const[key,id]=remaining[Math.floor(Math.random()*remaining.length)];
+  const[r,c]=key.split(',').map(Number);
+  const s=svPuzzle.suspects.find(x=>x.id===id);
+  const areaName=svPuzzle.areaNames[svGetCellArea(r,c)];
+  svSetStatus(`Hint: ${s.name} is in the ${areaName} (row ${'ABCD'[r]}, column ${c+1}).`);
+};
+
+window.svClearAll=function(){
+  svPlacement={};svMarkedX={};svSelectedSuspect=null;svRenderGrid();svRenderSuspects();
+  svSetStatus('Board cleared. Start fresh!');
+};
+
+window.svNextPuzzle=function(){
+  const next=(svCurrentIdx+1)%SV_PUZZLES.length;
+  svLoadPuzzle(next);svSwitchTab('puzzle');
+};
+
+function svSetStatus(msg,cls=''){
+  const bar=document.getElementById('sv-statusBar');
+  bar.textContent=msg;bar.className='sv-status-bar'+(cls?' '+cls:'');
+}
+</script>
+
+<script>
+// ═══════════════════════════════════════════
+// SAGEWORDS CROSSWORD
+// ═══════════════════════════════════════════
+const SW_MASTER_PUZZLES = [
+  {
+    title:"🌸 Springtime",
+    sol:[
+      ["B","L","O","O","M"],
+      ["U","#","A","#","O"],
+      ["D","E","K","A","S"],
+      ["S","#","E","#","S"],
+      ["T","R","E","E","S"]
+    ],
+    across:[
+      {num:1,clue:"Flowers open (5)",row:0,col:0,len:5},
+      {num:4,clue:"A sturdy tree variety (5)",row:2,col:0,len:5},
+      {num:5,clue:"More than one tree (5)",row:4,col:0,len:5}
+    ],
+    down:[
+      {num:1,clue:"Flower petals (4)",row:0,col:0,len:4},
+      {num:2,clue:"A woodland deer (3)",row:0,col:2,len:3},
+      {num:3,clue:"A summer month (5)",row:0,col:4,len:5},
+      {num:6,clue:"Color of new leaves (3)",row:2,col:1,len:3}
+    ]
+  },
+  {
+    title:"📚 Bookshelf",
+    sol:[
+      ["P","A","G","E","S"],
+      ["L","#","A","#","T"],
+      ["O","D","E","S","A"],
+      ["T","#","R","#","R"],
+      ["S","A","G","A","S"]
+    ],
+    across:[
+      {num:1,clue:"Book sheets (5)",row:0,col:0,len:5},
+      {num:4,clue:"Short poem forms (4)",row:2,col:1,len:4},
+      {num:5,clue:"Epic story sequences (5)",row:4,col:0,len:5}
+    ],
+    down:[
+      {num:1,clue:"Storyline (5)",row:0,col:0,len:5},
+      {num:2,clue:"A short lyric poem (3)",row:2,col:1,len:3},
+      {num:3,clue:"The best (5)",row:0,col:4,len:5},
+      {num:6,clue:"A gripping tale (5)",row:0,col:2,len:5}
+    ]
+  },
+  {
+    title:"☕ Cozy Corner",
+    sol:[
+      ["T","E","A","P","O","T"],
+      ["A","#","L","#","A","#"],
+      ["R","U","G","S","K","Y"],
+      ["O","#","E","#","E","#"],
+      ["T","O","A","S","T","S"]
+    ],
+    rows:5,cols:6,
+    across:[
+      {num:1,clue:"A vessel for brewing (6)",row:0,col:0,len:6},
+      {num:4,clue:"Floor coverings (4)",row:2,col:0,len:4},
+      {num:5,clue:"Breakfast bread (6)",row:4,col:0,len:6}
+    ],
+    down:[
+      {num:1,clue:"A hot drink (3)",row:0,col:0,len:3},
+      {num:2,clue:"A soft mat (3)",row:0,col:2,len:3},
+      {num:3,clue:"What stars fill (3)",row:0,col:4,len:3},
+      {num:6,clue:"Golden jam spread (5)",row:0,col:5,len:5}
+    ]
+  }
+];
+
+let swCurrentPuzzle=null, swCurrentPuzzleIdx=0, swPlayerGrid=[], swSelectedCell=null,
+    swDirection='A', swCellNumbers={}, swClueMap={}, swActiveClueKey=null;
+
+function swInit(){
+  swCurrentPuzzleIdx=0;swLoadPuzzle(0);
+  swBuildKeyboard();
+  // Attach hidden input listener once
+  const inp=document.getElementById('sw-hiddenInput');
+  if(inp&&!inp._swBound){
+    inp._swBound=true;
+    inp.addEventListener('input',function(e){
+      if(!swSelectedCell||!swCurrentPuzzle)return;
+      const val=this.value.replace(/[^a-zA-Z]/g,'').toUpperCase();
+      if(val.length>0) swTypeLetterAt(swSelectedCell.r,swSelectedCell.c,val[val.length-1]);
+      this.value='';
+    });
+    document.addEventListener('keydown',function(e){
+      if(!swSelectedCell)return;
+      const activeOverlay=document.getElementById('game-sagewords');
+      if(!activeOverlay||!activeOverlay.classList.contains('active'))return;
+      if(e.key==='Backspace'||e.key==='Delete'){e.preventDefault();swEraseLetter();}
+      else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();swDirection='A';swMoveSelection(e.key==='ArrowLeft'?-1:1,0);}
+      else if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();swDirection='D';swMoveSelection(0,e.key==='ArrowUp'?-1:1);}
+      else if(e.key==='Tab'){e.preventDefault();swNextWord();}
+    });
+  }
+}
+
+function swLoadPuzzle(idx){
+  swCurrentPuzzleIdx=idx;swCurrentPuzzle=SW_MASTER_PUZZLES[idx];
+  const p=swCurrentPuzzle;const rows=p.sol.length;const cols=p.sol[0].length;
+  swPlayerGrid=[];
+  for(let r=0;r<rows;r++){swPlayerGrid[r]=[];for(let c=0;c<cols;c++) swPlayerGrid[r][c]=p.sol[r][c]==='#'?'#':'';}
+  swCellNumbers=swNumberGrid(p);swClueMap=swBuildClueMap(p,swCellNumbers);
+  swSelectedCell=null;swDirection='A';swActiveClueKey=null;
+  swRenderPuzzleSelector();swRenderGrid();swRenderClues();
+  swSetStatus('Tap a white square to begin.');
+  const vo=document.getElementById('sw-victoryOverlay');if(vo)vo.classList.remove('show');
+  swSwitchTab('grid');
+}
+
+function swNumberGrid(puzzle){
+  const {sol}=puzzle;const rows=sol.length;const cols=sol[0].length;const nums={};let n=1;
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    if(sol[r][c]==='#')continue;
+    const startsAcross=(c===0||sol[r][c-1]==='#')&&(c+1<cols&&sol[r][c+1]!=='#');
+    const startsDown=(r===0||sol[r-1][c]==='#')&&(r+1<rows&&sol[r+1][c]!=='#');
+    if(startsAcross||startsDown) nums[`${r},${c}`]=n++;
+  }}return nums;
+}
+
+function swBuildClueMap(puzzle,nums){
+  const {sol,across,down}=puzzle;const map={};
+  if(across) across.forEach(cl=>{const cells=[];for(let i=0;i<cl.len;i++)cells.push({r:cl.row,c:cl.col+i});map[`A,${cl.num}`]={...cl,cells,dir:'A'};});
+  if(down) down.forEach(cl=>{const cells=[];for(let i=0;i<cl.len;i++)cells.push({r:cl.row+i,c:cl.col});map[`D,${cl.num}`]={...cl,cells,dir:'D'};});
+  return map;
+}
+
+function swGetClueForCell(r,c,dir){
+  for(const[key,cl] of Object.entries(swClueMap)){if(cl.dir===dir&&cl.cells.some(x=>x.r===r&&x.c===c))return key;}return null;
+}
+
+function swRenderPuzzleSelector(){
+  const wrap=document.getElementById('sw-puzzleSelector');if(!wrap)return;
+  wrap.innerHTML=SW_MASTER_PUZZLES.map((p,i)=>`<button class="sw-psel-btn${i===swCurrentPuzzleIdx?' active':''}" onclick="swLoadPuzzle(${i})">${p.title}</button>`).join('');
+}
+
+function swRenderGrid(){
+  const p=swCurrentPuzzle;if(!p)return;
+  const rows=p.sol.length;const cols=p.sol[0].length;
+  const grid=document.getElementById('sw-cwGrid');if(!grid)return;
+  grid.style.gridTemplateColumns=`repeat(${cols},min(9vw,44px))`;
+  grid.style.gridTemplateRows=`repeat(${rows},min(9vw,44px))`;
+  grid.innerHTML='';
+  const activeWordCells=new Set();
+  if(swActiveClueKey&&swClueMap[swActiveClueKey]) swClueMap[swActiveClueKey].cells.forEach(({r,c})=>activeWordCells.add(`${r},${c}`));
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    const cell=document.createElement('div');cell.className='sw-cw-cell';cell.dataset.r=r;cell.dataset.c=c;
+    if(p.sol[r][c]==='#'){cell.classList.add('sw-black');}
+    else {
+      const key=`${r},${c}`;
+      const isSelected=swSelectedCell&&swSelectedCell.r===r&&swSelectedCell.c===c;
+      const isWordHl=activeWordCells.has(key);
+      if(isSelected)cell.classList.add('sw-selected');
+      else if(isWordHl)cell.classList.add('sw-word-hl');
+      if(swCellNumbers[key]){const n=document.createElement('div');n.className='sw-cell-num';n.textContent=swCellNumbers[key];cell.appendChild(n);}
+      const letter=swPlayerGrid[r][c];
+      if(letter){const l=document.createElement('div');l.className='sw-cell-letter';l.textContent=letter;cell.appendChild(l);}
+      cell.addEventListener('click',()=>swOnCellClick(r,c));
+    }
+    grid.appendChild(cell);
+  }}
+}
+
+function swOnCellClick(r,c){
+  if(swCurrentPuzzle.sol[r][c]==='#')return;
+  if(swSelectedCell&&swSelectedCell.r===r&&swSelectedCell.c===c){
+    const other=swDirection==='A'?'D':'A';if(swGetClueForCell(r,c,other))swDirection=other;
+  } else {
+    swSelectedCell={r,c};if(!swGetClueForCell(r,c,swDirection))swDirection=swDirection==='A'?'D':'A';
+  }
+  swActiveClueKey=swGetClueForCell(r,c,swDirection)||swGetClueForCell(r,c,swDirection==='A'?'D':'A');
+  swRenderGrid();swRenderClues();swFocusInput();
+  const clue=swActiveClueKey&&swClueMap[swActiveClueKey];
+  if(clue)swSetStatus(`${clue.dir==='A'?'Across':'Down'} ${clue.num}: ${clue.clue}`);
+}
+
+function swFocusInput(){const inp=document.getElementById('sw-hiddenInput');if(inp){inp.value='';inp.focus();}}
+
+function swTypeLetterAt(r,c,letter){
+  swPlayerGrid[r][c]=letter;swAdvanceInWord(r,c);swRenderGrid();swRenderClues();swCheckAutoComplete();
+}
+
+function swAdvanceInWord(r,c){
+  if(!swActiveClueKey||!swClueMap[swActiveClueKey])return;
+  const cells=swClueMap[swActiveClueKey].cells;const idx=cells.findIndex(x=>x.r===r&&x.c===c);
+  if(idx>=0&&idx<cells.length-1){swSelectedCell=cells[idx+1];swActiveClueKey=swGetClueForCell(swSelectedCell.r,swSelectedCell.c,swDirection);}
+}
+
+function swEraseLetter(){
+  const{r,c}=swSelectedCell;
+  if(swPlayerGrid[r][c]){swPlayerGrid[r][c]='';}
+  else{if(swActiveClueKey&&swClueMap[swActiveClueKey]){
+    const cells=swClueMap[swActiveClueKey].cells;const idx=cells.findIndex(x=>x.r===r&&x.c===c);
+    if(idx>0){swSelectedCell=cells[idx-1];swPlayerGrid[swSelectedCell.r][swSelectedCell.c]='';}
+  }}
+  swRenderGrid();swRenderClues();
+}
+
+function swMoveSelection(dr,dc){
+  if(!swSelectedCell)return;const p=swCurrentPuzzle;
+  let nr=swSelectedCell.r+dc,nc=swSelectedCell.c+dr;
+  const rows=p.sol.length,cols=p.sol[0].length;
+  while(nr>=0&&nr<rows&&nc>=0&&nc<cols){
+    if(p.sol[nr][nc]!=='#'){swSelectedCell={r:nr,c:nc};swActiveClueKey=swGetClueForCell(nr,nc,swDirection);swRenderGrid();return;}
+    nr+=dc;nc+=dr;
+  }
+}
+
+function swNextWord(){
+  const keys=Object.keys(swClueMap);const idx=keys.indexOf(swActiveClueKey);
+  const next=keys[(idx+1)%keys.length];swActiveClueKey=next;
+  const cl=swClueMap[next];if(cl&&cl.cells.length>0){swSelectedCell=cl.cells[0];swDirection=cl.dir;}
+  swRenderGrid();swRenderClues();
+  const clue=swClueMap[swActiveClueKey];if(clue)swSetStatus(`${clue.dir==='A'?'Across':'Down'} ${clue.num}: ${clue.clue}`);
+}
+
+function swBuildKeyboard(){
+  const rows=['QWERTYUIOP','ASDFGHJKL','⌫ZXCVBNM⏎'];
+  const kb=document.getElementById('sw-keyboard');if(!kb)return;
+  kb.innerHTML='';
+  rows.forEach(row=>{
+    const rowEl=document.createElement('div');rowEl.className='sw-kb-row';
+    [...row].forEach(k=>{
+      const key=document.createElement('div');key.className='sw-kb-key'+(k==='⌫'||k==='⏎'?' sw-kb-wide':'');
+      key.textContent=k;
+      key.addEventListener('click',()=>{
+        if(k==='⌫')swEraseLetter();
+        else if(k==='⏎')swNextWord();
+        else if(swSelectedCell)swTypeLetterAt(swSelectedCell.r,swSelectedCell.c,k);
+        swFocusInput();
+      });
+      rowEl.appendChild(key);
+    });
+    kb.appendChild(rowEl);
+  });
+}
+
+function swRenderClues(){
+  const p=swCurrentPuzzle;if(!p)return;
+  const acrossEl=document.getElementById('sw-cluesAcross');
+  const downEl=document.getElementById('sw-cluesDown');
+  if(!acrossEl||!downEl)return;
+  const isWordSolved=(cl)=>cl.cells.every(({r,c})=>swPlayerGrid[r][c]===p.sol[r][c]);
+  function renderClueList(clues,container){
+    container.innerHTML=clues.map(cl=>{
+      const key=`${cl.dir==='A'?'A':'D'},${cl.num}`;
+      const isActive=key===swActiveClueKey;const solved=isWordSolved(cl);
+      return `<div class="sw-clue-row${isActive?' sw-active-clue':''}${solved?' sw-solved-clue':''}" onclick="swJumpToClue('${cl.dir||'A'}',${cl.num})">
+        <span class="sw-clue-n">${cl.num}</span><span class="sw-clue-txt">${cl.clue}</span></div>`;
+    }).join('');
+  }
+  const aclues=(p.across||[]).map(cl=>({...cl,dir:'A'}));
+  const dclues=(p.down||[]).map(cl=>({...cl,dir:'D'}));
+  aclues.forEach(cl=>{if(!cl.cells){cl.cells=[];for(let i=0;i<cl.len;i++)cl.cells.push({r:cl.row,c:cl.col+i});}});
+  dclues.forEach(cl=>{if(!cl.cells){cl.cells=[];for(let i=0;i<cl.len;i++)cl.cells.push({r:cl.row+i,c:cl.col});}});
+  renderClueList(aclues,acrossEl);renderClueList(dclues,downEl);
+}
+
+window.swJumpToClue=function(dir,num){
+  const key=`${dir},${num}`;if(!swClueMap[key])return;
+  swActiveClueKey=key;swDirection=dir;const cl=swClueMap[key];swSelectedCell=cl.cells[0];
+  swSwitchTab('grid');swRenderGrid();swRenderClues();
+  swSetStatus(`${dir==='A'?'Across':'Down'} ${num}: ${cl.clue}`);swFocusInput();
+};
+
+window.swCheckAll=function(){
+  const p=swCurrentPuzzle;const rows=p.sol.length,cols=p.sol[0].length;
+  let correct=0,total=0,wrong=0;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    if(p.sol[r][c]==='#')continue;total++;
+    if(swPlayerGrid[r][c]===p.sol[r][c])correct++;else if(swPlayerGrid[r][c])wrong++;
+  }
+  if(correct===total){swSetStatus('Perfect! Every letter is correct!','sw-success');swShowVictory();}
+  else{swSetStatus(`${correct}/${total} letters correct. ${wrong} incorrect.`,wrong>0?'sw-error':'');}
+};
+
+window.swRevealLetter=function(){
+  if(!swSelectedCell)return;const{r,c}=swSelectedCell;const p=swCurrentPuzzle;
+  if(p.sol[r][c]!=='#')swPlayerGrid[r][c]=p.sol[r][c];swRenderGrid();swCheckAutoComplete();
+};
+
+window.swRevealWord=function(){
+  if(!swActiveClueKey||!swClueMap[swActiveClueKey])return;const p=swCurrentPuzzle;
+  swClueMap[swActiveClueKey].cells.forEach(({r,c})=>{if(p.sol[r][c]!=='#')swPlayerGrid[r][c]=p.sol[r][c];});
+  swRenderGrid();swRenderClues();swCheckAutoComplete();
+};
+
+window.swClearGrid=function(){
+  const p=swCurrentPuzzle;const rows=p.sol.length,cols=p.sol[0].length;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){if(p.sol[r][c]!=='#')swPlayerGrid[r][c]='';}
+  swRenderGrid();swRenderClues();swSetStatus('Grid cleared.');
+};
+
+function swCheckAutoComplete(){
+  const p=swCurrentPuzzle;const rows=p.sol.length,cols=p.sol[0].length;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    if(p.sol[r][c]==='#')continue;if(swPlayerGrid[r][c]!==p.sol[r][c])return;
+  }
+  setTimeout(swShowVictory,300);
+}
+
+function swShowVictory(){
+  const score=50+(swCurrentPuzzleIdx*25);
+  if(window.saveScore) saveScore('sagewords',score,swCurrentPuzzle.title);
+  confetti();
+  document.getElementById('sw-victoryText').textContent='Every word found. You have a gift for this.';
+  document.getElementById('sw-victoryOverlay').classList.add('show');
+}
+
+window.swNextPuzzle=function(){
+  const next=(swCurrentPuzzleIdx+1)%SW_MASTER_PUZZLES.length;
+  swLoadPuzzle(next);swBuildKeyboard();
+  document.getElementById('sw-victoryOverlay').classList.remove('show');
+};
+
+window.swSwitchTab=function(tab){
+  ['grid','across','down'].forEach(t=>{
+    const el=document.getElementById(`sw-tab-${t}`);if(el)el.style.display=t===tab?'':'none';
+  });
+  document.querySelectorAll('.sw-tab').forEach((btn,i)=>{btn.classList.toggle('active',['grid','across','down'][i]===tab);});
+  if(tab==='grid')swFocusInput();
+};
+
+function swSetStatus(msg,cls=''){
+  const bar=document.getElementById('sw-statusBar');if(!bar)return;
+  bar.textContent=msg;bar.className='sw-status-bar'+(cls?' '+cls:'');
+}
+</script>
+
 </body>
 </html>
